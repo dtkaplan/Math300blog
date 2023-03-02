@@ -1,0 +1,23 @@
+---
+title: "Statistical or not?"
+author: "Daniel Kaplan"
+date: "2023-03-03"
+categories: [variation]
+---
+
+Some questions and answers are statistical in nature, and others not. How can you know which is which?
+
+I'm thinking of starting my statistics class today by asking my students their ages. Next, a mathematical question: Is everyone in the class of the same age? That's an easy question to answer, of course. The question is mathematical in the sense that it involves mathematical stuff---numbers---and there is a single, correct answer.
+
+I expect that not everyone will be the same age. That is, age varies among the members of the class. Now the question is: Why does age vary? When a statistical answer will be in the form, "Age varies because this other quantity or characteristic varies among the group." This style of answer attempts to account for the variation in age by the variation in other things. For instance, the students don't all have the same major, and different majors may place the stat course at different points in the students' studies. Or, students entered the academy at different points in time. Presumably there would be less variation in age if we adjusted for each student's age at matriculation.
+
+Another question. Why are the statistics students typically about 20 years old? The answer that occurs to me is that almost all of the students are from the US and in the US students enter first grade around age 6 and continue through 12 years of primary and secondary education. Then they go to college and take stats in their second or third years. Few students have a gap between high-school graduation and college matriculation.
+
+This answer is not statistical in nature. A statistical answers explains *variation* in one characteristic by appealing to the simultaneous *variation* in other characteristics. May statisticians may quarrel with my using words like "why" and "because." But that is not central to the matter. What's central to a question and answer being statistical in nature is that the question is about *variation* in a characteristic and the answer pairs that variation with *variation* in other characteristics.
+
+
+### Example: 
+
+- Not a statistical question or answer: "Why is the sky blue?" Because blue light from the sun is scattered by small particles in the atmosphere.
+
+- A statistical question and answer: "Why does the color of the sky change from time to time?" Because the weather is sometimes cloudy or foggy, and because the sun is sometimes high in the sky, sometimes rising or setting, and sometimes not visible at all.

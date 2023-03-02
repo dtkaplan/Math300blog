@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "posts/ChatGPT-and-R/index.html",
+    "href": "posts/ChatGPT-and-R/index.html",
+    "title": "Can ChatGPT help in interpreting or correcting R commands?",
+    "section": "",
+    "text": "The results are pretty good, to judge from a couple of initial trials. But, clearly, you cannot be completely oblivious about how R works to make sense of the results.\nChatGPT: This R code runs a linear regression model on the mtcars dataset, which is a built-in dataset in R containing information about 32 different cars. The model aims to predict the miles per gallon (mpg) of a car based on its horsepower (hp) and number of cylinders (cyl).\nHere’s a breakdown of what each part of the code means:\nTogether, the code lm(mpg ~ hp + cyl, data=mtcars) fits a linear regression model with mpg as the response variable and hp and cyl as the predictors, using the mtcars dataset. The output of the lm() function will include information about the coefficients of the model, as well as measures of model fit and statistical significance.\nChatGPT: This R code does not work because there is a syntax error in the formula provided to the lm() function. Specifically, there is an extra comma (,) after the cy variable, which causes R to interpret the formula incorrectly.*\nThe correct syntax for the lm() function requires that the formula is separated from the data argument using the data= parameter. Here’s the corrected code:\nThis code specifies the formula mpg ~ hp + cyl as before, and the data= parameter specifies that the data for the analysis should be taken from the mtcars dataset."
+  },
+  {
+    "objectID": "posts/ChatGPT-and-R/index.html#comments",
+    "href": "posts/ChatGPT-and-R/index.html#comments",
+    "title": "Can ChatGPT help in interpreting or correcting R commands?",
+    "section": "Comments",
+    "text": "Comments\n\nChatGPT has a preferred set of words for describing computation. All the ones I see here are legitimate, but they don’t reflect the usage in the Math 300 textbook. Examples:\n\n“parameter”—We tend to use “argument” or “input,” as in “The data= input to lm().”\n“formula”—We use the phrase “tilde expression.” That’s because our course is mathematical in nature. In mathematics, “formula” refers to an arithmetical combination of quantities, as in \\(mx + b\\). If you want to construct a linear regression model along the lines of \\(mx + b\\), your tilde expression will look like y ~ 1 + x, assuming that y is the name of your response variable and x is the name of the explanatory variable.\n\nIn the 2nd example, ChatGPT didn’t mention that cy is not a variable in the mtcars data frame. It did, however, correct it to cyl in the example code."
+  },
+  {
+    "objectID": "posts/Stat-and-non-stat-questions/index.html",
+    "href": "posts/Stat-and-non-stat-questions/index.html",
+    "title": "Statistical or not?",
+    "section": "",
+    "text": "Some questions and answers are statistical in nature, and others not. How can you know which is which?\nI’m thinking of starting my statistics class today by asking my students their ages. Next, a mathematical question: Is everyone in the class of the same age? That’s an easy question to answer, of course. The question is mathematical in the sense that it involves mathematical stuff—numbers—and there is a single, correct answer.\nI expect that not everyone will be the same age. That is, age varies among the members of the class. Now the question is: Why does age vary? When a statistical answer will be in the form, “Age varies because this other quantity or characteristic varies among the group.” This style of answer attempts to account for the variation in age by the variation in other things. For instance, the students don’t all have the same major, and different majors may place the stat course at different points in the students’ studies. Or, students entered the academy at different points in time. Presumably there would be less variation in age if we adjusted for each student’s age at matriculation.\nAnother question. Why are the statistics students typically about 20 years old? The answer that occurs to me is that almost all of the students are from the US and in the US students enter first grade around age 6 and continue through 12 years of primary and secondary education. Then they go to college and take stats in their second or third years. Few students have a gap between high-school graduation and college matriculation.\nThis answer is not statistical in nature. A statistical answers explains variation in one characteristic by appealing to the simultaneous variation in other characteristics. May statisticians may quarrel with my using words like “why” and “because.” But that is not central to the matter. What’s central to a question and answer being statistical in nature is that the question is about variation in a characteristic and the answer pairs that variation with variation in other characteristics.\n\nExample:\n\nNot a statistical question or answer: “Why is the sky blue?” Because blue light from the sun is scattered by small particles in the atmosphere.\nA statistical question and answer: “Why does the color of the sky change from time to time?” Because the weather is sometimes cloudy or foggy, and because the sun is sometimes high in the sky, sometimes rising or setting, and sometimes not visible at all."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Math 300 Blog",
+    "section": "",
+    "text": "Statistical or not?\n\n\n\n\n\n\n\nvariation\n\n\n\n\n\n\n\n\n\n\n\nMar 3, 2023\n\n\nDaniel Kaplan\n\n\n\n\n\n\n\n\nCan ChatGPT help in interpreting or correcting R commands?\n\n\n\n\n\n\n\nR\n\n\nChatGPT\n\n\n\n\n\n\n\n\n\n\n\nMar 2, 2023\n\n\nDaniel Kaplan\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Notes, comments, tools, and suggestions relating to Math 300Z, the prototype run of the core statistics course at USAFA.\nThis blog contains Danny Kaplan’s personal opinions. Nothing on this blog necessarily reflects the views or policies of the US Air Force Academy, the Department of Defense, or the US government generally."
+  }
+]
