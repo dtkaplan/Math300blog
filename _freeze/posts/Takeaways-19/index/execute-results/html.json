@@ -1,0 +1,14 @@
+{
+  "hash": "1f82c1953f7696576f4d384d39e4b00b",
+  "result": {
+    "markdown": "---\ntitle: \"Lesson 19 take-aways\"\nauthor: \"Daniel Kaplan\"\ndate: \"2023-03-04\"\ncategories: [Class sessions, variance]\n---\n\n\n\n\n## Statistical\n\n1. Measure variation using the \"variance.\" In R, \n\n\n::: {.cell}\n\n```{.r .cell-code}\nGalton %>% summarize(vh = var(height))\n```\n:::\n\n\n2. Response variable will always be quantitative/numerical in a regression model.\n\n3. Expect graphics in our section to always have the response variable on the vertical axis.\n\n## Administrative\n\n4. DO THE DAILY WORKSHEET! You'll fall behind if you don't.\n\n5. Bookmark [this class site](https://dtkaplan.github.io/Math-300Z/) in your browser. That way you don't have to detour through Teams.\n\n6. Use the Z-section project on `posit.cloud`. Bring in the worksheet using\n\n\n::: {.cell}\n\n```{.r .cell-code}\nmath300::get_lesson_worksheet( LESSON NUMBER )\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

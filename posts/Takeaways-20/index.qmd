@@ -1,5 +1,5 @@
 ---
-title: "Lesson 20 take-home points"
+title: "Lesson 20 take-aways"
 author: "Daniel Kaplan"
 date: "2023-03-07"
 categories: [Class sessions, variance, DAGs, causality]
