@@ -25,7 +25,7 @@
     "href": "index.html",
     "title": "Math 300 Blog",
     "section": "",
-    "text": "Statistical or not?\n\n\n\n\n\n\n\nvariation\n\n\n\n\n\n\n\n\n\n\n\nMar 3, 2023\n\n\nDaniel Kaplan\n\n\n\n\n\n\n\n\nCan ChatGPT help in interpreting or correcting R commands?\n\n\n\n\n\n\n\nR\n\n\nChatGPT\n\n\n\n\n\n\n\n\n\n\n\nMar 2, 2023\n\n\nDaniel Kaplan\n\n\n\n\n\n\nNo matching items"
+    "text": "Lesson 20 take-home points\n\n\n\n\n\n\n\nClass sessions\n\n\nvariance\n\n\nDAGs\n\n\ncausality\n\n\n\n\n\n\n\n\n\n\n\nMar 7, 2023\n\n\nDaniel Kaplan\n\n\n\n\n\n\n\n\nLesson 19 take-home points\n\n\n\n\n\n\n\nClass sessions\n\n\nvariance\n\n\n\n\n\n\n\n\n\n\n\nMar 4, 2023\n\n\nDaniel Kaplan\n\n\n\n\n\n\n\n\nStatistical or not?\n\n\n\n\n\n\n\nvariation\n\n\n\n\n\n\n\n\n\n\n\nMar 3, 2023\n\n\nDaniel Kaplan\n\n\n\n\n\n\n\n\nCan ChatGPT help in interpreting or correcting R commands?\n\n\n\n\n\n\n\nR\n\n\nChatGPT\n\n\n\n\n\n\n\n\n\n\n\nMar 2, 2023\n\n\nDaniel Kaplan\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -33,5 +33,47 @@
     "title": "About",
     "section": "",
     "text": "Notes, comments, tools, and suggestions relating to Math 300Z, the prototype run of the core statistics course at USAFA.\nThis blog contains Danny Kaplan’s personal opinions. Nothing on this blog necessarily reflects the views or policies of the US Air Force Academy, the Department of Defense, or the US government generally."
+  },
+  {
+    "objectID": "posts/Takehomes-19/index.html",
+    "href": "posts/Takehomes-19/index.html",
+    "title": "Lesson 19 take-home points",
+    "section": "",
+    "text": "Measure variation using the “variance.” In R,\n\n\nGalton %>% summarize(vh = var(height))\n\n\nResponse variable will always be quantitative/numerical in a regression model.\nExpect graphics in our section to always have the response variable on the vertical axis."
+  },
+  {
+    "objectID": "posts/Takehomes-19/index.html#administrative",
+    "href": "posts/Takehomes-19/index.html#administrative",
+    "title": "Lesson 19 take-home points",
+    "section": "Administrative",
+    "text": "Administrative\n\nDO THE DAILY WORKSHEET! You’ll fall behind if you don’t.\nBookmark this class site in your browser. That way you don’t have to detour through Teams.\nUse the Z-section project on posit.cloud. Bring in the worksheet using\n\n\nmath300::get_lesson_worksheet( LESSON NUMBER )"
+  },
+  {
+    "objectID": "posts/Takehomes-20/index.html",
+    "href": "posts/Takehomes-20/index.html",
+    "title": "Lesson 20 take-home points",
+    "section": "",
+    "text": "Measure variation using the “variance.” In R,\n\n\nGalton %>% summarize(vh = var(height))\n\n       vh\n1 12.8373\n\n\nInterpretation: The heights of the people in the `Galton` data frame vary. The amount of this variability is the variance: 12.8 square-inches. In less strange units, the standard deviation is $\\sqrt{12.8 \\text{square-inches}} = 3.6$ inches\n\nThe most common action for the rest of this course will be to create a model and summarize it.\nExample: lm(height ~ mother + father, data=Galton)\n\nheight ~ mother + father is a tilde expression that specifies the roles of variables in the model. height is the response variable. mother and father are the explanatory variables.\ndata = Galton tells lm() to use the Galton data frame to construct the model corresponding to the tilde expression.\n\nExample: Summarizing functions R2() and conf_interval()\n\n\nlm(height ~ mother + father, data=Galton) |> R2()\n\n    n k  Rsquared       F     adjR2 p df.num df.denom\n1 898 2 0.1088952 54.6856 0.1069039 0      2      895\n\n\nInterpretation: `mother` and `father` jointly explain about 10% of the variance in the `height` of their adult children.\n\nlm(height ~ mother + father, data=Galton) |> conf_interval()\n\n# A tibble: 3 × 4\n  term          .lwr  .coef   .upr\n  <chr>        <dbl>  <dbl>  <dbl>\n1 (Intercept) 13.9   22.3   30.8  \n2 mother       0.187  0.283  0.380\n3 father       0.290  0.380  0.470\n\n\nInterpretation: The model equation for a person's height in inches is, according to this model:\n\\[\\text{person's height} = 22.3 + 0.283\\ \\mathtt{mother} + 0.380\\ \\mathtt{father}\\] 3. Regression models (such as those built by lm()) quantify how to account-for/explain the variation in the response variable in terms of the variation in the explanatory variables."
+  },
+  {
+    "objectID": "posts/Takehomes-20/index.html#administrative",
+    "href": "posts/Takehomes-20/index.html#administrative",
+    "title": "Lesson 20 take-home points",
+    "section": "Administrative",
+    "text": "Administrative\n\nDO THE DAILY WORKSHEET! You’ll fall behind if you don’t.\nBookmark this class site in your browser. That way you don’t have to detour through Teams.\nUse the Z-section project on posit.cloud. Bring in the worksheet using\n\n\nmath300::get_lesson_worksheet( LESSON NUMBER )"
+  },
+  {
+    "objectID": "posts/Takehomes-20/index.html#new-topics",
+    "href": "posts/Takehomes-20/index.html#new-topics",
+    "title": "Lesson 20 take-home points",
+    "section": "New topics",
+    "text": "New topics\n\nAccount-for/explain. Often when we use the word “explain” we mean to suggest a causal connection. For instance, this randomized clinical trial established that a particular blood-pressure drug leads to lower blood pressure, that is, it causes the blood pressure to go down.\nWhen we say that “A causes B,” we don’t necessarily mean that A is the complete and total explanation for B. More often, we mean that “A contributes in some way to the value of B.” For instance, “high blood pressure increases mortality” does not mean that high blood pressure is the sole determinant of mortality. Instead, it means that high blood pressure contributes to an increased risk of mortality.\nA DAG (Directed acyclic graph—unnecessarily intimidating name!) is a way of encoding a hypothesis of what causes what in a system. We discussed the system involving treating a battlefield casualty with a tourniquet. (Link to in-class activity.) The system—a “system” is a collection of components—involved USE of a tourniquet, SEVERITY of injury, staying alive long enough for ADMISSION to hospital, and post-hospital SURVIVAL. Common sense suggests some causal connections:\n\nSEVERITY \\(\\longrightarrow\\) USE, since tourniquets are used for severe injuries involving bleeding from a limb.\nSEVERITY \\(\\longrightarrow\\) ADMISSION. The more severe the injury, the less likely the soldier is to reach the hospital.\nADMISSION \\(\\longrightarrow\\) SURVIVAL. There would be little point to having hospitals if they didn’t contribute to survival!\nSEVERITY \\(\\longrightarrow\\) SURVIVAL. Even if reaching the hospital, the soldier’s survival is in part determined by the SEVERITY of the injury.\n\nOther link were more hypothetical:\n\nUSE \\(\\longrightarrow\\) ADMISSION\n\n\nUSE \\(\\longrightarrow\\) SURVIVAL\n\nA DAG describes the hypothesized causal links among all the system components.\n\n\n\n\n\n\n\n\n\n\n\n\nMore detail\n\n\n\nThe clinical study looking at the relationship between tourniquet use and survival included only those patients admitted to the hospital, not the ones who died before admission. Their data did not demonstration a relationship between USE and SURVIVAL. That is to say, the hypothesized DAG as a result of the study was this:\n\n\n\n\n\nIn this second DAG, there is no causal connection between USE and SURVIVAL.\nA critique of the clinical trial is that it didn’t consider ADMISSION, that is, both those soldiers who reached the hospital and those who didn’t. Consequently, even if there were no direct link between USE and SURVIVAL, a more complete DAG includes a possible indirect path, as in this third DAG:\n\n\n\n\n\nThe path USE \\(\\longrightarrow\\) ADMISSION \\(\\longrightarrow\\) SURVIVAL could not be demonstrated by the (imperfect) clinical study, even though it might well exist. Any decision about the efficacy of tourniquets would need to consider the possible path USE \\(\\longrightarrow\\) ADMISSION \\(\\longrightarrow\\) SURVIVAL.\nHere’s a paradox: Effective use of tourniquets increases hospital mortality rates. Explain why this says something positive about tourniquet use."
+  },
+  {
+    "objectID": "posts/Takehomes-20/index.html#not-gotten-to-in-class",
+    "href": "posts/Takehomes-20/index.html#not-gotten-to-in-class",
+    "title": "Lesson 20 take-home points",
+    "section": "NOT gotten to in class",
+    "text": "NOT gotten to in class\n\nUse of sample() and dag_draw() with DAGs.\nWhat is a “random trial”\nHow (and why) to automate replication of random trials.\n\nYou can learn these things from the text and the worksheet for Lesson 20."
   }
 ]

@@ -1,0 +1,34 @@
+---
+title: "Lesson 19 take-home points"
+author: "Daniel Kaplan"
+date: "2023-03-04"
+categories: [Class sessions, variance]
+---
+
+```{r include=FALSE}
+library(math300)
+```
+
+## Statistical
+
+1. Measure variation using the "variance." In R, 
+
+```{r results="hide"}
+Galton %>% summarize(vh = var(height))
+```
+
+2. Response variable will always be quantitative/numerical in a regression model.
+
+3. Expect graphics in our section to always have the response variable on the vertical axis.
+
+## Administrative
+
+4. DO THE DAILY WORKSHEET! You'll fall behind if you don't.
+
+5. Bookmark [this class site](https://dtkaplan.github.io/Math-300Z/) in your browser. That way you don't have to detour through Teams.
+
+6. Use the Z-section project on `posit.cloud`. Bring in the worksheet using
+
+```{r eval=FALSE}
+math300::get_lesson_worksheet( LESSON NUMBER )
+```

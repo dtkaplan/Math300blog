@@ -1,0 +1,117 @@
+---
+title: "Lesson 20 take-home points"
+author: "Daniel Kaplan"
+date: "2023-03-07"
+categories: [Class sessions, variance, DAGs, causality]
+---
+
+```{r include=FALSE}
+library(math300)
+```
+
+## Review
+
+1. Measure variation using the "variance." In R, 
+
+```{r}
+Galton %>% summarize(vh = var(height))
+```
+    Interpretation: The heights of the people in the `Galton` data frame vary. The amount of this variability is the variance: 12.8 square-inches. In less strange units, the standard deviation is $\sqrt{12.8 \text{square-inches}} = 3.6$ inches
+
+2. The most common action for the rest of this course will be to **create a model** and **summarize** it.
+
+    Example: `lm(height ~ mother + father, data=Galton)`
+
+    - `height ~ mother + father` is a **tilde expression** that specifies the roles of variables in the model. `height` is the response variable. `mother` and `father` are the explanatory variables.
+    - `data = Galton` tells `lm()` to use the `Galton` data frame to construct the model corresponding to the tilde expression.
+        
+    Example: Summarizing functions `R2()` and `conf_interval()`
+    
+```{r}
+lm(height ~ mother + father, data=Galton) |> R2()
+```
+
+    Interpretation: `mother` and `father` jointly explain about 10% of the variance in the `height` of their adult children.
+
+```{r}
+lm(height ~ mother + father, data=Galton) |> conf_interval()
+```
+
+    Interpretation: The model equation for a person's height in inches is, according to this model:
+
+$$\text{person's height} = 22.3 + 0.283\ \mathtt{mother} + 0.380\ \mathtt{father}$$
+3. Regression models (such as those built by `lm()`) quantify how to account-for/explain the **variation** in the response variable in terms of the **variation** in the explanatory variables. 
+
+## New topics
+
+4. Account-for/explain. Often when we use the word "explain" we mean to suggest a **causal** connection. For instance, [this randomized clinical trial](www/1-s2.0-S0140673697053816-main.pdf) established that a particular blood-pressure drug leads to lower blood pressure, that is, it *causes* the blood pressure to go down. 
+
+5. When we say that "A causes B," we don't necessarily mean that A is the complete and total explanation for B. More often, we mean that "A contributes in some way to the value of B." For instance, "high blood pressure increases mortality" does not mean that high blood pressure is the sole determinant of mortality. Instead, it means that high blood pressure contributes to an increased risk of mortality.
+
+6. A **DAG** (Directed acyclic graph---unnecessarily intimidating name!) is a way of encoding a hypothesis of what causes what in a system. We discussed the system involving treating a battlefield casualty with a tourniquet. ([Link to in-class activity](https://dtkaplan.github.io/Math-300Z/Day-by-day/Lesson-20/Life-savers.html).) The system---a "system" is a collection of components---involved USE of a tourniquet, SEVERITY of injury, staying alive long enough for ADMISSION to hospital, and post-hospital SURVIVAL. Common sense suggests some **causal** connections:
+
+    i. SEVERITY $\longrightarrow$ USE, since tourniquets are used for severe injuries involving bleeding from a limb.
+    ii. SEVERITY $\longrightarrow$ ADMISSION. The more severe the injury, the less likely the soldier is to reach the hospital.
+    iii. ADMISSION $\longrightarrow$ SURVIVAL. There would be little point to having hospitals if they didn't contribute to survival!
+    iv. SEVERITY $\longrightarrow$ SURVIVAL. Even if reaching the hospital, the soldier's survival is in part determined by the SEVERITY of the injury.
+    
+    Other link were more hypothetical:
+    
+    v. USE $\longrightarrow$ ADMISSION
+    vi. USE $\longrightarrow$ SURVIVAL
+    
+7. A DAG describes the hypothesized causal links among all the system components.
+
+```{r echo=FALSE}
+T <- dag_make(
+  SEVERITY ~ exo(),
+  USE ~ SEVERITY,
+  ADMISSION ~ SEVERITY + USE,
+  SURVIVAL ~ SEVERITY + USE + ADMISSION
+)
+dag_draw(T, vertex.label.cex=1)
+```
+::: {.callout-note}
+## More detail
+
+The [clinical study](https://www.annemergmed.com/article/S0196-0644(14)01408-5/fulltext) looking at the relationship between tourniquet use and survival included only those patients admitted to the hospital, not the ones who died before admission. Their data did not demonstration a relationship between USE and SURVIVAL. That is to say, the hypothesized DAG as a result of the study was this:
+
+```{r echo=FALSE}
+T2 <- dag_make(
+  SEVERITY ~ exo(),
+  USE ~ SEVERITY,
+  SURVIVAL ~ SEVERITY
+)
+dag_draw(T2, vertex.label.cex=1)
+```
+
+In this second DAG, there is no causal connection between USE and SURVIVAL.
+
+A critique of the clinical trial is that it didn't consider ADMISSION, that is, both those soldiers who reached the hospital and those who didn't. Consequently, even if there were no direct link between USE and SURVIVAL, a more complete DAG includes a possible indirect path, as in this third DAG:
+
+```{r echo=FALSE}
+T3 <- dag_make(
+  SEVERITY ~ exo(),
+  USE ~ SEVERITY,
+  ADMISSION ~ SEVERITY + USE,
+  SURVIVAL ~ SEVERITY + ADMISSION
+)
+dag_draw(T3, vertex.label.cex=1)
+```
+
+The path USE $\longrightarrow$ ADMISSION $\longrightarrow$ SURVIVAL could not be demonstrated by the (imperfect) clinical study, even though it might well exist. Any decision about the efficacy of tourniquets would need to consider the possible path USE $\longrightarrow$ ADMISSION $\longrightarrow$ SURVIVAL.
+
+Here's a *paradox*: Effective use of tourniquets *increases* hospital mortality rates. Explain why this says something positive about tourniquet use. 
+
+:::
+
+## NOT gotten to in class
+
+1. Use of `sample()` and `dag_draw()` with DAGs.
+
+2. What is a "random trial"
+
+3. How (and why) to automate replication of random trials. 
+
+You can learn these things from the text and the worksheet for Lesson 20.
+
