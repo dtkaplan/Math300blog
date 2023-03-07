@@ -7,16 +7,23 @@ categories: [Class sessions, variance, DAGs, causality]
 
 ```{r include=FALSE}
 library(math300)
+source("../../_startup.R")
 ```
 
 ## Review
 
 1. Measure variation using the "variance." In R, 
 
-```{r}
+:::: {style="margin-left: 2cm;"}
+```{r digits=3}
+#| code-block-border-left: true
 Galton %>% summarize(vh = var(height))
 ```
-    Interpretation: The heights of the people in the `Galton` data frame vary. The amount of this variability is the variance: 12.8 square-inches. In less strange units, the standard deviation is $\sqrt{12.8 \text{square-inches}} = 3.6$ inches
+::::
+
+Interpretation: The heights of the people in the `Galton` data frame vary. The amount of this variability is the variance: 12.8 square-inches. In less strange units, the standard deviation is $\sqrt{12.8\ \text{square-inches}} = 3.6$ inches
+
+-----
 
 2. The most common action for the rest of this course will be to **create a model** and **summarize** it.
 
@@ -26,20 +33,26 @@ Galton %>% summarize(vh = var(height))
     - `data = Galton` tells `lm()` to use the `Galton` data frame to construct the model corresponding to the tilde expression.
         
     Example: Summarizing functions `R2()` and `conf_interval()`
-    
-```{r}
+
+:::: {style="margin-left: 2cm;"}
+```{r digits=3}
 lm(height ~ mother + father, data=Galton) |> R2()
 ```
 
-    Interpretation: `mother` and `father` jointly explain about 10% of the variance in the `height` of their adult children.
+Interpretation: `mother` and `father` jointly explain about 10% of the variance in the `height` of their adult children.
 
-```{r}
+```{r digits=3}
 lm(height ~ mother + father, data=Galton) |> conf_interval()
 ```
 
-    Interpretation: The model equation for a person's height in inches is, according to this model:
+::::
+
+Interpretation: The model equation for a person's height in inches is, according to this model:
 
 $$\text{person's height} = 22.3 + 0.283\ \mathtt{mother} + 0.380\ \mathtt{father}$$
+
+-----
+
 3. Regression models (such as those built by `lm()`) quantify how to account-for/explain the **variation** in the response variable in terms of the **variation** in the explanatory variables. 
 
 ## New topics
