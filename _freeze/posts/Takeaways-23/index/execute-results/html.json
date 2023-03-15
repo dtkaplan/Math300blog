@@ -1,0 +1,14 @@
+{
+  "hash": "b58fed01b7d27ec722b716353bd8e996",
+  "result": {
+    "markdown": "---\ntitle: \"Lesson 23 take-aways\"\nauthor: \"Daniel Kaplan\"\ndate: \"2023-03-15\"\ncategories: [Class sessions, confidence intervals, precision, accuracy]\n---\n\n\n\n\n## Review from Lesson 22\n\n1. `lm()` creates a model, which we can summarize in several ways. These numerical summaries---for instance, the coefficients reported by `lm()`---are called **sample statistics**. Mathematically, the sample statistics are exact, that is, the arithmetic is done correctly and everyone will get the same sample statistics when building the same model on the same data.\n\n2. *Statistically*, we take another point of view. We see the sample that we are working with as just one of the many samples that *might* have been collected. Imagine calculating a sample statistic on each of the many samples. The sample statistic would vary from one hypothetical sample to another. We call this **sampling variation**: note the \"ing\" ending on \"sampling.\" \n\n3. A **confidence interval** indicates the amount of sampling variation. It always consists of **two** numbers, the *lower* and the *upper* limits of the interval. Compute them from a model using `conf_interval()`.\n\n4. The width of a confidence interval is proportional to $1/\\sqrt{n}$; the more data you have, the narrower will be the confidence interval.\n\n5. **Precision** and **accuracy** are two different concepts. Accuracy refers to whether the measurement is \"on target\" or \"close to reality.\" Confidence intervals *have nothing at all to say about accuracy*. To get an accurate measurement of a coefficient, we need to choose the model that represents reality. Usually, we have no way to do this for sure. (With DAG simulations, we can read reality from the formulas, letting us match the model to the formula.)\n\n6. Precision refers to the reliability or repeatability of the measurement. Confidence intervals are a good way to describe the precision of your measurements.\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
