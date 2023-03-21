@@ -1,0 +1,39 @@
+---
+title: "Lesson 24 take-aways"
+author: "Daniel Kaplan"
+date: "2023-03-17"
+categories: [Class sessions, effect size]
+---
+
+```{r include=FALSE}
+library(math300)
+source("../../_startup.R")
+```
+
+1. The `lm()` model-training function is an entirely automatic machine for turning two inputs into model **coefficients** (which are stored in a "model object").
+    - Input 1: A model specification in the form of a tilde-expression. Example: `height ~ mother + sex`
+    - Input 2: A data frame holding the variables used in the tilde espression. Example: `Galton`
+    
+```{r}
+the_model <- lm(height ~ mother + sex, data = Galton)
+coefficients(the_model)
+```
+    
+2. Model coefficients are a convenient and historically important way to present a model. For fundamental, however, is the idea of a **model function** that takes as inputs the explanatory variables and returns a corresponding output to be interpreted as a value of the response variable.
+
+3. There are other ways to represent model functions. The field of "machine learning" is largely about the variety of ways of representing model functions. At an elementary level, when there are few explanatory variables, a graph will do:
+
+```{r}
+model_plot(the_model, interval="confidence")
+```
+
+In the above graph, a confidence interval has been added to indicate the precision that can justifiably be claimed for the model function. Any line that fits within the shaded region is a reasonable claim.
+
+4. Often, the interest is in measuring the size of the connection between an explanatory variable and the response variable. This is called the **effect size**. For instance, in the above graph there is obviously a connection between `mother`'s height and her children's `height`. The size of the connection is the amount by which the child's height would change if the mother's height were magically altered. Here, the effect size is about 0.35. A two-inch gain in mother's height would lead to a 0.70 inch gain in child's height.
+
+5. Effect size is always "with respect to" a single, selected explanatory variable. Each explanatory variable has its own effect size. An effect size always means to change the selected variable while **holding every other component of the system contant.** In mathematical language, an effect size is a **partial derivative** (if the selected explanatory variable is quantitative) or a **partial change** (if the selected explanatory variable is categorical).
+
+6. When we talk about effect size, we are not necessarily implying any causal connection in the real world. Obviously, it's absurd to think that changing a mother's height (and nothing else!) would lead to any change in her children's heights. The effect size describes how the model function output will change when the input is changed. The model function may or may not be faithful to the causal mechanisms in the world. For our mother/child height example, the model `height ~ mother + sex` does not capture the real-world genetics/environment determinants of child's height.
+
+7. Almost all the models we will construct in Math 300Z have only "linear" terms, so in every case the effect size with respect to a variable will be exactly the same as the coefficient on that variable. This is just to keep the accounting simple for us. (In class we showed a couple of models that have nonlinear terms, the most common of which are called "interactions," but which also include curvy (rather than straight-line) functions. You won't be responsible for this material.)
+

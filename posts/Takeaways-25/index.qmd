@@ -1,0 +1,28 @@
+---
+title: "Lesson 25 take-aways"
+author: "Daniel Kaplan"
+date: "2023-03-21"
+categories: [Class sessions, prediction, estimation, intervals, probability distribution]
+---
+
+```{r include=FALSE}
+library(math300)
+source("../../_startup.R")
+```
+
+1. We contrasted the very different tasks of ....
+    i. **Estimation**, which is mainly what we have been talking about until today. Estimation has to do with coefficients and effect sizes, understanding the relationships among values. **Confidence intervals** are a very important part of estimation methodology. Estimation focuses on "average" or "typical" or "central" patterns.
+    i. **Prediction** which focuses on outcomes for individuals, and doesn't benefit much from averaging. Graphically, a reasonable job drawing a prediction "interval" can be done from a plot of the data: look at the range of outcomes for the points near the given input levels.
+    
+2. The proper form for a prediction is to list all the possible outcomes, then assign a probability to each possible outcome.
+    i. When the outcomes are numeric over a continuous range, then "probability" should be interpreted as "probability density" (a technical term from calculus) or, in more everyday language, a "relative probability." 
+    ii. A violin plot gives a reasonable representation of the relative probability of the different outcomes. But this is suitable only when the explanatory variables are categorical. For continuous, numerical explanatory variables, we will need another technique.
+    
+3. Estimation of an effect size or a coefficient is accompanied by a confidence **interval**, which has a lower and an upper bound (the "confidence bounds"). The specific interval depends on the "confidence level," but you won't be mislead if you always use a 95% level, which is the convention.
+    i. Historical aside: The term "confidence" rather than "probability" was used to step around philosophical debates about the nature of probability. The confidence interval is not intended to be translated into a probability. Such a translation would look like this, "There is a 95% probability that the *true* value falls into the range covered by the interval." This is what almost everybody does, even though it is not exactly legitimate. The "mathematically correct" formulation for translating a confidence interval into a probability is more subtle and not satisfying. (It is, "If I build confidence intervals according to the rules, then I can expect that in 95% of the situations being studied the true value will be within the confidence interval. But I can't know for any one situation whether this is the case.")
+    
+4. Predictions are often formatted into an interval, so it's tempting to think that the same principles (e.g., use a 95% level) are applicable. But useful predictions often have to do with extreme events. So levels like 80% are often appropriate. Strictly speaking, what's presented as an interval ought really to be presented as a probability distribution (like a violin plot). Experts learn how to reverse engineer the probability distribution from the interval.
+
+5. Notwithstanding (4), the **proper** form for a prediction is to assign a probability to each possible outcome, as in (2). It is this form that is useful for decision making.
+
+6. We looked at [a case study about SAT scores](../Prediction-vs-estimation/) 
