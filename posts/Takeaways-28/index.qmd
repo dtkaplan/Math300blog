@@ -1,0 +1,68 @@
+---
+title: "Lesson 28 take-aways"
+author: "Daniel Kaplan"
+date: "2023-03-21"
+categories: [Class sessions, covariate, adjustment]
+---
+
+```{r include=FALSE}
+library(math300)
+source("../../_startup.R")
+```
+
+Recall that the fundamental method in the second half of Math 300Z is **linear regression**. That involves identifying a response variable and one or more explanatory variables.^[To be pedantic, I should say "zero or more explanatory variables." That's because `y ~ 1` is also a regression model, even though it has no explanatory variables.]
+
+1. We are adding some more detail to the vocabulary of explanatory variables in order to be able to talk about a very common situation:
+    a. There is one explanatory variable that is of primary interest to us.
+    b. There are also other explanatory variables that we might choose to include in the model specification, even though they aren't of direct interest to us.
+    
+2. The generic name **covariates** is used for the explanatory variables in (b). A covariate is an ordinary variable, but it is always one that is being considered for inclusion in a model specification. We have a choice in this matter since the covariate is not of direct interest. Using this vocabulary gives us a way to say concisely, "The variable may be important in an explanatory role, but it is not of direct interest to us."
+
+3. An important critical thinking skill for evaluating a claim is to ask, "What other factors might be involved?" This is exactly the role for covariates. The statistics of covariates lets us examine the consequences of incorporating such "other factors."
+
+4. Covariates often show up *implicitly* in models. For instance, the model `life_expectancy ~ GDP` has little explanatory power. Instead, we likely want to consider "per capita GDP`, which takes into account the size of the population. In our modeling framework, this is quite like adding a covariate `population`, that is `life_expectancy ~ GDP + population`. 
+
+::: {.callout-note}
+## Aside: Intensive, extensive, and logarithms
+
+In physical chemistry it's common to distinguish between **intensive** and **extensive** variables. An *extensive* variable refers to the size (or "extent") of the system: e.g. mass, volume, or energy. An *intensive* variable is not a measure of the "extent" of the system, but of a property like temperature or density. GDP is an extensive variable, as is population or land area. GDP is one way of describing how "big" the country is. Life expectancy does not tell you about the extent of the country, it's an intensive quantity that refers to individuals.
+
+As a modeling rule of thumb, whenever you are working with an *extensive* quantity, think seriously about using the logarithm of that quantity. 
+
+Doing this in the context of life-expectancy and GDP (with population size as a covariate) would involve the model specification `life_expectancy ~ log(GDP) + log(population)`. This model incorporates the "per capita" adjustment, since $\ln(GDP/population) = \ln(GDP) - ln(population)`. In other words, `life_expectancy ~ log(GDP) + log(population)` is a *generalization* of the per-capita adjustment. 
+
+:::
+
+5. In Lesson 30, we will consider reasons why or why not to include covariates in a model. But in this Lesson 28, we want to make a technical point about comparing the coefficients between two **nested models**. An example of a pair of nested models is `BFat ~ Hips` and `BFat ~ Hips + DThigh` (to use the `Anthro_F` example). The models are nested because they both have the same response variable **and** the larger model includes all the explanatory variables in the smaller models.
+
+6. Comparing the `Hips` coefficient for the two models shows something that surprises many people. Adding the covariate `PThigh` leads to a change in the coefficient on the explanatory variable `Hips`.
+    
+```{r digits=2}
+lm(BFat ~ Hips, data=Anthro_F) |> conf_interval()
+lm(BFat ~ Hips + PThigh, data=Anthro_F) |> conf_interval()
+```
+    
+    Notice the the confidence interval on the `Hips` coefficient from the smaller model doesn't overlap at all with the confidence interval on `Hips` from the larger model.
+
+
+7. Many people fallaciously believe that a situation as in (5) indicates some kind of deficiency in statistical methods. Such a person might ask, "How can I take a coefficient or confidence interval seriously if adding in another factor changes things completely?" In fact, the situation in (5) is entirely a mathematical phenomenon that depends on how closely related the explanatory variable (`Hips`) is to the covariate (`PThigh`). 
+
+We can measure how closely two variables are related using R^2^
+    
+```{r digits=2}
+lm(Hips ~ PThigh, data=Anthro_F) |> R2()
+```
+    
+When the covariate is *not* closely related to the explanatory variable, the dramatic shift in the confidence interval of the explanatory variable is not seen. To illustrate, suppose we use `Calf` as the covariate rather than `PThigh`.
+
+```{r digits=2}
+lm(Hips ~ Calf, data=Anthro_F) |> R2() # not so closely related
+```   
+    
+The high R^2^ indicates that the two variables are closely related. But with `Calf` as the covariate, the confidence interval on `Hips` is almost identical to what's seen in the smaller model (see above) `BFat ~ Hips`.
+
+```{r digits=2}
+lm(BFat ~ Hips + Calf, data=Anthro_F) |> conf_interval()
+```
+        
+The decision to include a covariate should rest on one's understanding of the system being models. We've been using DAGs to describe such understanding. Lesson 30 will show how a DAG can be transformed into a decision about whether to include covariates.
