@@ -1,7 +1,7 @@
 ---
 title: "Lesson 27 take-aways"
 author: "Daniel Kaplan"
-date: "2023-03-23"
+date: "2023-03-25"
 categories: [Class sessions]
 ---
 

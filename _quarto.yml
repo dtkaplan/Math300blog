@@ -5,7 +5,9 @@ project:
 website:
   title: "Math300 Blog"
   navbar:
-    right:
+    left:
+      - href: "https://dtkaplan.github.io/Math-300Z/"
+        text: "Spring 2023 class schedule"
       - about.qmd
       - icon: github
         href: https://github.com/
