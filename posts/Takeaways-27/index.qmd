@@ -1,0 +1,13 @@
+---
+title: "Lesson 27 take-aways"
+author: "Daniel Kaplan"
+date: "2023-03-23"
+categories: [Class sessions]
+---
+
+```{r include=FALSE}
+library(math300)
+source("../../_startup.R")
+```
+
+In our original plan for Math 300Z, Lesson 27 was to be the first of two exam days. That plan changed; we dropped the first exam, keeping only the second. Consequently, we passed directly from Lesson 26 to Lesson 28.

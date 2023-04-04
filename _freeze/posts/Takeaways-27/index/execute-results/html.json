@@ -1,0 +1,14 @@
+{
+  "hash": "b1bdc7775b161826eb30434095a290bc",
+  "result": {
+    "markdown": "---\ntitle: \"Lesson 27 take-aways\"\nauthor: \"Daniel Kaplan\"\ndate: \"2023-03-23\"\ncategories: [Class sessions]\n---\n\n\n\n\nIn our original plan for Math 300Z, Lesson 27 was to be the first of two exam days. That plan changed; we dropped the first exam, keeping only the second. Consequently, we passed directly from Lesson 26 to Lesson 28.\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
