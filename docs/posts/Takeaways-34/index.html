@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Daniel Kaplan">
+<meta name="dcterms.date" content="2023-04-23">
+
+<title>Math300 Blog - Lesson 34 take-aways</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Math300 Blog</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://dtkaplan.github.io/Math-300Z/">
+ <span class="menu-text">Spring 2023 class schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Lesson 34 take-aways</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Class sessions</div>
+                <div class="quarto-category">classifier</div>
+                <div class="quarto-category">logistic regression</div>
+                <div class="quarto-category">threshold</div>
+                <div class="quarto-category">loss function</div>
+                <div class="quarto-category">false-positive/false-negative</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Daniel Kaplan </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">April 23, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<ol type="1">
+<li>We talked about “<strong>classifiers</strong>,” a mechanism aimed to distinguish people with a given condition (e.g.&nbsp;prospective congestive heart failure, or colon cancer, …) from people without that conditions.</li>
+<li>The classifier takes measurements from a person and returns either a <strong>positive</strong> (<span class="math inline">\(\mathbb P\)</span>) or a <strong>negative</strong> (<span class="math inline">\(\mathbb N\)</span>) result.</li>
+<li>The two numbers that summarize the performance of the test are:
+<ul>
+<li><strong>Sensitivity</strong>: The fraction of people with the condition who test <span class="math inline">\(\mathbb P\)</span>, which is the <em>correct</em> result for such people.</li>
+<li><strong>Specificity</strong>: The fraction of people without the condition to test <span class="math inline">\(\mathbb N\)</span>, which is the <em>correct</em> result for this other group of people.</li>
+</ul></li>
+<li>An incorrect result is called “<strong>false</strong>,” a correct result is “<strong>true</strong>.”
+<ul>
+<li>For people who do not have the condition, a <span class="math inline">\(\mathbb P\)</span> result is false. Such people are called “<strong>false positives</strong>.” A good classifier keeps the rate of false positives low because such people may receive treatment which is not needed.</li>
+<li>For people who have the condition, a <span class="math inline">\(\mathbb N\)</span> result is false. Such people are called “<strong>false negatives</strong>.” A good classifier keeps the rate of false negatives low because such people do not receive the treatment which is called for.</li>
+</ul></li>
+<li>By changing a number called the “<strong>threshold</strong>,” the false negative rate can be improved, but at the cost of a higher false positive rate. And <em>vice versa</em>. That is, there is always a trade-off between false positives and false negatives.</li>
+<li>We resolve the trade-off by looking at the overall <strong>loss</strong> due to the mistaken classifications. The loss for a false positive is generally different (often, less) than the loss for a false negative. To calculate the overall loss, multiply the false-positive rate and the false-negative rate by their respective losses, and add. Choose the threshold that minimizes the overall loss.</li>
+</ol>
+<section id="more-detail" class="level2">
+<h2 class="anchored" data-anchor-id="more-detail">More detail</h2>
+<ol type="1">
+<li><p>A <strong>classifier</strong> is a machine that, based on measurements of some sort assigns a <strong>categorical level</strong> to the object the measurements came from. We can make this less abstract by talking about classifiers in the context of medical screening. There, the “object” is a patient; the possible categorical levels are <span class="math inline">\(\mathbb{P}\)</span> and <span class="math inline">\(\mathbb{N}\)</span>, meaning a “positive” test result or a “negative” test result.</p></li>
+<li><p>In this Lesson, we demonstrated <em>how to build</em> a classifier. The classifier takes the form of a statistical model fitted to training data.</p></li>
+<li><p>Skipping, for the moment, to the <em>use</em> of a classifier that’s already been built, this is a matter of <em>evaluating</em> the statistical model at the inputs relevant to the patient, then applying a threshold to the model output to make the choice between <span class="math inline">\(\mathbb{P}\)</span> and <span class="math inline">\(\mathbb{N}\)</span>. Interpreting the meaning of <span class="math inline">\(\mathbb{P}\)</span> and <span class="math inline">\(\mathbb{N}\)</span> requires that we know about:</p>
+<ol type="i">
+<li>The performance of the classifier, which is summarized by <strong>two</strong> numbers, the <strong>sensitivity</strong> and the <strong>specificity</strong>. Using these two numbers (along with a third number, called the <strong>prevalence</strong>) is the topic of Lesson 35.</li>
+<li>You may hear people talk about the “accuracy” of a classifier. We’ll show how, in the process of building the classifier, to calculate the accuracy, specificity, and sensitivity. Note that the “accuracy” is inadequate for describing the classifier.</li>
+</ol></li>
+<li><p>There are three steps to building a classifier:</p>
+<ol type="i">
+<li>Assembling <strong>training data</strong>. This is a very difficult and drawn-out process, usually done in a clinical setting and involving hundreds or thousands of test subjects.
+<ol type="a">
+<li>In our example, we used the <code>math300::Framingham</code> data frame, which is the product of a lot of work by many people.</li>
+<li>The training data includes one or more measurements made on each of the test subjects. In <code>Framingham</code> such measurements included age, sex, smoking status, whether the subject was taking medicine for high blood pressure, BMI, and so on. In the well known screening tests (e.g.&nbsp;for breast cancer, prostate cancer, colon cancer) the measurement is often the concentration in blood or stool of a particular antigen.</li>
+<li>The training data must include an outcome variable. With <code>Framingham</code>, the outcome is <code>TenYearCHD</code> which records whether or not the subject developed congestive heart failure (CHD) in the ten-year follow up period (that is, the ten years after the measurements in (b) were made. The outcome variable is a zero-one variable.</li>
+</ol></li>
+<li>Building a statistical model of the outcome variable as a function of one or more of the measurements in (b). The role of this model, once built, is to convert the measurements in (b) into a <strong>score</strong>. Often in such model building, care is taken to identify the measurements in (b) that give the best “performance.” Performance refers to producing a wide range of model output values that correlate well with the outcome variable.</li>
+<li>The final step is to establish a <strong>threshold</strong>. This is a number, in the units of the score. When the score is above this threshold, the classifier produces a <span class="math inline">\(\mathbb P\)</span> result. A score below the threshold means the result is <span class="math inline">\(\mathbb N\)</span>.</li>
+</ol>
+<p>In class, we used <strong>logistic regression</strong> to build the statistical model (section 4.ii). Then we evaluated the model on the training data to produce a score for each subject in the training data. Each of these subjects either developed CHD (in the ten-year follow-up) or did not. The fraction of subjects who developed CHD is called the “training prevalence.” In the example constructed for the table below (in (5)), there are 1000 subjects altogether, of whom 50 +150=200 had CHD as the outcome. The training prevalence is the fraction of the whole who had the CHD outcome: 200/1000 = 20% in the example below.</p></li>
+<li><p>The process of choosing a <strong>threshold</strong> (section 4.iii) is an important part of the decision-making guided by the test. It works like this:</p>
+<ol type="i">
+<li>Choose a candidate threshold. Apply this to each of the scores in the model-evaluated training data to produce a new column which we can call the output of the candidate test. This will have entries that are <span class="math inline">\(\mathbb P\)</span> or <span class="math inline">\(\mathbb N\)</span> depending on whether the score is above the candidate threshold.</li>
+<li>Tally up the table using the outcome (disease or not) and the test result (<span class="math inline">\(\mathbb P\)</span> or <span class="math inline">\(\mathbb N\)</span>). This will produce a table like this:</li>
+</ol></li>
+</ol>
+<table class="table">
+<thead>
+<tr class="header">
+<th>patient outcome</th>
+<th>test output</th>
+<th>count</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Disease.</td>
+<td><span class="math inline">\(\mathbb P\)</span></td>
+<td>150.</td>
+<td>“true positive”</td>
+</tr>
+<tr class="even">
+<td>Disease.</td>
+<td><span class="math inline">\(\mathbb N\)</span></td>
+<td>50.</td>
+<td>“false negative”</td>
+</tr>
+<tr class="odd">
+<td>Healthy</td>
+<td><span class="math inline">\(\mathbb P\)</span></td>
+<td>75.</td>
+<td>“false positive”</td>
+</tr>
+<tr class="even">
+<td>Healthy.</td>
+<td><span class="math inline">\(\mathbb N\)</span></td>
+<td>725.</td>
+<td>“true negative”</td>
+</tr>
+</tbody>
+</table>
+<ol start="6" type="1">
+<li>From the above table, you can easily compute three measurements of the performance of the test:</li>
+</ol>
+<ul>
+<li>sensitivity: The fraction of the diseased subjects who tested positive. In the example, that’s 150/(150+50) = 75%.</li>
+<li>specificity: The fraction of the healthy subjects who had a negative test result. Here that’s 725/(725+75) = 90.6%.</li>
+</ul>
+<p>Note that neither the sensitivity nor the specificity reflect the training prevalence, since each is calculated within either the disease group or the healthy group.</p>
+<ul>
+<li>accuracy: The “accuracy” is the fraction of all subjects who received a <strong>correct</strong> test result, that is, one that matches the patient outcome. Here that’s the fraction with “true” in the description, that is, (150+725)/1000 = 87.5%. The problem with “accuracy” is that it depends strongly on the training prevalence.</li>
+</ul>
+<ol start="7" type="1">
+<li><p>The <em>training prevalence</em> is an artifact of the data collection process and is typically much higher than the prevalence in the overall population, that is, the <strong>population prevalence</strong>.</p></li>
+<li><p>Remember that we are still in the process of evaluating the merits of the candidate threshold used to construct the table above. Now we want to re-arrange the counts in that table to reflect the <strong>population</strong> prevalence.</p>
+<ol type="i">
+<li>The training prevalence was 20%. Suppose that the prevalence in the population to whom the test is targeted is 5%.</li>
+<li>Construct a new table of counts where the sensitivity and specificity are exactly as found in the table from the training-data/candidate-threshold but where the prevalence is the desired 5%. We can accomplish this by arithmetically increasing the numbers in the healthy category so that there are altogether 4000 people in the table. (200 diseased out of 4000 total is a prevalence of 5%.) In increasing the number of healthy people, we need to be careful to keep the specificity at the level found from the training data: 90.6. That is, we will change the healthy numbers so that there are 3800 healthy people (giving 4000 total, including the diseased) of whom 90.6% got a <span class="math inline">\(\mathbb N\)</span> result. This gives us 3800<em>0.906 = 3443 in the last row and 3800</em>(1-0.906) = 357 in the second to last row.</li>
+</ol></li>
+</ol>
+<p>The adjusted table that reflects the population prevalence (as opposed to the training prevalence) is:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>patient outcome</th>
+<th>test output</th>
+<th style="text-align: right;">count</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Disease</td>
+<td><span class="math inline">\(\mathbb P\)</span></td>
+<td style="text-align: right;">150</td>
+<td>“true positive”</td>
+</tr>
+<tr class="even">
+<td>Disease</td>
+<td><span class="math inline">\(\mathbb N\)</span></td>
+<td style="text-align: right;">50</td>
+<td>“false negative”</td>
+</tr>
+<tr class="odd">
+<td>Healthy</td>
+<td><span class="math inline">\(\mathbb P\)</span></td>
+<td style="text-align: right;">357</td>
+<td>“false positive”</td>
+</tr>
+<tr class="even">
+<td>Healthy</td>
+<td><span class="math inline">\(\mathbb N\)</span></td>
+<td style="text-align: right;">3443</td>
+<td>“true negative”</td>
+</tr>
+</tbody>
+</table>
+<ol start="9" type="1">
+<li>Time to evaluate the candidate threshold.
+<ol type="i">
+<li>We can measure how good the threshold is by calculating the “accuracy” of the test on the tests results on the adjusted table. Unlike the accuracy on the training results, which depends on an unrealistic prevalence, the adjusted table has the right prevalence. The accuracy is (150 + 3443)/4000 = 89.8%. Looking at things from the other side, the “mistake” rate is 11.2%.</li>
+<li>It’s usually the case that the cost of making a mistake is very different for a “false negative” than a “false positive.” A person with a false negative will not receive the appropriate treatment for his or her disease. We call this a “<strong>loss</strong>,” and it may be a very big problem for that person. On the other hand, a person with a false positive will receive treatment that is unnecessary and potentially harmful, risky, or imposes financial or emotional costs. That’s also a loss. It is a matter of judgement what the relevant sizes of the loss from a false negative and the loss from a false positive.</li>
+</ol></li>
+<li>Let’s suppose that the false-negative loss is 10, and the false-positive loss is 0.5. (These are just made-up numbers for the example.) Then, referring to the table above, the total loss is 50$<span class="math inline">\(10 + 357\)</span><span class="math inline">\(0.5 = 678.5\)</span>. The <strong>loss rate</strong>, that is, the loss per person, is 678.5/4000 = 0.17 per person.</li>
+</ol>
+<p>The test developers can repeat all these calculations for other candidate thresholds. That will give them a set of thresholds and a set of corresponding loss rates. Pick the threshold with the lowest loss rate.</p>
+<p>Note the importance of the relative sizes of the false-positive loss and the false-negative loss. Expertise in the area of application of the test and follow-up treatments is important to assign meaningful values to the comparative losses. Our 10 and 0.5 are just for the purposes of example.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
