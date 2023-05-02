@@ -1,0 +1,13 @@
+---
+title: "Competing two hypotheses"
+author: "Daniel Kaplan"
+date: "2023-04-30"
+categories: [likelihood, prior, posterior, likelihood ratio, odds]
+---
+
+The idea of competing two hypotheses .... [UNDER CONSTRUCTION]
+
+
+A simple formula for the posterior odds:
+
+$$\underbrace{odds(H_a | \text{obs})}_{\Large\text{posterior for } H_a} = \underbrace{\left[\frac{{\cal L}_a(\text{obs})}{{\cal L}_0(\text{obs})} \right]}_{\Large\text{Likelihood ratio}}\ \times\ \underbrace{odds(H_a)}_{\Large\text{prior for } H_a}$$

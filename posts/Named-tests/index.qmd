@@ -1,0 +1,22 @@
+---
+title: "Named tests from Stat 101"
+author: "Daniel Kaplan"
+date: "2023-05-01"
+categories: ["one- and two-sample tests", "p-test", "t-test", "ANOVA", "simple regression"]
+---
+
+A Stat 101 course will cover many hypothesis tests among which are the one-sample t-test, the two-sample t-test, the one and two sample p-tests, and ANOVA. All these different tests are in reality just linear regression.
+
+To see the translation between regression and the sundry named tests, imagine some data with quantitative variables `x` and `y`, a zero-one variable `z`, and a categorical variable (with potentially many levels) `g`. Each named hypothesis test corresponds to a particular model specification.
+
+* one-sample t-test: `y ~ 1` and take the p-value from the intercept.
+* two-sample t-test: `y ~ g` when `g` has just two levels. Take the p-value from the `g` coefficient.
+* one-sample p-test: `z ~ 1` and take the p-value from the intercept.
+* two-sample p-test: `z ~ g` when `g` has just two levels. Take the p-value from the `g` coefficient.
+* test on simple regression: `y ~ x` and take the p-value from the `x` coefficient.
+* "one-way" ANOVA: `y ~ g` when `g` has more than two levels. There will be a p-value for each level of `g` (except the reference level), but the p-value for this test is the one from `R2()` or `anova_summary()`, which doesn't refer to a particular coefficient.
+
+There are many other "forms of ANOVA" that are not covered in Stat101. These all fit in with the linear regression framework. For instance:
+
+* "two-way" ANOVA: `y ~ g1*g2` and take the p-value from the interaction term in the `anova_summary()` report.
+* analysis of covariance (ANCOVA): `y ~ x + g` and take the p-value from the `g` term in the `anova_summary()` report.

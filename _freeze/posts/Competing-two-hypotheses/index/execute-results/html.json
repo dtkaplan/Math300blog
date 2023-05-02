@@ -1,0 +1,16 @@
+{
+  "hash": "ae31a84a32a33eb8bfdfa3af945e8303",
+  "result": {
+    "markdown": "---\ntitle: \"Competing two hypotheses: a better graph\"\nauthor: \"Daniel Kaplan\"\ndate: \"2023-04-30\"\ncategories: [likelihood, prior, posterior, likelihood ratio, odds]\n---\n\n\n\n\nIn Lesson 35, in the context of medical screening tests, we presented diagrams like this one.\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-2-1.png){width=672}\n:::\n:::\n\n\nThis diagram is based on only three basic numbers---sensitivity, specificity, and prevalence. Exactly the same information could be presented in a 2x2 table:\n\nTest result | Sick patients | Healthy patients\n--------|--------------|------------\n$\\mathbb P$ | 12% (true positives) | 26% (false positives)\n$\\mathbb N$ | 3% (false negatives) | 60% (true negatives)\n\nThe four numbers necessarily add up to 100%, so one of the numbers is redundant. To generate the table we only need the three basic numbers:\n\n- prevalence: 15%, that is, true positives + false negatives \n- sensitivity: 12%/(12%+3%) = 80%, that is, true positives divided by prevalence\n- specificity: 70.6%, that is, true negatives/(1-prevalence). Filling in the numbers 60%/(1-15%) = 70.6%. \n\n\n\nUsually in statistical graphics, we place the scales on the horizontal and vertical axes, which is not the case with the above diagram. Sticking with the scales-on-axes convention, here is a streamlined graph:\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n:::\n\n\nWe've generalized the notation a bit and emphasized (1-specificity) rather than the specificity itself. \n\n1. Prior(Alternative) = width of \"Alternative\" box.\n2. Likelihood for Alternative hypothesis, that is, p($\\mathbb P$ | Alternative) (corresponds to sensitivity)\n3. Likelihood for Null hypothesis, p($\\mathbb P$ | Null) (corresponds to 1-specificity.)\n\nThe area of each box is, as expected, the width times the height. The two areas printed on the graph are the ingredients for the calculation of the posterior:\n\nposterior(Alternative | $\\mathbb P$) = 0.12/(0.12 + 0.255) = 32%\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

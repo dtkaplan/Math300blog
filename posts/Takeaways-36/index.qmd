@@ -1,0 +1,60 @@
+---
+title: "Lesson 36 take-aways"
+author: "Daniel Kaplan"
+date: "2023-05-01"
+categories: [Class sessions, likelihood, null hypothesis, alternative hypothesis, prior, posterior, p-value, confidence intervals]
+---
+
+```{r include=FALSE}
+library(math300)
+library(ggmosaic)
+source("../../../_startup.R")
+```
+
+We are spending this week on a topic that constitutes about one-quarter of the consensus Stat 101 course (e.g. "AP Statistics"). We are calling the topic "Null hypothesis testing" (NHT), but other names are also used:
+
+- "Significance testing"---the name used by the originator of the method, Ronald Fisher when he introduced it in 1926.
+- "Null hypothesis significance testing" (HST---what to say if you can't decide between calling it NHT or "significance testing."
+- "Hypothesis testing," the name almost always used in statistics textbooks, but which is misleading in that it suggests something broader than NHT actually is.
+
+Our agenda today is to describe the terminology of NHT and give an example of an NHT calculation (which is easy to do with any statistical software at all).
+
+1. NHT involves a quantity called the "**p-value**" which is a number between zero and one.
+2. We have talked previously about tests that give a result of either $\mathbb P$ or $\mathbb N$. In NHT, the test results are stated differently: either "**reject the Null**" or "**fail to reject the Null**."
+3. Once you have the numerical p-value, translation into test results is trivial: if $p < 0.05$ the conclusion is "reject the Null." Otherwise, that is if p is bigger than 0.05, the conclusion is "fail to reject the Null." This is admittedly stilted language, and we owe you and explanation for why things are this way. That will come later.
+
+4. When using linear regression (our main method in 300Z), the software for summarizing models always provides a p-value: you just have to ask for it. To illustrate, consider the model `height ~ nkids` with respect to Galton's height data. (Galton (1822-1911) and Fisher (1890-1962) were near contemporaries.) 
+    
+    Think of `height ~ nkids` as asking a question: Is the adult height of a child correlated with the number of siblings? (Why might someone offer the hypothesis that the number of siblings has a connection to adult height? Perhaps the growing children had to compete for food. Or perhaps contagious disease is more prevalent in large families, and childhood disease might be correlated with height. But in NHT, there's no requirement to explain why one is interested to test a hypothesis.) Here's the calculation, done in four different ways of summarizing a model.
+    
+```{r}
+model <- lm(height ~ nkids, data=Galton)
+model |> conf_interval(show_p=TRUE)
+model |> R2()
+model |> regression_summary()
+model |> anova_summary()
+```
+In the regression summary report and the confidence interval report, a p-value is listed for each coefficient. We are interested in the `nkids` coefficient.
+    
+In the R-squared and ANOVA report, there is no p-value on the intercept term; only `nkids` is at issue. 
+    
+Note that the p-value is the same for all four reports. 
+    
+An NHT consists of calculating a p-value, comparing it to 0.05, and drawing the corresponding conclusion. Since $p = 0.000137 < 0.05$, the proper conclusion is to "reject the Null."
+
+5. "The Null" is short for "the Null hypothesis." The dictionary definitions for "null" relevant here include "having or associated with the value zero" or "amounting to nothing." In the context of linear regression the Null for a given coefficient always means that, with a sufficiently large ("infinite") sample, the coefficient would be zero.
+
+6. The p-value calculation is done in a mathematical world where the Null is true. Other expressions often used: "assuming the Null," "given the Null hypothesis," "under the Null."
+
+7. Naturally, our samples are finite in size. Consequently, because of sampling variation, we cannot expect the coefficient to be exactly zero even under the Null. Instead, we expect the coefficient to be small.
+    a. We have already discussed one operational definition of "small," that the confidence interval includes zero. If so, then "fail to reject the Null." Otherwise (as with the `nkids` example above), then "reject the Null."
+    b. The p-value is just another way of encoding the notion of "small." Indeed, in linear regression we can calculate the p-value from the same information used to construct the confidence interval. 
+  
+::: {.callout-note}
+## Many types of statistical tests?
+A Stat 101 course will cover many hypothesis tests among which are the one-sample t-test, the two-sample t-test, the one and two sample p-tests, and ANOVA. All these different tests are in reality just linear regression. See this [blog post]().
+
+There is one hypothesis test that is not exactly equivalent to regression: the chi-squared test. However, in the context where chi-squared often appears, the result corresponds to the `z ~ g` model specification. [Blog post not yet available.]
+:::
+
+
