@@ -1,0 +1,80 @@
+---
+title: "Hypothesis testing and poker"
+author: "Daniel Kaplan"
+date: "2023-05-03"
+categories: [Hypothesis testing, Null hypothesis, p-value, shuffling]
+---
+
+```{r include=FALSE}
+library(math300)
+library(ggmosaic)
+```
+
+Suppose I had a statistics class with 19 students. One day I walk in and announce a that we are going to play poker. Any student who has a better hand than I will get a grade of "A." 
+
+I pull **two** decks out of my pocket, each deck in its box, which has already been opened.
+
+"I shuffled these two decks this morning," I announce. "Deal yourself five cards and then pass the remainder of the deck on to your neighbor." 
+
+I hand one complete deck to a student in the back of the room. Then
+I deal myself five cards from the other deck, and pass the remainder to a student in the front row. The front-row student likes to joke around, which I like. She says, "Are you sure that you shuffled this deck?" 
+
+"Maybe not," I reply. "Why don't you make sure by shuffling it again." But I hold on to my original five cards.
+
+Once each of the 19 students has a hand of five cards, I ask them to rank their hands. Poker experience is not a pre-requisite for my stats class so I go over the rules, trying to turn it into a lesson in probability. 
+
+A quick web search later, I am on [this site](https://www.cardschat.com/poker/strategy/poker-hands/) and projecting this diagram:
+
+::: {.column-page-right}
+![](poker-hands.png)
+:::
+
+Now the reveal: I got two pair: 5s and aces.
+
+The students groan. I've beaten them all.
+
+The student in the front row once again asks, "Are you sure that you shuffled this deck?" She remembers that I had already selected my cards before she reshuffled them. 
+
+**Questions**:
+
+1. Is her skepticism warranted? Calculate the p-value for my getting two pair under the Null hypothesis that the deck was fairly shuffled before class. 
+
+2. If one of the students had happened to beat me, would that change the p-value on my hand?
+
+3. Suppose that my hand had been one pair. What would be the p-value? Should I conclude that the deck had been fairly shuffled before class.
+
+&nbsp;
+
+*This problem was suggested by Lt. Col. Kenneth Horton.*
+
+::: {.callout-note}
+## Digression on probability
+
+The probabilities in the above table are wrong. There are 2,598,960 distinct poker hands. (This is after sorting the cards within each hand.) There are indeed 4 ways to get a royal flush, putting the probability at 1/649,740.
+
+Here's a deck of cards in R:
+```{r}
+#| code-fold: TRUE
+suits <- "♣♠♡♢"|> strsplit(split=NULL)|> unlist()
+values <- c(2:10, "A", "J", "Q", "K")
+deck <- outer(suits, values, FUN=paste0) |> c()
+deck
+```
+
+How many different five-card hands are there?
+
+```{r }
+#| code-fold: TRUE
+All_hands <- combinat::combn(deck, 5) |> 
+  apply(2, FUN=function(x) paste0(c(x), collapse="|"))
+length(All_hands)
+```
+
+Here's a possible set of 10 hands dealt from a thoroughly shuffled deck:
+
+```{r}
+#| code-fold: TRUE
+sample(All_hands, size=10)
+```
+
+:::
