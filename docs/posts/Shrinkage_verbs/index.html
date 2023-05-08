@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Daniel Kaplan">
+<meta name="dcterms.date" content="2023-05-06">
+
+<title>Math300 Blog - Shrinkage verbs</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Math300 Blog</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://dtkaplan.github.io/Math-300Z/">
+ <span class="menu-text">Spring 2023 class schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Shrinkage verbs</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">reduction</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Daniel Kaplan </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">May 6, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+
+
+
+
+<div class="page-columns page-full"><p>Much of the time when we use <code>mutate()</code>, we are generating a new variable out of those already in the data frame. All sorts of mathematical and character transformations are available. For instance, the <code>KidsFeet</code> data frame records the length and width of 39 third- and fourth-grade children.  If we would like to work with the aspect ratio of the feet, which is length divided by width, <code>mutate()</code> will do the work for us.</p><div class="no-row-height column-margin column-container"><span class="">We will use a short subsample of the <code>KidsFeet</code> data for the purposes of demonstration.</span></div></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>KidsFeet <span class="sc">|&gt;</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">aspect =</span> length <span class="sc">/</span> width)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+
+</div>
+<div class="cell page-columns page-full" data-digits="3">
+<div class="cell-output-display page-columns page-full">
+<div id="tbl-aspect-ratio" class="anchored page-columns page-full">
+
+<table class="table table-striped table-condensed" style="font-family: Courier; width: auto !important; ">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> sex </th>
+   <th style="text-align:right;"> length </th>
+   <th style="text-align:right;"> width </th>
+   <th style="text-align:right;"> aspect </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 26.1 </td>
+   <td style="text-align:right;"> 9.1 </td>
+   <td style="text-align:right;"> 2.87 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 24.5 </td>
+   <td style="text-align:right;"> 9.7 </td>
+   <td style="text-align:right;"> 2.53 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 23.6 </td>
+   <td style="text-align:right;"> 9.0 </td>
+   <td style="text-align:right;"> 2.62 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 26.0 </td>
+   <td style="text-align:right;"> 9.0 </td>
+   <td style="text-align:right;"> 2.89 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 24.5 </td>
+   <td style="text-align:right;"> 9.0 </td>
+   <td style="text-align:right;"> 2.72 </td>
+  </tr>
+</tbody>
+</table>
+<div class="quarto-table-caption margin-caption">Table&nbsp;1:  An example of mutate() with a transformation that works on each row individually. </div></div>
+</div>
+</div>
+<p>This Lesson introduces transformations of a different kind, some of which you are already familiar with. We will call these “<strong>shrinkage</strong>” transformations because, rather than dealing with the data frame rows one at a time, these transformations work on the rows collectively.</p>
+<p>Perhaps the simplest shrinkage transformation is averaging. An average, of course, combines (shrinks) many numerical values to give a single representative one. Two examples of averages are the <strong>mean</strong> and <strong>median</strong>. When <code>mutate()</code> encounters a shrinkage transformation of this sort, it inserts the same value for all of the rows. You can think of mean or median as shrinking the range of values of its argument into a single number.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>KidsFeet <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="fu">mean</span>(length))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell page-columns page-full" data-digits="3">
+<div class="cell-output-display page-columns page-full">
+<div id="tbl-mean-len1" class="anchored page-columns page-full">
+
+<table class="table table-striped table-condensed" style="font-family: Courier; width: auto !important; ">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> sex </th>
+   <th style="text-align:right;"> length </th>
+   <th style="text-align:right;"> width </th>
+   <th style="text-align:right;"> mean(length) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 26.1 </td>
+   <td style="text-align:right;"> 9.1 </td>
+   <td style="text-align:right;"> 24.9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 24.5 </td>
+   <td style="text-align:right;"> 9.7 </td>
+   <td style="text-align:right;"> 24.9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 23.6 </td>
+   <td style="text-align:right;"> 9.0 </td>
+   <td style="text-align:right;"> 24.9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 26.0 </td>
+   <td style="text-align:right;"> 9.0 </td>
+   <td style="text-align:right;"> 24.9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 24.5 </td>
+   <td style="text-align:right;"> 9.0 </td>
+   <td style="text-align:right;"> 24.9 </td>
+  </tr>
+</tbody>
+</table>
+<div class="quarto-table-caption margin-caption">Table&nbsp;2:  Some shrinkage operators insert the same value for each row, reflecting the collective properties of all rows. </div></div>
+</div>
+</div>
+<p>Usually, we prefer to give column names that are short and have no special characters. To accomplish this, use <em>named arguments</em> to <code>mutate()</code>. The names are up to you. Here’s an example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>KidsFeet <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">mlen =</span> <span class="fu">mean</span>(length))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell page-columns page-full" data-digits="3">
+<div class="cell-output-display page-columns page-full">
+<div id="tbl-mean-len2" class="anchored page-columns page-full">
+
+<table class="table table-striped table-condensed" style="font-family: Courier; width: auto !important; ">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> sex </th>
+   <th style="text-align:right;"> length </th>
+   <th style="text-align:right;"> mlen </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 26.1 </td>
+   <td style="text-align:right;"> 24.9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 24.5 </td>
+   <td style="text-align:right;"> 24.9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 23.6 </td>
+   <td style="text-align:right;"> 24.9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 26.0 </td>
+   <td style="text-align:right;"> 24.9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 24.5 </td>
+   <td style="text-align:right;"> 24.9 </td>
+  </tr>
+</tbody>
+</table>
+<div class="quarto-table-caption margin-caption">Table&nbsp;3:  Imposing a more concise column name using a named-argument syntax. </div></div>
+</div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned page-columns page-full">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Rank of a variable
+</div>
+</div>
+<div class="callout-body-container callout-body page-columns page-full">
+<p>Two interesting shrinkage transforms with important uses in statistics are <code>rank()</code> and <code>percent_rank()</code>. These tell where each row would stand if the values had been sorted in ascending order:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>KidsFeet <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">rank=</span><span class="fu">rank</span>(length), <span class="at">percentile=</span><span class="dv">100</span><span class="sc">*</span><span class="fu">percent_rank</span>(length))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell page-columns page-full" data-digits="3">
+<div class="cell-output-display page-columns page-full">
+<div id="tbl-mean-rank" class="anchored page-columns page-full">
+
+<table class="table table-striped table-condensed" style="font-family: Courier; width: auto !important; ">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> sex </th>
+   <th style="text-align:right;"> length </th>
+   <th style="text-align:right;"> rank </th>
+   <th style="text-align:right;"> percentile </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 26.1 </td>
+   <td style="text-align:right;"> 5.0 </td>
+   <td style="text-align:right;"> 100 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 24.5 </td>
+   <td style="text-align:right;"> 2.5 </td>
+   <td style="text-align:right;"> 25 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 23.6 </td>
+   <td style="text-align:right;"> 1.0 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 26.0 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 75 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 24.5 </td>
+   <td style="text-align:right;"> 2.5 </td>
+   <td style="text-align:right;"> 25 </td>
+  </tr>
+</tbody>
+</table>
+<div class="quarto-table-caption margin-caption">Table&nbsp;4:  rank() and percent_rank()are very much the same, withpercent_rank()` scaling the results to fit into the range 0 to 1. </div></div>
+</div>
+</div>
+<p>Unlike <code>mean()</code>, the <code>rank()</code> transformations do not insert the same value in each row. Still, the output values depend collectively on the values in the input. This is completely characteristic of a shrinkage transformation.</p>
+</div>
+</div>
+<section id="groupwise-operations" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="groupwise-operations">Groupwise operations</h2>
+<p>The <code>group_by()</code> wrangling verb sets up <code>mutate()</code> to use shrinkage transformations separately for each group. For instance:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>KidsFeet <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank=</span><span class="fu">rank</span>(length))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell page-columns page-full" data-digits="3">
+<div class="cell-output-display page-columns page-full">
+<div id="tbl-grouped-rank" class="anchored page-columns page-full">
+
+<table class="table table-striped table-condensed" style="font-family: Courier; width: auto !important; ">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> sex </th>
+   <th style="text-align:right;"> length </th>
+   <th style="text-align:right;"> rank </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 26.1 </td>
+   <td style="text-align:right;"> 3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 24.5 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 23.6 </td>
+   <td style="text-align:right;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 26.0 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 24.5 </td>
+   <td style="text-align:right;"> 1 </td>
+  </tr>
+</tbody>
+</table>
+<div class="quarto-table-caption margin-caption">Table&nbsp;5:  group_by() sets up mutate() to calulate shrinkage values group-by-group. </div></div>
+</div>
+</div>
+<p>Rank 1 appears twice in <a href="#tbl-grouped-rank">Table&nbsp;5</a>, once for the girls and once for the both. Within both groups, rank 1 is assigned to the row with the smallest <code>length</code>.</p>
+<p>In the <a href="../Prelude-to-modeling/">next Lesson</a> we will work extensively with groupwise means as a way of summarizing the similarities within a group and the differences between groups.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

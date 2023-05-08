@@ -1,0 +1,306 @@
+---
+title: "Prelude to modeling"
+author: "Daniel Kaplan"
+date: "2023-05-07"
+categories: [reduction, ]
+---
+
+```{r include=FALSE}
+library(math300)
+source("../../_startup.R")
+```
+
+Using a shrinkage transformation like `mean()` along with `group_by()` constitutes a simple form of **statistical modeling**, a powerful way to summarize data and to characterize the **relationships** among variables. Statistical modeling has its own vocabulary and a major goal of this Lesson is to introduce that vocabulary.
+
+```{r echo=FALSE}
+set.seed(104)
+Small <- KidsFeet |> select(sex, length, width) |> sample(5) |> select(-orig.id)
+rownames(Small) <- NULL
+```
+
+Picking up on the example from the [previous Lesson](../Shrinkage_verbs/), here are the mean foot `width`s of the children recorded in the `KidsFeet` data frame.
+
+```{r results="hide"}
+KidsFeet |>
+  group_by(sex) |>
+  mutate(modval = mean(width))
+```
+
+```{r echo=FALSE, digits=3}
+#| label: tbl-modval
+#| tbl-cap: "The average foot widths groupwise for boys and girls."
+#| tbl-cap-location: margin
+Small |>
+  group_by(sex) |>
+  mutate(modval = mean(width)) |>
+  ungroup()
+```
+
+We have given the name `modval` to the column added by `mutate`. This is short for "**model value**," which will become our *generic* name for the quantity calculated using shrinkage transforms in this way. Two additional important new vocabulary terms are "**response variable**" and "**explanatory variable(s)**." The response variable is the quantity we seek to explain via modeling. The explanatory variable(s) are the materials for the explanation. In the wrangling command that produces @tbl-modval, `width` the response variable. Naturally, `width` varies from row to row; this is no more than saying that kids differ one from another in this way. 
+
+The goal of modeling is to shrink away unwanted variation in the response variable, keeping only that variation associated with the explanatory variable(s). You can see that `modval` still varies from row to row, but the variation is simpler. All that is retained from the response variable `width` is the variation that goes along with the explanatory variable `sex.`
+
+@fig-shrinkage-width displays such shrinkage visually. The transluscent dots show each childs actual foot width. The darker dots are the model values; all the girls have one model value, all the boys another.
+
+```{r}
+#| label: fig-shrinkage-width
+#| fig-cap-location: margin
+#| fig-cap: "The model values (darker colors) show a simpler form of variation than the response variable. It is as if the values of the response have been shrunken down onto the model values."
+#| code-fold: true
+For_plot <- KidsFeet |> group_by(sex) |> 
+  mutate(modval = mean(width)) |>
+  mutate(jitterx = as.numeric(sex) + runif(length(sex),-.15,.15)) |>
+  mutate(resid = width - modval)
+For_plot |>
+  ggplot(aes(x = jitterx)) + 
+  geom_point(aes(y = width, color=sex), alpha=0.3) +
+  geom_point(aes(y=modval, color=sex)) +
+  scale_x_continuous(breaks = 1:2, labels=c("Girl", "Boy"), limits=c(0.5, 2.5),
+                     name="Child's sex") +
+  guides(color = "none") + 
+  ylab("Foot width (cm)") + ylim(c(7.5,10)) +
+  scale_color_manual(values=c("blue", "red"))
+```
+
+Even though all the girls share the same model value and similarly with the boys, each child has his or her own "**residual**," which is the difference between that child's actual foot width and the model value for that child. Calculating the residuals is very easy: just subtract the model value from the response variable's value.
+
+```{r results="hide"}
+KidsFeet |> group_by(sex) |> 
+  mutate(modval = mean(width),
+         resid = width - modval)
+```
+
+```{r echo=FALSE}
+#| label: tbl-calc-resid
+#| tbl-cap: "The residual is the difference between the actual value of the response variable (here, `width`) for each unit of observation and the model value for that unit."
+#| tbl-cap-location: margin
+Small |> group_by(sex) |> 
+  mutate(modval = mean(width),
+         resid = width - modval)
+```
+
+@fig-width-resids shows the residuals for each child as a vertical line segment. When the actual foot width is higher than the model value, the residual is positive. When the foot width is lower than the model value, the residual is negative. 
+
+```{r echo=FALSE}
+#| label: fig-width-resids
+#| fig-cap: "The residuals are the differences between the response values and the model values. Here, the residuals are shown by a narrow line. The magnitude of the residual for each unit of observation is the length of that line; the sign of the residual can be positive (shown by dashed lines) or negative (solid lines)."
+For_plot |> mutate(linetype = resid > 0 ) |>
+  ggplot(aes(x = jitterx)) + 
+  geom_point(aes(y = width, color=sex), alpha=0.3) +
+  geom_point(aes(y=modval, color=sex)) +
+  geom_line(aes(y=modval, color=sex)) + 
+  geom_segment(aes(y=modval, yend=width, x=jitterx, xend=jitterx, linetype=linetype), 
+               linewidth=0.2) +
+  scale_x_continuous(breaks = 1:2, labels=c("Girl", "Boy"), limits=c(0.5, 2.5),
+                     name="Child's sex") +
+  guides(color = "none", linetype = "none") + 
+  ylab("Foot width (cm)") + ylim(c(7.5,10))
+```
+
+The purpose of statistical modeling is to divide the variation in the response variable into two components: the variation in the model values and the variation in the residuals.
+
+## Quantitive explanatory variables
+
+When the explanatory variable is categorical---`sex` in the previous examples---the `mean()` is a good way to shrink the individual values of the response onto a single value for each level of the explanatory variable.
+
+```{r echo=FALSE}
+shrink_linear <- function(response, explanatory) {
+  mod <- lm(response ~ explanatory)
+  predict(mod)
+}
+```
+
+But often an explanatory variable is quantitative. For instance, we might decide to model foot width using foot `length` as the explanatory variable. Among the 39 kids in `KidsFeet`, there are 25 unique foot lengths. If we use `group_by(length)` then there will be 25 different model values, as in @fig-too-many-modvals.
+
+```{r}
+#| label: fig-too-many-modvals
+#| fig-cap: "Grouping by `length` creates 25 different groups, one for each unique value of `length`. For groups with just one kid, the model value goes exactly through the value of foot width for that kid. For groups with two or three kids, the model value goes somewhere in the middle vertically. Here, the model values are connected by line segments to make it easier to see how they vary with foot `length`."
+KidsFeet |> 
+  group_by(length) |>
+  mutate(modval = mean(width),
+         resid = width - modval,
+         linetype = resid > 0) |>
+  ggplot(aes(x=length)) +
+  geom_point(aes(y=width), alpha=0.2) +
+  geom_line(aes(y=modval), color="blue") +
+  geom_segment(aes(y=modval, yend=width, x=length, xend=length, 
+                   linetype=linetype), 
+               linewidth=0.2) +
+  guides(linetype="none")
+```
+
+With so many different model values, there's hardly any shrinkage apparent; the model values vary almost as much as the response variable (`width`) does.
+
+[Modeling with ntiles in the exercises.]
+
+A better [We won't be using `shrink_linear()` for long. It turns out that the wrangling notation is not very well suited to building anything but simple models.]{.aside}
+approach for quantitative explanatory variables is to shrink down to a line or curve that goes through the middle of the various `width` values. In this Lesson, we will use the `shrink_linear()` function to create the model values. The first argument is the response variable, the second the explanatory variable. 
+
+To illustrate, the next command shows the usage of `shrink_linear()`.
+
+```{r results="hide"}
+KidsFeet |> mutate(modval = shrink_linear(width, length))
+```
+
+```{r echo=FALSE, digits=3}
+#| label: tbl-shrink1
+#| tbl-cap: "Model values calculated with `width` as the response variable and `length` as the explanatory variable."
+set.seed(104)
+foo <- KidsFeet |> 
+  mutate(modval = shrink_linear(width, length)) |> 
+  select(sex, length, width, modval) |> sample(5) |> select(-orig.id)
+rownames(foo) <- NULL
+foo
+```
+Just to look at @tbl-shrink1, the model values seem a jumble. It's easier to see what's going on by graphing the data and model values, as in @fig-shrink-linear1.
+
+```{r}
+#| label: fig-shrink-linear1
+#| code-fold: true
+#| fig-cap: "A point plot of `width` versus `length` from the `KidsFeet` data frame. The model values (black dots) are set by imposing a linear relationship between the response and explanatory variables."
+#| fig-cap-location: margin
+P2 <- KidsFeet |> 
+  mutate(modval = shrink_linear(width, length),
+         resid = width - modval,
+         linetype = resid > 0) |>
+  ggplot(aes(x=length)) +
+  geom_point(aes(y=width), alpha=0.2) +
+  geom_point(aes(y=modval)) +
+  geom_line(aes(y=modval), color="blue") + 
+  geom_segment(aes(y=modval, yend=width, 
+                   x=length, xend=length, 
+                   linetype=linetype), 
+               linewidth=0.2) +
+  guides(linetype="none")
+P2
+```
+
+The scatter of the `width` and `length` variables in a point plot is shrunk down to a line by the `shrink_linear()` function. Overall, the pattern of the model values shows a steady increase in foot `width` as a function of foot `length`.
+
+It's also possible to use `shrink_linear()` in conjunction with `group_by()`. 
+
+```{r results="hide"}
+KidsFeet |> 
+  group_by(sex) |> mutate(modval = shrink_linear(width, length))
+```
+
+```{r echo=FALSE, digits=3}
+#| label: tbl-shrink2
+#| tbl-cap: "Grouping `KidsFeet` by `sex` produces model values that are on separate straight lines for girls and boys."
+set.seed(104)
+foo <- KidsFeet |> 
+  group_by(sex) |> mutate(modval = shrink_linear(width, length)) |> 
+  select(sex, length, width, modval) |> sample(5) |> select(-orig.id) |> 
+  ungroup()
+rownames(foo) <- NULL
+foo
+```
+
+```{r}
+#| label: fig-shrink-linear2
+#| code-fold: true
+#| fig-cap: "A point plot of `width` versus `length` with `sex` as a grouping variable."
+#| fig-cap-location: margin
+P3 <- KidsFeet |> 
+  group_by(sex) |>
+  mutate(modval = shrink_linear(width, length),
+         resid = width - modval,
+         linetype = resid > 0) |>
+  ggplot(aes(x=length, color=sex)) +
+  geom_point(aes(y=width), alpha=0.2) +
+  geom_point(aes(y=modval)) +
+  geom_line(aes(y=modval)) +
+  scale_color_manual(values=c("blue", "red")) +
+  geom_segment(aes(y=modval, yend=width, 
+                   x=length, xend=length, 
+                   linetype=linetype), 
+               linewidth=0.2) +
+  guides(linetype="none")
+P3
+```
+
+## Are simpler models better?
+
+@fig-six-shrinkage-models shows six different ways of constructing model values. In each case, the model values constitute the shrunken values of the response variable `width`. In panel (a), the shrinkage is the most possible, all the way down to a single model value of `width`. In (b) the shrinkage is a little less; one model value for each `sex`. In successive panels (c) through (e), the shrinkage gets smaller and smaller. By panel (f), there is hardly any shrinkage in `width` at all.
+
+```{r echo=FALSE}
+#| label: fig-six-shrinkage-models
+#| layout-ncol: 3
+#| column: page-right
+#| fig-cap: "Six different ways of shrinking `width` based on `length` and `sex`."
+#| fig-subcap:
+#|   - "`mean(width)`"
+#|   - "`mean(width)` grouped by `sex`"
+#|   - "linear by `length`"
+#|   - "linear by `length` grouped by `sex`"
+#|   - "grouping by `length`"
+#|   - "grouping by `length` and `sex`"
+P1 <- KidsFeet |> 
+  mutate(modval = mean(width),
+         resid = width - modval,
+         linetype = resid > 0) |>
+  ggplot(aes(x=length)) +
+  geom_point(aes(y=width), alpha=0.2) +
+  geom_line(aes(y=modval), color="blue") +
+  geom_segment(aes(y=modval, yend=width, 
+                   x=length, xend=length, 
+                   linetype=linetype), 
+               linewidth=0.2) +
+  guides(linetype="none")
+P1b <- KidsFeet |> 
+  group_by(sex) |>
+  mutate(modval = mean(width),
+         resid = width - modval,
+         linetype = resid > 0) |>
+  ggplot(aes(x=length)) +
+  geom_point(aes(y=width), alpha=0.2) +
+  geom_line(aes(y=modval, color=sex)) +
+  geom_segment(aes(y=modval, yend=width, 
+                   x=length, xend=length, 
+                   linetype=linetype, color=sex), 
+               linewidth=0.2) +
+  guides(linetype="none")
+
+P4 <- KidsFeet |> 
+  group_by(length) |>
+  mutate(modval = mean(width),
+         resid = width - modval,
+         linetype = resid > 0) |>
+  ggplot(aes(x=length)) +
+  geom_point(aes(y=width), alpha=0.2) +
+  geom_line(aes(y=modval), color="blue") +
+  geom_segment(aes(y=modval, yend=width, 
+                   x=length, xend=length, 
+                   linetype=linetype), 
+               linewidth=0.2) +
+  guides(linetype="none")
+
+P5 <- KidsFeet |> 
+  group_by(sex, length) |>
+  mutate(modval = mean(width),
+         resid = width - modval,
+         linetype = resid > 0) |>
+  ggplot(aes(x=length)) +
+  geom_point(aes(y=width), alpha=0.2) +
+  geom_line(aes(y=modval, color=sex)) +
+  scale_color_manual(values=c("blue", "red")) +
+  geom_segment(aes(y=modval, yend=width, 
+                   x=length, xend=length, 
+                   linetype=linetype), 
+               linewidth=0.2) +
+  guides(linetype="none")
+
+P1; P1b; P2; P3; P4; P5
+```
+
+Earlier in this Lesson we stated, 
+
+> "*The goal of modeling is to shrink away unwanted variation in the response variable, keeping only that variation associated with the explanatory variable(s).*"
+
+
+
+
+----------
+
+
+Exercise: Show that the sum of squares and mean square for modeling using the median is larger than for the mean.

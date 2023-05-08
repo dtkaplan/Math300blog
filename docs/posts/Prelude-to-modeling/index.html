@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Daniel Kaplan">
+<meta name="dcterms.date" content="2023-05-07">
+
+<title>Math300 Blog - Prelude to modeling</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Math300 Blog</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://dtkaplan.github.io/Math-300Z/">
+ <span class="menu-text">Spring 2023 class schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Prelude to modeling</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">reduction</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Daniel Kaplan </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">May 7, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+
+
+
+
+<p>Using a shrinkage transformation like <code>mean()</code> along with <code>group_by()</code> constitutes a simple form of <strong>statistical modeling</strong>, a powerful way to summarize data and to characterize the <strong>relationships</strong> among variables. Statistical modeling has its own vocabulary and a major goal of this Lesson is to introduce that vocabulary.</p>
+<div class="cell">
+
+</div>
+<p>Picking up on the example from the <a href="../Shrinkage_verbs/">previous Lesson</a>, here are the mean foot <code>width</code>s of the children recorded in the <code>KidsFeet</code> data frame.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>KidsFeet <span class="sc">|&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">|&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">modval =</span> <span class="fu">mean</span>(width))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell page-columns page-full" data-digits="3">
+<div class="cell-output-display page-columns page-full">
+<div id="tbl-modval" class="anchored page-columns page-full">
+
+<table class="table table-striped table-condensed" style="font-family: Courier; width: auto !important; ">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> sex </th>
+   <th style="text-align:right;"> length </th>
+   <th style="text-align:right;"> width </th>
+   <th style="text-align:right;"> modval </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 26.1 </td>
+   <td style="text-align:right;"> 9.1 </td>
+   <td style="text-align:right;"> 9.27 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 24.5 </td>
+   <td style="text-align:right;"> 9.7 </td>
+   <td style="text-align:right;"> 9.27 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 23.6 </td>
+   <td style="text-align:right;"> 9.0 </td>
+   <td style="text-align:right;"> 9.27 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 26.0 </td>
+   <td style="text-align:right;"> 9.0 </td>
+   <td style="text-align:right;"> 9.00 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 24.5 </td>
+   <td style="text-align:right;"> 9.0 </td>
+   <td style="text-align:right;"> 9.00 </td>
+  </tr>
+</tbody>
+</table>
+<div class="quarto-table-caption margin-caption">Table&nbsp;1:  The average foot widths groupwise for boys and girls. </div></div>
+</div>
+</div>
+<p>We have given the name <code>modval</code> to the column added by <code>mutate</code>. This is short for “<strong>model value</strong>,” which will become our <em>generic</em> name for the quantity calculated using shrinkage transforms in this way. Two additional important new vocabulary terms are “<strong>response variable</strong>” and “<strong>explanatory variable(s)</strong>.” The response variable is the quantity we seek to explain via modeling. The explanatory variable(s) are the materials for the explanation. In the wrangling command that produces <a href="#tbl-modval">Table&nbsp;1</a>, <code>width</code> the response variable. Naturally, <code>width</code> varies from row to row; this is no more than saying that kids differ one from another in this way.</p>
+<p>The goal of modeling is to shrink away unwanted variation in the response variable, keeping only that variation associated with the explanatory variable(s). You can see that <code>modval</code> still varies from row to row, but the variation is simpler. All that is retained from the response variable <code>width</code> is the variation that goes along with the explanatory variable <code>sex.</code></p>
+<p><a href="#fig-shrinkage-width">Figure&nbsp;1</a> displays such shrinkage visually. The transluscent dots show each childs actual foot width. The darker dots are the model values; all the girls have one model value, all the boys another.</p>
+<div class="cell page-columns page-full">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>For_plot <span class="ot">&lt;-</span> KidsFeet <span class="sc">|&gt;</span> <span class="fu">group_by</span>(sex) <span class="sc">|&gt;</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">modval =</span> <span class="fu">mean</span>(width)) <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">jitterx =</span> <span class="fu">as.numeric</span>(sex) <span class="sc">+</span> <span class="fu">runif</span>(<span class="fu">length</span>(sex),<span class="sc">-</span>.<span class="dv">15</span>,.<span class="dv">15</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">resid =</span> width <span class="sc">-</span> modval)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>For_plot <span class="sc">|&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> jitterx)) <span class="sc">+</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> width, <span class="at">color=</span>sex), <span class="at">alpha=</span><span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y=</span>modval, <span class="at">color=</span>sex)) <span class="sc">+</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"Girl"</span>, <span class="st">"Boy"</span>), <span class="at">limits=</span><span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">2.5</span>),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">name=</span><span class="st">"Child's sex"</span>) <span class="sc">+</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="st">"none"</span>) <span class="sc">+</span> </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Foot width (cm)"</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="fl">7.5</span>,<span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-shrinkage-width" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="index_files/figure-html/fig-shrinkage-width-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption margin-caption">Figure&nbsp;1: The model values (darker colors) show a simpler form of variation than the response variable. It is as if the values of the response have been shrunken down onto the model values.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Even though all the girls share the same model value and similarly with the boys, each child has his or her own “<strong>residual</strong>,” which is the difference between that child’s actual foot width and the model value for that child. Calculating the residuals is very easy: just subtract the model value from the response variable’s value.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>KidsFeet <span class="sc">|&gt;</span> <span class="fu">group_by</span>(sex) <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">modval =</span> <span class="fu">mean</span>(width),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">resid =</span> width <span class="sc">-</span> modval)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tbl-calc-resid" class="cell tbl-cap-location-margin tbl-parent quarto-layout-panel anchored" data-tbl-cap="The residual is the difference between the actual value of the response variable (here, `width`) for each unit of observation and the model value for that unit.">
+<div class="panel-caption table-caption">
+<p><strong>?(caption)</strong></p>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<pre><code># A tibble: 5 × 5
+# Groups:   sex [2]
+  sex   length width modval  resid
+  &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 B       26.1   9.1   9.27 -0.167
+2 B       24.5   9.7   9.27  0.433
+3 B       23.6   9     9.27 -0.267
+4 G       26     9     9     0    
+5 G       24.5   9     9     0    </code></pre>
+</div>
+</div>
+</div>
+<p><a href="#fig-width-resids">Figure&nbsp;2</a> shows the residuals for each child as a vertical line segment. When the actual foot width is higher than the model value, the residual is positive. When the foot width is lower than the model value, the residual is negative.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-width-resids" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-width-resids-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2: The residuals are the differences between the response values and the model values. Here, the residuals are shown by a narrow line. The magnitude of the residual for each unit of observation is the length of that line; the sign of the residual can be positive (shown by dashed lines) or negative (solid lines).</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The purpose of statistical modeling is to divide the variation in the response variable into two components: the variation in the model values and the variation in the residuals.</p>
+<section id="quantitive-explanatory-variables" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="quantitive-explanatory-variables">Quantitive explanatory variables</h2>
+<p>When the explanatory variable is categorical—<code>sex</code> in the previous examples—the <code>mean()</code> is a good way to shrink the individual values of the response onto a single value for each level of the explanatory variable.</p>
+<div class="cell">
+
+</div>
+<p>But often an explanatory variable is quantitative. For instance, we might decide to model foot width using foot <code>length</code> as the explanatory variable. Among the 39 kids in <code>KidsFeet</code>, there are 25 unique foot lengths. If we use <code>group_by(length)</code> then there will be 25 different model values, as in <a href="#fig-too-many-modvals">Figure&nbsp;3</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>KidsFeet <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(length) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">modval =</span> <span class="fu">mean</span>(width),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">resid =</span> width <span class="sc">-</span> modval,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">linetype =</span> resid <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>length)) <span class="sc">+</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y=</span>width), <span class="at">alpha=</span><span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>modval), <span class="at">color=</span><span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">y=</span>modval, <span class="at">yend=</span>width, <span class="at">x=</span>length, <span class="at">xend=</span>length, </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                   <span class="at">linetype=</span>linetype), </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">linewidth=</span><span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">linetype=</span><span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-too-many-modvals" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-too-many-modvals-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3: Grouping by <code>length</code> creates 25 different groups, one for each unique value of <code>length</code>. For groups with just one kid, the model value goes exactly through the value of foot width for that kid. For groups with two or three kids, the model value goes somewhere in the middle vertically. Here, the model values are connected by line segments to make it easier to see how they vary with foot <code>length</code>.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>With so many different model values, there’s hardly any shrinkage apparent; the model values vary almost as much as the response variable (<code>width</code>) does.</p>
+<p>[Modeling with ntiles in the exercises.]</p>
+<div class="page-columns page-full"><p>A better  approach for quantitative explanatory variables is to shrink down to a line or curve that goes through the middle of the various <code>width</code> values. In this Lesson, we will use the <code>shrink_linear()</code> function to create the model values. The first argument is the response variable, the second the explanatory variable.</p><div class="no-row-height column-margin column-container"><span class="">We won’t be using <code>shrink_linear()</code> for long. It turns out that the wrangling notation is not very well suited to building anything but simple models.</span></div></div>
+<p>To illustrate, the next command shows the usage of <code>shrink_linear()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>KidsFeet <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">modval =</span> <span class="fu">shrink_linear</span>(width, length))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-digits="3">
+<div class="cell-output-display">
+<div id="tbl-shrink1" class="anchored">
+
+<table class="table table-striped table-condensed" style="font-family: Courier; width: auto !important; "><caption>Table&nbsp;2:  Model values calculated with width as the response variable and length as the explanatory variable. </caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> sex </th>
+   <th style="text-align:right;"> length </th>
+   <th style="text-align:right;"> width </th>
+   <th style="text-align:right;"> modval </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 26.1 </td>
+   <td style="text-align:right;"> 9.1 </td>
+   <td style="text-align:right;"> 9.33 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 24.5 </td>
+   <td style="text-align:right;"> 9.7 </td>
+   <td style="text-align:right;"> 8.94 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 23.6 </td>
+   <td style="text-align:right;"> 9.0 </td>
+   <td style="text-align:right;"> 8.71 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 26.0 </td>
+   <td style="text-align:right;"> 9.0 </td>
+   <td style="text-align:right;"> 9.31 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 24.5 </td>
+   <td style="text-align:right;"> 9.0 </td>
+   <td style="text-align:right;"> 8.94 </td>
+  </tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Just to look at <a href="#tbl-shrink1">Table&nbsp;2</a>, the model values seem a jumble. It’s easier to see what’s going on by graphing the data and model values, as in <a href="#fig-shrink-linear1">Figure&nbsp;4</a>.</p>
+<div class="cell page-columns page-full">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>P2 <span class="ot">&lt;-</span> KidsFeet <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">modval =</span> <span class="fu">shrink_linear</span>(width, length),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">resid =</span> width <span class="sc">-</span> modval,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">linetype =</span> resid <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>length)) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y=</span>width), <span class="at">alpha=</span><span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y=</span>modval)) <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>modval), <span class="at">color=</span><span class="st">"blue"</span>) <span class="sc">+</span> </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">y=</span>modval, <span class="at">yend=</span>width, </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                   <span class="at">x=</span>length, <span class="at">xend=</span>length, </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                   <span class="at">linetype=</span>linetype), </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">linewidth=</span><span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">linetype=</span><span class="st">"none"</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>P2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-shrink-linear1" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="index_files/figure-html/fig-shrink-linear1-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption margin-caption">Figure&nbsp;4: A point plot of <code>width</code> versus <code>length</code> from the <code>KidsFeet</code> data frame. The model values (black dots) are set by imposing a linear relationship between the response and explanatory variables.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The scatter of the <code>width</code> and <code>length</code> variables in a point plot is shrunk down to a line by the <code>shrink_linear()</code> function. Overall, the pattern of the model values shows a steady increase in foot <code>width</code> as a function of foot <code>length</code>.</p>
+<p>It’s also possible to use <code>shrink_linear()</code> in conjunction with <code>group_by()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>KidsFeet <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">modval =</span> <span class="fu">shrink_linear</span>(width, length))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-digits="3">
+<div class="cell-output-display">
+<div id="tbl-shrink2" class="anchored">
+
+<table class="table table-striped table-condensed" style="font-family: Courier; width: auto !important; "><caption>Table&nbsp;3:  Grouping KidsFeet by sex produces model values that are on separate straight lines for girls and boys. </caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> sex </th>
+   <th style="text-align:right;"> length </th>
+   <th style="text-align:right;"> width </th>
+   <th style="text-align:right;"> modval </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 26.1 </td>
+   <td style="text-align:right;"> 9.1 </td>
+   <td style="text-align:right;"> 9.40 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 24.5 </td>
+   <td style="text-align:right;"> 9.7 </td>
+   <td style="text-align:right;"> 9.06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 23.6 </td>
+   <td style="text-align:right;"> 9.0 </td>
+   <td style="text-align:right;"> 8.87 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 26.0 </td>
+   <td style="text-align:right;"> 9.0 </td>
+   <td style="text-align:right;"> 9.17 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 24.5 </td>
+   <td style="text-align:right;"> 9.0 </td>
+   <td style="text-align:right;"> 8.83 </td>
+  </tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell page-columns page-full">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>P3 <span class="ot">&lt;-</span> KidsFeet <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">modval =</span> <span class="fu">shrink_linear</span>(width, length),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">resid =</span> width <span class="sc">-</span> modval,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">linetype =</span> resid <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>length, <span class="at">color=</span>sex)) <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y=</span>width), <span class="at">alpha=</span><span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y=</span>modval)) <span class="sc">+</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>modval)) <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">y=</span>modval, <span class="at">yend=</span>width, </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>                   <span class="at">x=</span>length, <span class="at">xend=</span>length, </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>                   <span class="at">linetype=</span>linetype), </span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>               <span class="at">linewidth=</span><span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">linetype=</span><span class="st">"none"</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>P3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-shrink-linear2" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="index_files/figure-html/fig-shrink-linear2-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption margin-caption">Figure&nbsp;5: A point plot of <code>width</code> versus <code>length</code> with <code>sex</code> as a grouping variable.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="are-simpler-models-better" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="are-simpler-models-better">Are simpler models better?</h2>
+<p><a href="#fig-six-shrinkage-models">Figure&nbsp;6</a> shows six different ways of constructing model values. In each case, the model values constitute the shrunken values of the response variable <code>width</code>. In panel (a), the shrinkage is the most possible, all the way down to a single model value of <code>width</code>. In (b) the shrinkage is a little less; one model value for each <code>sex</code>. In successive panels (c) through (e), the shrinkage gets smaller and smaller. By panel (f), there is hardly any shrinkage in <code>width</code> at all.</p>
+<div id="fig-six-shrinkage-models" class="cell column-page-right quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 33.3%;justify-content: center;">
+<div id="fig-six-shrinkage-models-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-six-shrinkage-models-1.png" class="img-fluid figure-img" data-ref-parent="fig-six-shrinkage-models" width="672"></p>
+<p></p><figcaption class="figure-caption">(a) <code>mean(width)</code></figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 33.3%;justify-content: center;">
+<div id="fig-six-shrinkage-models-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-six-shrinkage-models-2.png" class="img-fluid figure-img" data-ref-parent="fig-six-shrinkage-models" width="672"></p>
+<p></p><figcaption class="figure-caption">(b) <code>mean(width)</code> grouped by <code>sex</code></figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 33.3%;justify-content: center;">
+<div id="fig-six-shrinkage-models-3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-six-shrinkage-models-3.png" class="img-fluid figure-img" data-ref-parent="fig-six-shrinkage-models" width="672"></p>
+<p></p><figcaption class="figure-caption">(c) linear by <code>length</code></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 33.3%;justify-content: center;">
+<div id="fig-six-shrinkage-models-4" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-six-shrinkage-models-4.png" class="img-fluid figure-img" data-ref-parent="fig-six-shrinkage-models" width="672"></p>
+<p></p><figcaption class="figure-caption">(d) linear by <code>length</code> grouped by <code>sex</code></figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 33.3%;justify-content: center;">
+<div id="fig-six-shrinkage-models-5" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-six-shrinkage-models-5.png" class="img-fluid figure-img" data-ref-parent="fig-six-shrinkage-models" width="672"></p>
+<p></p><figcaption class="figure-caption">(e) grouping by <code>length</code></figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 33.3%;justify-content: center;">
+<div id="fig-six-shrinkage-models-6" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-six-shrinkage-models-6.png" class="img-fluid figure-img" data-ref-parent="fig-six-shrinkage-models" width="672"></p>
+<p></p><figcaption class="figure-caption">(f) grouping by <code>length</code> and <code>sex</code></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6: Six different ways of shrinking <code>width</code> based on <code>length</code> and <code>sex</code>.</figcaption><p></p>
+</figure>
+</div>
+<p>Earlier in this Lesson we stated,</p>
+<blockquote class="blockquote">
+<p>“<em>The goal of modeling is to shrink away unwanted variation in the response variable, keeping only that variation associated with the explanatory variable(s).</em>”</p>
+</blockquote>
+<hr>
+<p>Exercise: Show that the sum of squares and mean square for modeling using the median is larger than for the mean.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
