@@ -2,7 +2,7 @@
 title: "Prelude to modeling"
 author: "Daniel Kaplan"
 date: "2023-05-07"
-categories: [reduction, ]
+categories: [shrinkage transform, model values, residuals ]
 ---
 
 ```{r include=FALSE}
@@ -220,6 +220,12 @@ P3
 ```
 
 ## Are simpler models better?
+
+::: {.callout-note}
+## Move this section
+
+:::
+
 
 @fig-six-shrinkage-models shows six different ways of constructing model values. In each case, the model values constitute the shrunken values of the response variable `width`. In panel (a), the shrinkage is the most possible, all the way down to a single model value of `width`. In (b) the shrinkage is a little less; one model value for each `sex`. In successive panels (c) through (e), the shrinkage gets smaller and smaller. By panel (f), there is hardly any shrinkage in `width` at all.
 

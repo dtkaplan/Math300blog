@@ -1,0 +1,200 @@
+---
+title: "Stats Vocabulary"
+author: "Daniel Kaplan"
+date: "2023-05-07"
+categories: [reduction, ]
+---
+
+```{r include=FALSE}
+library(math300)
+source("../../_startup.R")
+```
+
+When reviewing for a course, it's often a good idea to start with the specialized **words** and **phrases** that are used in the subject.
+
+To that end, I have tallied up the most common specialized words and phrases in the documents associated with the second half of 300Z: the textbook, instructor notes, wooksheets, and blog posts. Here are the most common along with the count of how many times they appear in the documents. I've added some of the less common ones because I think their importance is bigger than their count.
+
+word | count | note
+-------|----|-------
+data   | 826
+model  | 658
+sample | 631 | as in "sampling variation"
+variable | 554
+interval | 475
+variation | 369 | including "variance" 
+confidence | 354 | as in "confidence interval"
+coefficient | 296
+statistic | 272 | as in "sample statistic"
+`lm()`    | 266
+risk      | 265
+DAG       | 232
+explanatory | 213 | as in "explanatory variable"
+effect    | 218 | as in "effect size"
+response  | 177 | as in "response variable"
+specificity | 168 |
+causality | 141
+covariate | 123 
+sensitivity | 118
+frame | 107 | as in "data frame"
+regression | 101
+term | 99 | as in "model term"
+correlation | 98
+node | 92 | as in a DAG
+prevalence | 77
+categorical | 66 | as in "categorical variable"
+likelihood  | 59
+specification | 46 | as in "model specification"
+experiment  | 54
+confounding | 38
+
+## Data
+
+data frame, unit of observation, variable, column, row
+    variable: numerical (quantitative) vs categorical 
+    categorical: 
+        - levels: the allowed values, e.g., "red", "blue", "green" or "smoker", "nonsmoker"
+        - zero-one transformation (for categorical variables with two levels)
+    
+## Sample
+
+sampling variability, sampling bias, sample size ($n$), sample statistic, random selection
+    
+## Summaries
+
+sample statistic
+
+- For a single variable/column: 
+    - most used in 300Z: mean, variance (`var()`), standard deviation (`sd()`) 
+    - many others, e.g. median
+
+- For relating multiple variables: our main method is regression modeling
+
+## Regression modeling
+
+response variable, explanatory variables, covariates
+
+i. Fitting (or, equivalently, "model training")
+    - modeler chooses model specification (e.g. `y ~ x + g`) and provides training data
+    - `lm()` is our main tool for fitting: e.g. `lm(y ~ x + g, data=my_data_frame)`
+        - we have also used `glm(..., family=binomial)` ("logistic regression") when response variable is in zero-one format
+    - produces model coefficients
+        - intercept term (always present)
+        - quantitative explanatory variable: only one coefficient which is rate of change of model output with respect to this input.
+        - categorical explanatory variable: 
+            - one level is (automatically) used as a reference.
+            - one coefficient for each other level, gives *difference* from reference level
+    - residuals are response values minus the model output
+    
+ii. Model summaries: 
+    - Confidence interval (CI)
+        - estimate of "precision" of estimated coefficient, describes how much coefficient might be different if we collected a new sample.
+        - an interval for each model coefficient. Intervals have a lower end and upper end.
+        - confidence level (e.g. 95% is standard)
+            - "sampling variance" is estimate of size of sampling variation
+            - "standard error" (square-root of sampling variance)
+            - margin of error $\approx 2 \times$ standard error
+            - confidence interval $\equiv$ coefficient $\pm$ margin of error
+        - CI can be translated to a p-value
+            - p < 0.05 means that CI (at 95% confidence level) does not include zero.
+        - "Effect size" summarizes how much the model output changes when the value of an input changes. For our models in 300Z, the effect size is the same as the model coefficient.
+    - R-squared: 
+        - R^2^ = var(model values) / var(response variable)
+        - R^2^ measures fraction of response variance "explained" or "accounted for" by the explanatory variables. 
+        - 1 - R^2^ is fraction of response variance that remains unexplained.
+    - Mentioned but not much used in Math 300Z
+        - "Regression report" gives for each coefficient the coef. itself, its standard error, and a  p-value. Essentially a different format for the same info that's in the confidence interval report.
+        - ANOVA: describes categorical variables as one unit rather than as separate levels.
+        
+## Hypothesis testing
+
+i. Hypothesis: a statement that might or might not be true. We have focussed on competing two hypotheses.
+    - Null hypothesis: the explanatory variable is not related to the response variable.
+    - Alternative hypothesis: the explanatory variable is related
+    
+ii. "Significance testing" or "Null hypothesis testing" looks *only* at the Null hypothesis.
+    - p-value is likelihood of observed sample statistic (e.g. a coefficient) on "Planet Null," a world where the Null is true.
+    - Small p-value means that the observed sample statistic is *unlikely* on Planet Null. If p is small, then "reject the Null." Otherwise, "fail to reject the Null." 
+        - Often people rephrase "reject the Null" as "the result (e.g. a coefficient) is 'statistically significant.'" But this is misleading; the p-value on its own is not a measure of the practical importance of the result. Better to say "statistically discernible," or even just p < 0.05.
+        - Use of 0.05 as a threshold for "reject the Null" is merely a convention, but that convention is so widely used as to have become the operational definition of "reject the Null."
+    - Calculating a p-value. Usually done by software but you could do it yourself in different ways:
+        - p-value on a coefficient: Does the 95% CI encompass zero?
+        - Carry out many trials in which you shuffle the explanatory variable, fit the model to the shuffled data, and calculate the model summary (e.g. model coefficient or R^2^). Find the fraction of trials where the model summary is larger in magnitude than the model summary from the unshuffled data.
+        
+iii. Bayesian inference considers both the Null and the Alternative hypotheses.
+    - Overall result is the relative probability of the Alternative and the Null
+    - prior probability: prob(Alternative | no observation yet). This is often a subjective guess.
+    - posterior probability: prob(Alternative | after observation taken into account)
+    - two likelihoods: 
+        i. prob(observation | Alternative)
+        ii. prob(observation | Null)
+    - Likelihoods and the prior probability are combined to calculate the posterior probability. This is a matter of using a formula, but we haven't emphasized this calculation (except in the concrete setting of medical screening).
+    
+iv. Medical screening (our concrete example of Bayesian inference)
+    - examples of screening for diseases: mammography for breast cancer, prostate specific antigen (PSA) for prostate cancer, COVID antibodies for COVID infection. 
+    - the patient is tested, returning a *positive* or a *negative* result.
+        - Common sense suggests that a positive test means the patient has the disease, a negative test means otherwise. But in reality, a positive test merely suggests the patient is more likely than a random person to have the disease.
+    - posterior probability: prob(disease | positive test)
+    - prior probability: prob(disease | no test yet). In medical screening, the prior is the probability that a randomly selected person will genuinely have the disease.
+    - two likelihoods
+        i. prob(positive test | genuinely has the disease). Called the "sensitivity."
+        ii. prob(positive test | genuinely does not have the disease). This is 1 - "specificity."
+    - Likelihoods and the prior are combined to calculate the posterior probability. We did this by comparing the two blue areas in this diagram:
+
+::: {.column-margin}
+![](two-way.png)
+:::
+
+## Risk
+
+- Two components to a risk:
+    i. Value at risk, that is, how bad is the outcome going to be.
+    ii. Risk level: probability that the pad outcome will happen
+- Three entirely equivalent ways to describe the risk level
+    i. as a probability (p, a number between zero and one)
+    ii. as odds (p/(1-p)), a number between zero and infinity
+    iii. as "log-odds," the logarithm of the odds. a number between -infinity and infinity.
+- Risk factor: a condition or action that changes the risk level, e.g. smoking and lung cancer
+    i. risk ratio: risk level with the condition divided by the risk level without the condition
+    ii. baseline risk: the risk level without any risk-factor conditions
+    iii. risk level with the condition is risk ratio multiplied by baseline risk.
+    iv. "absolute" change in risk: risk level with the condition minus baseline risk. Often measured in "percentage points."
+    v. "relative risk" is about the risk ratio (without the baseline coming into consideration). Risk ratio of 1.5 means a increase in relative risk of 50% (say "percent", not "percentage points"). Risk ratio of 2.3 means a 130 percent increase in relative risk.
+- Logistic regression (`glm(..., family=binomial)`) used to model risk as a function of risk factors. (We didn't spend much time on this, but it's good to know what "logistic regression" refers to.)
+
+
+## Prediction
+
+i. closely related to risk
+ii. proper form for a prediction is to assign a probability to every possible outcome. 
+    - modeling for prediction: outcome level is the response, explanatory variables are the "predictors," that is, the inputs used to generate the prediction.
+iii. prediction interval is a shorthand for (ii)
+    - 95% prediction interval is the range of outcomes that covers 95% of the outcome probabilities.
+    - prediction interval will cover approx. 95% of the response variable 
+    
+## DAGs
+
+- A representation of a causal *hypothesis*.
+- Stands for "Directed Acyclic Graph" but you can think of it as a plumbing diagram for "causal flow."
+    - Graph: A mathematical "graph" consisting of "nodes" connected by "edges."
+    - Directed: each edge points in one direction
+    - Acyclic: if you follow the edges from a starting node, you can't return to ("cycle back to") the starting node.
+- Path: A set of edges that connects two nodes. (You can ignore the edge directions.)
+- Causal path: A set of edges that connects two nodes, but the edge directions are taken into account. - Criteria for a causal path between nodes X and Y: 
+    - There be a path between X and Y.
+    - There is some node on the path from which you can get to both X and Y by following the edges in the proper direction. Examples of causal paths between X and Y: 
+        - $X \rightarrow Y$
+        - $X \leftarrow C \rightarrow Y$
+- Other nodes on path between X and Y can be 
+    - Collider: $X \rightarrow C \leftarrow Y$
+    - Intermediary: $X \rightarrow C \rightarrow Y$
+    - Confounder: Consists of a direct path $X \rightarrow Y$ and an indirect path $X \leftarrow C \rightarrow Y$.
+- Path analysis: looking at all the paths connecting X and Y in order to figure out which covariates ("C") we should include in a model or exclude from a model, that is, choosing between the two model specifications `Y ~ X` pr `Y ~ X + C`.
+
+    
+
+
+
+
+
+
+
