@@ -1,0 +1,123 @@
+---
+title: "From notebooks to data frames"
+author: "Daniel Kaplan"
+date: "2023-05-09"
+categories: [data frame, unit of observation, variable, value]
+---
+
+```{r include=FALSE}
+library(math300)
+library(ggmosaic)
+source("../../../_startup.R")
+```
+
+Traditionally, data organization was a matter of common sense. Science students learn to keep a lab notebook where they record, day by day, what work they were doing and the measurements they take or the observations they made. For example, [Francis Galton](https://en.wikipedia.org/wiki/Francis_Galton) (1822-1900), one of the pioneers of statistics, sought to understand the heritability of traits---what we now call "genetics." Perhaps to distinquish himself from his cousin, [Charles Darwin](https://en.wikipedia.org/wiki/Charles_Darwin) (1809-1882) who developed his theories based on measurements of finches in the Galapagos Islands, Galton sought to study people. There are many easily visible heritable traits in people: cleft in the chin, earlobe shape, skin and hair color, etc. Galton wanted to develop a *mathematical* description of heritability, so he decided to work on a trait that has an obvious numerical measurement: height.
+
+Galton's data-collection procedure involved visiting households in London.[How he selected the households to visit is not part of the record, although today's scientists would describe such things in any report of their work.]{.aside} All of the households Galton worked with consisted of a mother, a father, and one or more grown children (all of whom shared parentage.) In each household, Galton measured and recorded the heights of the mother, father, and each of the children. @fig-galton-notebook shows part of Galton's research notebook.
+
+```{r echo=FALSE}
+#| label: fig-galton-notebook
+#| fig-cap: "An excerpt from Francis Galton's notebook recording the heights of parents and children in London in the 1880s."
+#| fig-cap-location: margin
+knitr::include_graphics("galton-notebook-excerpt.png")
+```
+
+The modern statistical thinker faces challenges that Galton did not; data now exist in huge quantities that can only be handled by enlisting the computer as a partner. The human needs to be able to direct the computer to undertake the operations that re-arrange and display data. To support this, data scientists have developed organizational principles that provide concise descriptions---both human and computer readable---of common data re-organization process. [We use the term "**data wrangling**" to describe such processes.]{.aside}
+
+The **data frame** is an important unit of data storage and organization. The principles behind data frames and data wrangling were systematized in the 1970s and 1980s. At first glance, data frames resemble the "spreadsheet" organization of data. For instance, data frames are naturally presented as a rectangular array of cells, each of which contains a single value. Being a rectangular array, a data frame has columns and rows.
+
+Unlike a spreadsheet, in a data frame each row must be the same type of thing. Galton's notebook displays an intuitive understanding of this. Each of the lines @fig-galton-notebook refers to a family consisting of a mother, a father, and one or more children. One row is one family; different rows are distinct families. The generic term for the object represented by a row is "**unit of observation**."
+
+In a data frame, each row must be organized in exactly the same way; only the values that go into the cells differ. Similarly, each column of the data frame must consist of values that record the same kind of measurement. This is true---for the most part---in Galton's notebook. For instance, the "father" column records the heights of the fathers in each family while the "mother" column records the mothers' heights. The "sons" and "daughters" columns, however, record different kinds of things from one row to the next. For example, the top entry in the "daughters" column is a list of three entries, whereas the next two rows in that column consist of two entries and a single entry respectively.
+
+Let's put the data on the grown children into a proper data-frame format. The first step is to define exactly what will be the unit of observation for the data frame. We will declare the unit to be "a child." @fig-galton-notebook shows the data for 22 children. There are 898 children across all the pages of Galton's notebook; @fig-galton-notebook shows just part of the first part of the first page.
+
+We'll call the data frame `Children`, to remind us what is the unit of observation. The `Children` data frame will have 898 rows, but we will show just the first several. `Children` has three columns. Columns are also called "**variables**" since the entries within a column *vary* from row to row. In a data frame, variables are given names. In `Children`, the variable names are "height," "sex," and "family."
+
+```{r echo=FALSE}
+#| label: tbl-children
+#| tbl-cap: "The `Children` data frame in which the unit of observation is a child."
+Children <- Galton |> select(height, sex, family)  
+rownames(Children) <- NULL
+Children |> head()
+```
+
+The "height" variable is **numeric** (or, equivalently, **quantitative**). All of the values in the "height" variable are exactly the same kind of thing: a height measured in inches. The "sex" variable contains values that come from a small set of possible **levels** of "sex," specifically "M" and "F". (Keep in mind these data are from the 1880s.) A variable like "sex" is called **categorical**, because the values are not numeric. The two *levels* correspond to the two categories of "sex." The values in the "sex" variable are all the same kind of thing, namely, a category of "sex."
+
+Including the third column in `Children` may seem odd at first. But you will see why it's needed in a little bit. That third column---the "family" variable---records which family a child came from. The different families are identified by different integers: 1, 2, 3, and so on. Best to think about "family" as a categorical variable. It happens that the levels of "family" are integers, but they could have been any ID code assigned to identify the family uniquely, say, "fam_ID_1423" and "fam_ID_76A." 
+
+The `Children` data frame records only some of the data from Galton's notebook. To store the other data we use a second data frame, which we will call `Parents`. As the name suggests, the unit of observation in the `Parents` data frame is the pair of parents for each family.
+
+```{r echo=FALSE}
+#| label: tbl-parents
+#| fig-cap: "A data table, `Parents`, for storing the data on the heights of the parents." 
+#| fig-cap-location: margin
+Galton |> select(mother, father, family) |>
+  group_by(family) |> filter(row_number() == 1) -> Parents
+rownames(Parents) <- NULL
+Parents |> head(4) 
+```
+
+The evident *disadvantage* in splitting the data from Galton's notebook is that it separates related quantify. For instance, Galton's genetics interest was to relate the heights of parents and their children.
+
+There are big advantages to this organization, however. Imagine that discover that one of the children had been entered twice. To correct things, we need merely strike out the repeated row in the `Children` data frame. Or, suppose we want to add  `year_of_birth` or `eye_color` for the children. Just add a new column to `Children`. 
+
+Do these advantages outweigh the disadvantages? This is where data wrangling comes in. The data-wrangling operations, once learned, make it easy to combine the data from the two tables in whatever way serves the purpose at hand. To illustrate, suppose we are interested in checking the hypothesis that taller fathers tend to have bigger families. Here are the wrangling steps:
+
+1. Process the `Children` data frame to count the number of children in each family, producing a new table that we might call `Family_size`. Here's the wrangling command:
+
+```{r}
+Family_size <- Children |>
+  group_by(family) |>
+  summarize(nkids = n()) 
+```
+
+
+```{r echo=FALSE}
+head(Family_size) |> mutate(family=as.numeric(family)) |> arrange(family)
+```
+
+2. Merge the `Family_size` data table with the `Parents` data table.
+
+```{r message=FALSE}
+For_my_research <- Parents |> left_join(Family_size) |> select(father, nkids)
+```
+
+```{r echo=FALSE}
+head(For_my_research)
+```
+
+3. Model the relationship between `father` and `nkids`. Later Lessons will cover modeling extensively. Since we're eager to check the tall-father-big-family hypothesis, we'll build and summarize the model, even though you aren't yet in a position to make sense of the results.
+
+```{r digits=3}
+lm(nkids ~ father, data=For_my_research) |> conf_interval()
+```
+
+According to the model, the `father`'s height doesn't have any discernible relationship to the family size.
+
+## Databases
+
+EXPLAIN ABOUT COLLECTION OF data frames and keys that connect relate how things are connected across data frames.
+
+
+----------
+
+EXERCISE: 
+`Parents` is just one of the reasonable formats for storing the parent data. Another perfectly good format would have the unit of observation be an individual parent rather than a mother/father pair. 
+
+```{r echo=FALSE}
+#| label: tbl-parent
+#| tbl-cap: "The `Parent` (singular) data frame where the unit of observation is an individual parent."
+#| tbl-cap-location: margin
+Parents |> pivot_longer(cols = c("mother", "father"), values_to = "parent_height", names_to = "role")
+```
+
+
+
+
+EXERCISE:
+Are girls from bigger families on average than boys?
+
+EXERCISE: Average family size from the child's point of view and from the households point of view.
+
+EXERCISE: Use `College_database` in `{math300}` to find the GPA by instructor.
