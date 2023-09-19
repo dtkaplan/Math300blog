@@ -1,0 +1,160 @@
+---
+title: "Instructor's Orientation"
+author: "Daniel Kaplan"
+date: "2023-08-16"
+categories: [p-values, significance]
+format:
+  html:
+    toc: true
+---
+
+```{r include=FALSE}
+library(math300)
+source("../../../_startup.R")
+```
+
+To judge from the tables of contents of the most widely used introductory statistics texts, there is strong consensus about the appropriate topics to include in a university-level introduction to statistics, a course we will label "Stat 101." Yet there remains considerable dis-enchantment with Stat 101. Among these: a semester course is too crowded with topics; there is too much algebra; there is too strong an emphasis on p-values. Leading statistics educators, such as the 11 authors of the [2016 American Statistical Association *Guidelines for Assessment and Instruction in Statistics Education* (GAISE) College Report](https://www.amstat.org/asa/files/pdfs/GAISE/GaiseCollege_Full.pdf)) point to stresses placed on the introductory course from two directions: first, the increasing coverage of statistics in grades 6-12 and, second, the emergence of data science as the paradigm for real-world professional work with data.
+
+There has been incremental progress in addressing the shortcomings of Stat 101. Much of this progress fall under four themes.
+
+1. Increasing use of computing as a modality for introducing statistical concepts. 
+2. Greater emphasis on "real data" and short, student-directed investigatory projects.
+3. The greater conceptual clarity and accessibility of randomization-based approaches to statistical inference, particularly bootstrapping and permutation tests.
+4. The emergence of free, online, open-source texts that compare favorably to publisher-directed commercial texts. Among these are [Hardin and Cetinskaya], [OpenStax], [OpenIntro], [ModernDive].
+
+In many ways, the free, online texts are the engine for innovation. They are typically produced by one or two statistics educators working independently of any publisher and motivated not to capture a paying market but to advance statistics education. In contrast, publishers are conservative in their choice of topics and technology, seeming with the goal of not alienating their current client base. [Notable exceptions include the Lock^5^ and Tintle texts.]{aside} Instructors recognize that the next edition of a textbook will be different only in superficial ways from the previous editions. One text, widely used in two-year colleges and broadly disparaged in other contexts, is in its thirteenth edition. The first edition appeared in 1980.
+
+One of the most highly regarded statistics educators of the last 30 years, George Cobb, entitled a [2015 paper](https://arxiv.org/abs/1507.05346) "Mere Renovation is Too Little Too Late: We Need to Rethink Our Undergraduate Curriculum from the Ground Up." But ground-up innovation is problematic. It calls for heroic effort by statistics instructors to learn new topics and tools. More subtly, in order to teach a coherent course where topics build on one another and reinforce one another, instructors have to develop a feel for the connections among the initially unfamiliar topics.
+
+Those who advocate a ground-up innovation ultimately have to face an ethical formula: ["Ought implies can."](https://en.wikipedia.org/wiki/Ought_implies_can). The innovator must reach past the arguments for innovation to demonstrate that a ground-up innovation is a feasible way to teach introductory statistics, *including data science*. In my view, one also has to recognize the constraints imposed by other aspects of the educational system. Although a one-semester statistics course is one of the most widespread requirements across university disciplines, there is little advocacy among non-statisticians for a heavier, longer requirement. Similarly, the successful statistics course cannot call for extensive pre- or co-requisites in computing or mathematics. 
+
+*Lessons in Statistical Thinking* is my attempt to go beyond outlining ground-up innovation to a living, breathing, complete course. The purpose of this *Orientation* is to help instructors understand the overall structure of the course, the reasons for including some topics and excluding others, and to highlight some of the innovations that make the course a feasible option for many statistics instructors.
+
+## Improving Stat 101
+
+An excellent summary of how to improve Stat 101 is provided by Jeff Witmer's [2023 article](https://doi.org/10.1080/26939169.2023.2205905) in the *Journal of Statistics and Data Science Education*, "What should we do differently in STAT 101?" Witmer, one of the authors of the 2016 GAISE report, proposes fifteen changes for Stat 101, placing them in three categories: 
+
+a. Changes you could make with little effort or planning.
+b. Changes that you could implement with the investment of a day or two of planning.
+c. Changes that require "quite a bit of planning but that are worth considering nonetheless."
+
+Witmer provides a discussion of each of the fifteen changes, an extremely useful reference for the reader who might not be familiar with terms like causal diagrams, causal diagrams, effect size, etc. For ease of reference, I retain Witmer's numbering system in the short summaries that follow.
+
+**Paradigm for statistical description**
+
+- 4) Use the use the framework of response variable versus predictor variables. (Category a.) [In *Lessons*, I prefer "explanatory variable" rather than "predictor variable but there is no real difference.]{.aside}
+
+- 5) Use more modeling and estimation and less formal inference. (b.)
+
+- 10) Talk about effect size. (c.)
+
+- 8) Use logistic regression when modeling a categorical response variable with two levels. (b.)
+
+- 12) Present causal diagrams. (c.)
+
+- 13) Include more emphasis on prediction. (c.)
+
+- 14) Be explicit about how to adjust for a confounder and the Cornfield conditions. (c.)
+
+- 15) Teach Berkson's paradox. In terms of causal diagrams, this corresponds to a collider. (c.)
+
+**Changes concerning statistical inference**
+
+- 1) Replace "statistically significant" with "statistically discernible."  (Category a.)
+
+- 2) Report p-values to only 2 or 3 decimal places. (a.)
+
+- 3) Refer to "conditions" that can potentially be checked rather than "assumptions" that may or may not be relevant to a real-world context. (a.)
+
+- 6) Include "power" and other aspects of the Neymann-Pearson approach, rather than just Null Hypothesis Significance Testing. (b.)
+
+- 7) Cover the inference of relative risk, e.g. $p_1 / p_2$. 
+
+- 9) Consider teaching about paired proportions (b.)
+
+- 10) (continued) Show that a test statistic is an effect size multiplied by a sample size inflation. (c.)  Example: The effect size corresponding to $R^2$ is $R^2 / (1- R^2)$ while the sample size inflation is $\frac{n - (k+1)}{k}$, that is, $$F \equiv \frac{R^2}{1-R^2} \frac{n - (k+1)}{k}\ .$$
+
+- 11) Teach about the perils of multiple testing and about the "garden of forking paths." (c.)
+
+The topics and practices in categories (a) and (b) fit easily into the 1-semester Stat 101. But many of the category-(c) topics require surgery on Stat 101: making space for new topics by removing or consolidating some traditional topics.
+
+*Lessons* touches on fourteen of  fifteen of Witmer's suggested Stat 101 topics and practices. (The exception is topic 9.) But *Lessons* does not merely swap out old topics for new. Rather, *Lessons* provides new foundations on which a modern statistical edifice can be constructed.
+
+## Foundations in *Lessons*
+
+
+
+
+## Accessible computing
+
+
+
+
+-------
+
+*Lessons in Statistical Thinking* is an introductory textbook that is, like most textbooks, oriented to students. Students come to the book with fresh minds, unaware of the history that leads some topics to be emphasized and others to be minimized or entirely excluded. 
+
+For instructors, however, that history plays an important role in setting attitudes and expectations. Instructors have already studied statistics---sometimes learning it from the textbook they teach from!---and have pre-formed opinions about which topics ought to be included in an introduction to statistics. This orientation seeks to explain to instructors the unconventional choices made in *Lessons* and highlight the important connections between subjects that might not yet be familiar to the instructor contemplating using *Lessons* as a course text.
+
+## Stat 101
+
+Many readers have had experience teaching a conventional introductory course. A first step in understanding the choices made in putting together the *Lessons* text is to become aware of the problems and deficiencies of the conventional approach. For brevity, we'll use the name "Stat 101" to label the conventional practices that are so widely used that they can be taken as the consensus view.
+
+A widely held opinion among instructors is that there is already so much material in Stat 101 that there is no room for including even important new topics such as adjusting for covariates, causal inference, or data-science skills and techniques. This over-crowding becomes a deficiency in Stat 101 when you consider alternative approaches that can substantially streamline the Stat 101 material. 
+
+Another deficiency has to do with the emphasis on p-values found in Stat 101. Typically, about one-third of the course focuses on statistical tests. The American Statistical Association has called for a de-emphasis on p-values [CITATION HERE], recognizing the many ways they are routinely misused. For instance, the ASA statement states that "a p-value does not provide a good measure of evidence regarding a model or hypothesis." This statement, widely accepted in the professional community, is incomprehensible to many Stat-101 teachers. (You can judge for yourself whether or not the ASA statement is reflected in the orientation of your own teaching.) 
+
+
+
+
+The [2016 American Statistical Association *Guidelines for Assessment and Instruction in Statistics Education* (GAISE) College Report](https://www.amstat.org/asa/files/pdfs/GAISE/GaiseCollege_Full.pdf)) includes a section on "suggestions for topics that might be omitted from introductory statistics courses." These include probability theory and drills with "$z$-, $t$-, $\chi^2$, and $F$-tables." 
+For instance, early discussions by the committee charged by the American Statistical Association with updating the GAISE report favored dividing the widely accepted requirement for statistics into two courses, one in statistics, the other in data science. My own opinion is that such an expansion of requirements is likely to be rejected as overly burdensome by many programs.  this is both impractical and unnecessary. Few departments that 
+
+
+First and foremost is the divergence of professional statistical practice from the topics of Stat 101. Quantities and methods routinely found in the applied research literature are often not even hinted at in Stat 101. 
+
+
+
+
+: the intentional omission of many Stat-101 topics and the inclusion of other topics that never found space in the Stat-101 canon or that violated the *ethos* that historically that course.
+
+* Tests versus models
+
+
+## P values and causation
+
+
+Statistics instructors very often have their knowledge base shaped by the introductory books from which they teach. What's in the books, rather than what's useful or needed, is the operational definition of the field. This book drops many traditional methods and introduces important methods used in contemporary work with data. A little background may help instructors new to this book in understanding two major decisions shaping that book. They both have to do with what is called "statistical inference," reasoning from data to the broader world: first, minimizing the role in this book of p-values; second, taking causality seriously.
+
+There are dozens of introductory statistics textbooks, many in their tenth or fifteenth editions. Unfortunately, the topics of traditional introductory statistics texts have long been obsolescent and fail to address the needs of the contemporary data scientist and decision-maker. The traditional canon stems from an influential 1925 book, Ronald Fisher's *Statistical Methods for Research Workers*. Research workers of that era typically ran small benchtop or field experiments with a dozen or fewer observations on each of two treatments. A first task with such small data is to rule out the possibility that calculated differences might reflect only the accidental arrangement of numbers into groups. This task was given the odd name "significance testing" and is at the core of most statistics textbooks.
+
+Unfortunately, significance testing has little to do with the everyday meaning of "significant" as "important" or "relevant." [This article](www/d41586-019-00857-9.pdf) in the prestigious science journal *Nature* details the controversy. @fig-nature-significance reproduces a cartoon from that article that puts the shortcomings of "statistical significance" in a historical context.
+
+```{r echo=FALSE}
+#| label: fig-nature-significance
+#| fig-cap: "A cartoon published along with an article in *Nature*, \"Retire statistical significance,\" showing this once-respected idea heading to the graveyard for outdated and misleading \"scientific\" concepts such as phlogiston and aether."
+#| fig-cap-location: margin
+knitr::include_graphics("www/Significance-cartoon.png")
+```
+
+Obsession with the mantra, "Correlation is not causation," is another sign of the obsolescence of the traditional introduction to statistics. Around 1910, the pioneers of statistics were the first to emphasize an important innovation in scientific method: the randomized controlled trial (RCT). Adoption of the RCT in the twentieth century put several branches of science on a new footing. And many statistics instructors see "correlation is not causation" as a slogan pointing to the genuine importance of RCTs. Unfortunately, the mantra has been over-interpreted to mean the impossibility of causal knowledge without RCTs, as in the following cartoon (@fig-xkcd-correlation):
+
+```{r echo=FALSE}
+#| label: fig-xkcd-correlation
+#| fig.cap: "[XKCD's take](https://xkcd.com/552/) on correlation and causation."
+knitr::include_graphics("www/xkcd-correlation.png")
+```
+
+Nowadays, when data are used to inform policy decisions in many areas, being statistically literate includes the need to make justifiable conclusions about causality. One approach to this was highlighted by the [2019 Nobel Prize](https://www.nobelprize.org/prizes/economic-sciences/2019/press-release/) in economics; breaking down complex issues of global poverty into smaller, more manageable questions where an RCT is feasible. Another approach, using "natural experiments" was honored by the [2021 Nobel Prize](https://www.nobelprize.org/prizes/economic-sciences/2021/press-release/).
+
+There is no Nobel in computer science. The equivalent is the [Turing Award, which in 2011](https://amturing.acm.org/award_winners/pearl_2658896.cfm) was awarded for "fundamental contributions to ... probabilistic and causal reasoning." That such prestigious awards are being given in the last decade demonstrates how recent and how important causal reasoning is and why the fundamentals of causality ought to be part a modern introduction to statistics. Consequently, they are a major theme in these Lessons.
+
+## Taken out
+
+To set the stage, consider some of the ways *Lessons* is different from the conventional introductory statistics.
+
+1. *Lessons* starts with a brief introduction to those elements of *data science* that provide access to the sorts of data commonly encountered today. It is here that computing is introduced. The new instructor will reasonably wonder whether data-science computing is accessible to her students. @sec-simplifying-computing provides the necessary introduction to instructors. Based on this introduction, an instructor can shape an informed opinion about accessibility.
+
+2. *Lessons* uses statistical modeling as the core framework for quantifying patterns in data. The modeling approach has two advantages: it actually simplifies the presentation of the many tests found in a conventional introduction; and it provides the means to put covariation and multivariable thinking at the center of the course. ("Multivariable thinking" is one of the primary emphases in the [2016 American Statistical Association *Guidelines for Assessment and Instruction in Statistics Education* (GAISE) College Report](https://www.amstat.org/asa/files/pdfs/GAISE/GaiseCollege_Full.pdf).) 
+
+

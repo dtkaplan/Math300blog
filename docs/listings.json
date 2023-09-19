@@ -2,9 +2,10 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/Prelude-to-modeling/index.html",
+      "/posts/Graphics-and-history/index.html",
+      "/posts/Populations/index.html",
+      "/posts/P-values/index.html",
       "/posts/Stat-vocabulary/index.html",
-      "/posts/Shrinkage_verbs/index.html",
       "/posts/Hyp-test-and-poker/index.html",
       "/posts/Hyp-test-Bayesian/index.html",
       "/posts/Takeaways-36/index.html",

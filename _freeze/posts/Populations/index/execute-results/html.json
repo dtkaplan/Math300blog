@@ -1,0 +1,14 @@
+{
+  "hash": "40f62141cb163059f41cbc8c6650829e",
+  "result": {
+    "markdown": "---\ntitle: \"Instructor's Orientation\"\nauthor: \"Daniel Kaplan\"\ndate: \"2023-08-16\"\ncategories: [population]\nformat:\n  html:\n    toc: true\n---\n\n\n\n\nDRAFT: Explain why we don't push the distinction between population and sample. \n\n\n**Instructors** with previous experience may think of the word \"population.\" This is used in several ways. The applied scientist or statistician may use the word \"population\" to refer to the entire class of entities about which a claim is entitled to be regarded as valid. For instance, \"the population is people over 60 with end-stage congestive heart failure.\"\n\nIn theoretical statistics, a \"population\" is an infinite, inexhaustible source of specimens. As a theoretical entity, a population possesses \"parameters\" which, as can happen only in theory, are fixed and unchanging. Ronald Fisher introduced this theoretical entity for a particular purpose: providing a framework in which to define probability as a ratio of counts---the so-called \"frequentist\" interpretation. The frequentist perspective in statistics has been a fecund source of mathematical theorems. It has also been a source of mischief by defining probability in a way that excludes the Bayesian methods that are so important in engineering and decision making. \n\nMuch of classical theoretical statistics was concerned with questions that are no longer of relevance. For example given a population with parameters \"mean\" and \"standard deviation,\" which formulas for computing a numerical values of a sample statistic will make the most efficient use of data while providing an unbiased estimate. \"Efficient\" here means lowest variance. But contemporary machine learning techniques take the perspective that it can be worth trading off bias for reduced variance.\n\nI encourage instructors to continue using \"population\" in the informal sense of an applied scientist, but to avoid spending time on the theoretical statistics entity. This means, for example, that there is no need to distinguish between \"parameters\" and \"statistics,\" no point in emphasizing the differences between $\\mu$ and $\\bar{x}$ or s^2^ and $\\sigma^2$. Modelers use the word \"parameter\" in an entirely different sense than theoretical statisticians, and much of statistical thinking is about constructing and interpreting models.\n\nInsofar as you need to provide a definition of \"statistical inference,\" you don't communicate much by saying, \"Reasoning from the sample to the (theoretical) population.\" Instead, describe inference as establishing the uncertainty in what we think we know from our sample.\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

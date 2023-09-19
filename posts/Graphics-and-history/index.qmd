@@ -1,0 +1,47 @@
+---
+title: "Trade deficits and the Opium Wars"
+author: "Daniel Kaplan"
+date: "2023-08-16"
+categories: [p-values, significance]
+format:
+  html:
+    toc: true
+---
+
+```{r include=FALSE}
+library(math300)
+source("../../../_startup.R")
+```
+
+
+```{r echo=FALSE}
+#| label: tbl-playfair-trade
+#| tbl-cap: "Annual exports and imports in the trade between England and the East Indies"
+#| column: margin
+GDAdata::EastIndiesTrade |> kable()
+```
+
+[William Playfair](https://en.wikipedia.org/wiki/William_Playfair) (1759-1823) is credited as the inventor of novel graphical forms in which data values are presented graphically, rather than as numbers or text. To illustrate, consider the data from the 1700s (@tbl-playfair-trade) that Playfair turned into a picture.
+
+Playfair's innovation, as in @fig-playfair, was successful because it was powerful. The pattern that is latent in the data frame becomes visually obvious to the human viewer. The picture shows not only the trade values each year but also the *trends* across the decades. 
+
+
+```{r echo=FALSE}
+#| label: fig-playfair
+#| fig-cap: "William Playfair's 1801 presentation of year-by-year data on trade between England and the East Indies. [Source: University of Pennsylvania Libraries](https://colenda.library.upenn.edu/catalog/81431-p3bv7bb8v)"
+# knitr::include_graphics("www/Playfair-East-Indies.png")
+knitr::include_graphics("www/playfair-aligned.png")
+```
+
+
+The American revolution is marked out by the graph; you can see the steady fall in English exports from 1775-1780, corresponding to the American boycott during the revolution. Exports pick up again after the revolution, but English imports increase even more rapidly, leading to a steady expanding trade deficit by 1800. The historical consequences of this deficit are profound with continuing implications. 
+
+The historically minded reader should note that the the growing English trade deficit in 1800 had important historical consequences that are still playing out in the 2020s.
+
+> "*The roots of the Opium War (or First China War) lay in a trade dispute between the British and the Chinese Qing Dynasty. By the start of the 19th century, the trade in Chinese goods such as tea, silks and porcelain was extremely lucrative for British merchants. The problem was that the Chinese would not buy British products in return. They would only sell their goods in exchange for silver, and as a result large amounts of silver were leaving Britain.*
+
+> "*In order to stop this, the East India Company and other British merchants began to smuggle Indian opium into China illegally, for which they demanded payment in silver. This was then used to buy tea and other goods. By 1839, opium sales to China paid for the entire tea trade.*"---[National Army Museum](https://www.nam.ac.uk/explore/opium-war-1839-1842)
+
+By 1839, facing millions of Chinese citizens addicted to opium, the Chinese government began to successfully intervene to stop the smuggling, much as the US and other countries still do to curtail illegal drug trade. The English government found this unacceptable and went to war with China. With less advanced military technology, that war was a disaster for the Chinese and led to the impoverishment of the country and the forced transfer of territory---such as Hong Kong---to England. In the 1930s, a greatly weakened China fell victim to Japanese imperialism, then communist revolution. Only in the 1990s did China start to overcome extreme poverty. In the 2000s, the Chinese are still seeking to restore the economic pre-eminance they held before the eruption of the English opium trade.
+
+
