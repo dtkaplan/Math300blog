@@ -1,0 +1,14 @@
+---
+title: "A Model Statistics Course"
+author: "Daniel Kaplan"
+date: "2023-10-18"
+categories: [presentation, overview]
+format:
+  html:
+    toc: true
+---
+
+> *These are presentation notes for the October 2023 StatChat meeting. For more than 15 years, statistical educators in the Twin Cities region of Minnesota have been gathering a half-dozen times a year at StatChat to share comradeship and teaching insights. Among the schools regularly represented are the University of Minnesota, Macalester College, St. Olaf College, Hamline University, Augsburg University, Carleton College, St. Cloud State University, and Minnesota State University Mankato.*
+
+**Abstract**: "Mere Renovation is Too Little Too Late: We Need to Rethink Our Undergraduate Curriculum from the Ground Up" is the title [2015 paper](https://nhorton.people.amherst.edu/mererenovation/) by George Cobb. Honoring George's challenge, I have been rethinking and re-designing the introductory statistics course, replacing traditional foundations using modern materials and reconfiguring the living and working spaces to suit today's applied statistical needs and projects. In the spirit of a "model house" used to demonstrate housing innovations, I'll take you on a tour of my "model course," whose materials are available free, open, and online. Among the features you'll see: an accessible handling of causal reasoning, a unification of the course structure around modeling, a streamlined yet professional-quality computational platform, and an honest presentation of Null Hypothesis Testing that connects it to more current forms of statistical inference.
+
