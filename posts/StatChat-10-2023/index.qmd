@@ -12,3 +12,8 @@ format:
 
 **Abstract**: "Mere Renovation is Too Little Too Late: We Need to Rethink Our Undergraduate Curriculum from the Ground Up" is the title [2015 paper](https://nhorton.people.amherst.edu/mererenovation/) by George Cobb. Honoring George's challenge, I have been rethinking and re-designing the introductory statistics course, replacing traditional foundations using modern materials and reconfiguring the living and working spaces to suit today's applied statistical needs and projects. In the spirit of a "model house" used to demonstrate housing innovations, I'll take you on a tour of my "model course," whose materials are available free, open, and online. Among the features you'll see: an accessible handling of causal reasoning, a unification of the course structure around modeling, a streamlined yet professional-quality computational platform, and an honest presentation of Null Hypothesis Testing that connects it to more current forms of statistical inference.
 
+
+## Resources
+
+- Jeff Witmer (2023) "What Should We Do Differently in STAT 101?" *Journal of Statistics and Data Science Education* [link](https://www.tandfonline.com/doi/full/10.1080/26939169.2023.2205905)
+
