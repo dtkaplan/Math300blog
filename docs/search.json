@@ -459,6 +459,104 @@
     "href": "posts/StatChat-10-2023/index.html",
     "title": "A Model Statistics Course",
     "section": "",
-    "text": "These are presentation notes for the October 2023 StatChat meeting. For more than 15 years, statistical educators in the Twin Cities region of Minnesota have been gathering a half-dozen times a year at StatChat to share comradeship and teaching insights. Among the schools regularly represented are the University of Minnesota, Macalester College, St. Olaf College, Hamline University, Augsburg University, Carleton College, St. Cloud State University, and Minnesota State University Mankato.\n\nAbstract: “Mere Renovation is Too Little Too Late: We Need to Rethink Our Undergraduate Curriculum from the Ground Up” is the title 2015 paper by George Cobb. Honoring George’s challenge, I have been rethinking and re-designing the introductory statistics course, replacing traditional foundations using modern materials and reconfiguring the living and working spaces to suit today’s applied statistical needs and projects. In the spirit of a “model house” used to demonstrate housing innovations, I’ll take you on a tour of my “model course,” whose materials are available free, open, and online. Among the features you’ll see: an accessible handling of causal reasoning, a unification of the course structure around modeling, a streamlined yet professional-quality computational platform, and an honest presentation of Null Hypothesis Testing that connects it to more current forms of statistical inference."
+    "text": "These are presentation notes for the October 2023 StatChat meeting. For more than 15 years, statistical educators in the Twin Cities region of Minnesota have been gathering a half-dozen times a year at StatChat to share comradeship and teaching insights. Among the schools regularly represented are the University of Minnesota, Macalester College, St. Olaf College, Hamline University, Augsburg University, Carleton College, St. Cloud State University, and Minnesota State University Mankato.\nAbstract: “Mere Renovation is Too Little Too Late: We Need to Rethink Our Undergraduate Curriculum from the Ground Up” is the title 2015 paper by George Cobb. Honoring George’s challenge, I have been rethinking and re-designing the introductory statistics course, replacing traditional foundations using modern materials and reconfiguring the living and working spaces to suit today’s applied statistical needs and projects. In the spirit of a “model house” used to demonstrate housing innovations, I’ll take you on a tour of my “model course,” whose materials are available free, open, and online. Among the features you’ll see: an accessible handling of causal reasoning, a unification of the course structure around modeling, a streamlined yet professional-quality computational platform, and an honest presentation of Null Hypothesis Testing that connects it to more current forms of statistical inference."
+  },
+  {
+    "objectID": "posts/StatChat-10-2023/index.html#motivation",
+    "href": "posts/StatChat-10-2023/index.html#motivation",
+    "title": "A Model Statistics Course",
+    "section": "Motivation",
+    "text": "Motivation\nThe “consensus” Stat 101 is 50 years out of date:\n\nfails to engage issues of causation, covariation, and adjustment\ntoo much emphasis on p-values\nentirely ignores Bayes\nno substantial coverage of risk, risk factors, …\nuses a confusing over-variety of graphic modes (which are out-of-date)\ndoesn’t make contact with data science, machine learning, and AI/GPT\n\nMy objective: Demonstrate the extent to which it’s possible to overcome these deficiencies with a complete, practicable, no-prerequisite course.\nI’m happy to discuss the above points anytime, but that’s not the point of this talk."
+  },
+  {
+    "objectID": "posts/StatChat-10-2023/index.html#objects-and-operations",
+    "href": "posts/StatChat-10-2023/index.html#objects-and-operations",
+    "title": "A Model Statistics Course",
+    "section": "Objects and operations",
+    "text": "Objects and operations\n\nData frame\nData graphics (as distinct from “infographics”)\nStatistical model\nSimulation\n\nOperations for all students\n\nData wrangling (simplified)\nAnnotated point plot of variables from a data frame\nModel training\nModel summarization\n\nOperations used in demonstrations (and suited to some students)\n\nSimulation (in demonstrations)\nIteration and accumulation (in demonstrations)\n\nComputations on variables are always inside the arguments of a function taking a data frame as an input.\nTilde expressions for models and graphics."
+  },
+  {
+    "objectID": "posts/StatChat-10-2023/index.html#style",
+    "href": "posts/StatChat-10-2023/index.html#style",
+    "title": "A Model Statistics Course",
+    "section": "Style",
+    "text": "Style\n\nDemonstrate and describe statistical phenomena by causal simulation\n\nExamples:\n\nsampling variation\nconfounders, covariates, colliders, adjustment\n\nStat theory from simulation/wrangling rather than probability/algebra\n\nInformal inference from the very beginning, gradually formalizing it over the semester\nSingle, standard format for graphics\nRemove square roots whenever that’s easy\n\nfocus on variance rather than standard deviation\nR^2 rather than r\n\nVery small computational footprint, a dozen stat/graphics/wrangling functions."
+  },
+  {
+    "objectID": "posts/StatChat-10-2023/index.html#resources",
+    "href": "posts/StatChat-10-2023/index.html#resources",
+    "title": "A Model Statistics Course",
+    "section": "Resources",
+    "text": "Resources\n\nJeff Witmer (2023) “What Should We Do Differently in STAT 101?” Journal of Statistics and Data Science Education link"
+  },
+  {
+    "objectID": "posts/StatChat-10-2023/index.html#data-frames",
+    "href": "posts/StatChat-10-2023/index.html#data-frames",
+    "title": "A Model Statistics Course",
+    "section": "1. Data frames",
+    "text": "1. Data frames\nData is always in data frames.\n\nColumns: Variables\nRows: “Specimens” / Unit of observation\n\nComputing concepts:\n\nname of data frame\npipe\nfunction()\n\nUsually start with a named data frame, piping it to a function.\n\nNats |&gt; names()\n\n[1] \"country\" \"year\"    \"GDP\"     \"pop\""
+  },
+  {
+    "objectID": "posts/StatChat-10-2023/index.html#graphics",
+    "href": "posts/StatChat-10-2023/index.html#graphics",
+    "title": "A Model Statistics Course",
+    "section": "Graphics",
+    "text": "Graphics\nBoth the horizontal and vertical axes are mapped to variables.\nJust one command: pointplot() produces point plot with automatic jittering as needed.\nTilde expression specifies which variable is mapped to y and x (and, optionally, color and faceting).\n\nGalton |&gt; pointplot(height ~ sex)\nGalton |&gt; pointplot(height ~ mother + sex + sex)"
+  },
+  {
+    "objectID": "posts/StatChat-10-2023/index.html#course-overview",
+    "href": "posts/StatChat-10-2023/index.html#course-overview",
+    "title": "A Model Statistics Course",
+    "section": "Course overview",
+    "text": "Course overview\n\nPart 1: Handling data\n\nData frames\nGraphics (data and models)\nWrangling\n\nPart 2: Describing relationships\n\nRegression (incl. categorical and multiple explanatory variables)\nAdjustment\n\nPart 3: Randomness and the unexplained\n\nSimulation and DAGs\nProbability models (optional)\nLikelihood (prep. for Part 5)\nMeasuring and accumulating risk\n\nPart 4: Understanding modeling\n\nSampling variation and confidence intervals/bands\nCausality/Confounding/Adjustment\nExperiment\n\nPart 5: Hypothetical thinking\n\nBasic Bayes: competing two hypotheses\nNull hypothesis testing (What you get when there is no prior and no second hypothesis.)"
+  },
+  {
+    "objectID": "posts/StatChat-10-2023/index.html#lesson-1.-data-frames",
+    "href": "posts/StatChat-10-2023/index.html#lesson-1.-data-frames",
+    "title": "A Model Statistics Course",
+    "section": "Lesson 1. Data frames",
+    "text": "Lesson 1. Data frames\nData is always in data frames.\n\nColumns: Variables\nRows: “Specimens” / Unit of observation\n\nComputing concepts:\n\nname of data frame\npipe\nfunction()\n\nUsually start with a named data frame, piping it to a function.\n\nNats |&gt; names()\n\n[1] \"country\" \"year\"    \"GDP\"     \"pop\""
+  },
+  {
+    "objectID": "posts/StatChat-10-2023/index.html#lesson-2.-graphics",
+    "href": "posts/StatChat-10-2023/index.html#lesson-2.-graphics",
+    "title": "A Model Statistics Course",
+    "section": "Lesson 2. Graphics",
+    "text": "Lesson 2. Graphics\nBoth the horizontal and vertical axes are mapped to variables.\nJust one command: pointplot() produces point plot with automatic jittering as needed.\nTilde expression specifies which variable is mapped to y and x (and, optionally, color and faceting).\n\nGalton |&gt; pointplot(height ~ sex)\nGalton |&gt; pointplot(height ~ mother + sex + sex)"
+  },
+  {
+    "objectID": "posts/StatChat-10-2023/index.html#lesson-3.-empirical-distributions",
+    "href": "posts/StatChat-10-2023/index.html#lesson-3.-empirical-distributions",
+    "title": "A Model Statistics Course",
+    "section": "Lesson 3. Empirical distributions",
+    "text": "Lesson 3. Empirical distributions\n\nGalton |&gt; pointplot(height ~ sex, annot = \"violin\")\n\nWarning in pointplot(Galton, height ~ sex, annot = \"violin\"): x-axis variable is numerical, so only one violin drawn for all rows.\n              Perhaps you want to use ntiles() or factor() on that variable?"
+  },
+  {
+    "objectID": "posts/StatChat-10-2023/index.html#lesson-4.-models-as-graphical-annotation",
+    "href": "posts/StatChat-10-2023/index.html#lesson-4.-models-as-graphical-annotation",
+    "title": "A Model Statistics Course",
+    "section": "Lesson 4. Models as graphical annotation",
+    "text": "Lesson 4. Models as graphical annotation\n\nGalton |&gt; sample_n(size=100) |&gt; \n  pointplot(height ~ sex, annot = \"model\", alpha = 0.1, model_alpha=0.75)\nGalton |&gt; pointplot(height ~ mother + sex + sex, annot = \"model\", alpha = 0.1, model_alpha=0.75)"
+  },
+  {
+    "objectID": "posts/StatChat-10-2023/index.html#lesson-5-wrangling",
+    "href": "posts/StatChat-10-2023/index.html#lesson-5-wrangling",
+    "title": "A Model Statistics Course",
+    "section": "Lesson 5: Wrangling",
+    "text": "Lesson 5: Wrangling\n[Perhaps use two class days]\nFive basic operations: mutate(), filter(), summarize(), select(), arrange()\n\nNats\n\n# A tibble: 8 × 4\n  country  year   GDP   pop\n  &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 Korea    2020   874    32\n2 Cuba     2020    80     7\n3 France   2020  1203    55\n4 India    2020  1100  1300\n5 Korea    1950   100    32\n6 Cuba     1950    60     8\n7 France   1950   250    40\n8 India    1950   300   700\n\n\n\nNats |&gt; filter(year == 2020)\n\n# A tibble: 4 × 4\n  country  year   GDP   pop\n  &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 Korea    2020   874    32\n2 Cuba     2020    80     7\n3 France   2020  1203    55\n4 India    2020  1100  1300\n\nNats |&gt; summarize(totalpop = sum(pop), .by=year)\n\n# A tibble: 2 × 2\n   year totalpop\n  &lt;dbl&gt;    &lt;dbl&gt;\n1  2020     1394\n2  1950      780"
+  },
+  {
+    "objectID": "posts/StatChat-10-2023/index.html#lesson-6-computing-recap",
+    "href": "posts/StatChat-10-2023/index.html#lesson-6-computing-recap",
+    "title": "A Model Statistics Course",
+    "section": "Lesson 6: Computing recap",
+    "text": "Lesson 6: Computing recap\n[Perhaps merged into a two-day wrangling unit with Lesson 5]\nPipes, functions, parentheses, arguments, …"
+  },
+  {
+    "objectID": "posts/StatChat-10-2023/index.html#lesson-7-databases",
+    "href": "posts/StatChat-10-2023/index.html#lesson-7-databases",
+    "title": "A Model Statistics Course",
+    "section": "Lesson 7: Databases",
+    "text": "Lesson 7: Databases\n[Entirely optional]\n\nJoins\nWhy we put related data into tables with different units of observation."
   }
 ]

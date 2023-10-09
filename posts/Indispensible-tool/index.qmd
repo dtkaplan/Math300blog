@@ -1,0 +1,16 @@
+---
+title: "The indispensible tool for statistical work"
+author: "Daniel Kaplan"
+date: "2023-10-9"
+categories: [presentation, overview]
+format:
+  html:
+    toc: true
+---
+
+
+::: {.callout-warning}
+## Under construction
+
+Calculators, Hollerith cards, Fisher's quote, MCMC, machine learning.
+:::

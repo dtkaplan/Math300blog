@@ -12,6 +12,169 @@ format:
 
 **Abstract**: "Mere Renovation is Too Little Too Late: We Need to Rethink Our Undergraduate Curriculum from the Ground Up" is the title [2015 paper](https://nhorton.people.amherst.edu/mererenovation/) by George Cobb. Honoring George's challenge, I have been rethinking and re-designing the introductory statistics course, replacing traditional foundations using modern materials and reconfiguring the living and working spaces to suit today's applied statistical needs and projects. In the spirit of a "model house" used to demonstrate housing innovations, I'll take you on a tour of my "model course," whose materials are available free, open, and online. Among the features you'll see: an accessible handling of causal reasoning, a unification of the course structure around modeling, a streamlined yet professional-quality computational platform, and an honest presentation of Null Hypothesis Testing that connects it to more current forms of statistical inference.
 
+```{r include=FALSE}
+library(LST)
+```
+
+
+## Motivation
+
+The "consensus" Stat 101 is 50 years out of date:
+
+- fails to engage issues of causation, covariation, and adjustment
+- too much emphasis on p-values 
+- entirely ignores Bayes
+- no substantial coverage of risk, risk factors, ... 
+- uses a confusing over-variety of graphic modes (which are out-of-date)
+- doesn't make contact with data science, machine learning, and AI/GPT
+
+My objective: Demonstrate the extent to which it's possible to overcome these deficiencies with a complete, practicable, no-prerequisite course.
+
+I'm happy to discuss the above points anytime, but that's not the point of this talk.
+
+## Style
+
+a. Demonstrate and describe statistical phenomena by causal simulation
+    - Examples:
+        - sampling variation
+        - confounders, covariates, colliders, adjustment
+    - Stat theory from simulation/wrangling rather than probability/algebra
+#. Informal inference from the very beginning, *gradually* formalizing it over the semester
+#. Single, standard format for graphics
+#. Remove square roots whenever that's easy
+    - focus on variance rather than standard deviation
+    - R^2 rather than r
+#. Very small computational footprint, a dozen stat/graphics/wrangling functions.
+
+## Course overview
+
+- Part 1: Handling data
+    - Data frames
+    - Graphics (data and models)
+    - Wrangling
+
+- Part 2: Describing relationships
+    - Regression (incl. categorical and multiple explanatory variables)
+    - Adjustment
+
+- Part 3: Randomness and the unexplained
+    - Signal and noise
+    - Simulation and DAGs
+    - Probability models (optional)
+    - Likelihood (optional, prep. for Part 5)
+    - Measuring and accumulating risk
+
+- Part 4: Understanding modeling
+    - Sampling variation and confidence intervals/bands 
+    - Causality/Confounding/Adjustment
+    - Experiment
+
+- Part 5: Hypothetical thinking
+    - Basic Bayes: competing two hypotheses
+    - Null hypothesis testing (What you get when there is no prior and no second hypothesis.)
+
+## Lesson 1. Data frames
+
+Data is *always* in data frames.
+
+- Columns: Variables
+
+- Rows: "Specimens" / Unit of observation
+
+Computing concepts:
+
+- name of data frame
+- pipe
+- function()
+
+Usually start with a named data frame, piping it to a function.
+
+```{r}
+Nats |> names()
+```
+
+## Lesson 2. Graphics
+
+Both the horizontal and vertical axes are mapped to variables.
+
+Just one command: `pointplot()` produces point plot with automatic jittering as needed.
+
+Tilde expression specifies which variable is mapped to y and x (and, optionally, color and faceting).
+
+```{r}
+#| layout-ncol: 2
+Galton |> pointplot(height ~ sex)
+Galton |> pointplot(height ~ mother + sex + sex)
+```
+
+## Lesson 3. Empirical distributions
+
+```{r}
+Galton |> pointplot(height ~ sex, annot = "violin")
+```
+
+## Lesson 4. Models as graphical annotation
+
+```{r}
+#| layout-ncol: 2
+Galton |> sample_n(size=100) |> 
+  pointplot(height ~ sex, annot = "model", alpha = 0.1, model_alpha=0.75)
+Galton |> pointplot(height ~ mother + sex + sex, annot = "model", alpha = 0.1, model_alpha=0.75)
+```
+
+## Lesson 5: Wrangling
+
+[Perhaps use two class days]
+
+Five basic operations: `mutate()`, `filter()`, `summarize()`, `select()`, `arrange()`
+
+
+```{r}
+Nats
+```
+
+```{r}
+Nats |> filter(year == 2020)
+Nats |> summarize(totalpop = sum(pop), .by=year)
+```
+
+## Lesson 6: Computing recap
+
+[Perhaps merged into a two-day wrangling unit with Lesson 5]
+
+Pipes, functions, parentheses, arguments, ...
+
+## Lesson 7: Databases
+
+[Entirely optional]
+
+- Joins 
+- Why we put related data into tables with different units of observation.
+
+
+
+## Objects and operations
+
+a. Data frame
+#. Data graphics (as distinct from "infographics")
+#. Statistical model
+#. Simulation
+
+Operations for all students
+
+1. Data wrangling (simplified)
+2. Annotated point plot of variables from a data frame
+3. Model training
+4. Model summarization
+
+Operations used in demonstrations (and suited to some students)
+
+5. Simulation (in demonstrations)
+6. Iteration and accumulation (in demonstrations)
+
+Computations on variables are always **inside** the arguments of a function taking a data frame as an input.
+
+Tilde expressions for models and graphics.
 
 ## Resources
 
