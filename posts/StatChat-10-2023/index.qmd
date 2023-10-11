@@ -25,12 +25,26 @@ The "consensus" Stat 101 is 50 years out of date:
 - too much emphasis on p-values 
 - entirely ignores Bayes
 - no substantial coverage of risk, risk factors, ... 
-- uses a confusing over-variety of graphic modes (which are out-of-date)
+- uses a confusing over-variety of graphic modes (many of which are out-of-date)
 - doesn't make contact with data science, machine learning, and AI/GPT
 
 My objective: Demonstrate the extent to which it's possible to overcome these deficiencies with a complete, practicable, no-prerequisite course.
 
 I'm happy to discuss the above points anytime, but that's not the point of this talk.
+
+::: {.callout-note}
+## Jeff Witmer's approach
+
+Jeff proposes 15 changes*, dividing into effort categories:
+
+a. Changes You Could Make with Little Effort or Planning. (e.g. "significant" -> discernible)
+b. Changes to a Course That You Could Implement after Investing a Day or so of Planning. (e.g. emphasize power, not $\alpha$)
+c. Changes to a Course That Would Require Quite a Bit of Planning but That Are Worth Considering Nonetheless (e.g. emphasize effect size)
+
+Jeff Witmer (2023) "What Should We Do Differently in STAT 101?" *Journal of Statistics and Data Science Education* [link](https://www.tandfonline.com/doi/full/10.1080/26939169.2023.2205905)
+
+*Almost all of which are engaged in *Lessons in Statistical Thinking*
+:::
 
 ## Style
 
@@ -41,10 +55,7 @@ a. Demonstrate and describe statistical phenomena by causal simulation
     - Stat theory from simulation/wrangling rather than probability/algebra
 #. Informal inference from the very beginning, *gradually* formalizing it over the semester
 #. Single, standard format for graphics
-#. Remove square roots whenever that's easy
-    - focus on variance rather than standard deviation
-    - R^2 rather than r
-#. Very small computational footprint, a dozen stat/graphics/wrangling functions.
+
 
 ## Course overview
 
@@ -72,6 +83,25 @@ a. Demonstrate and describe statistical phenomena by causal simulation
 - Part 5: Hypothetical thinking
     - Basic Bayes: competing two hypotheses
     - Null hypothesis testing (What you get when there is no prior and no second hypothesis.)
+
+## How can we fit more in an already crowded course?
+
+Streamline!
+
+1. Reduce ~~drag~~ cognitive load. 
+    a. Repeated use a small number of standard forms
+        - one basic graphical pattern: annotated point plot
+        - one basic computational pattern: verb `|>` verb `|>` ...
+    b. Avoid nomenclature conflicts with everyday words, e.g.
+        - "table" -> data frame
+        - "case" -> specimen
+        - "assignment" -> storage
+2. Unify t, p into regression modeling, conf. interval/bands in both graphics and models
+3. Keep number of types of objects small: data frame, model, graphic, simulation
+    a. Very small computational footprint, a dozen stat/graphics/wrangling functions.
+4. Remove square roots whenever that's easy
+    - focus on variance rather than standard deviation, R^2 rather than r
+
 
 ## Lesson 1. Data frames
 
@@ -178,5 +208,23 @@ Tilde expressions for models and graphics.
 
 ## Resources
 
-- Jeff Witmer (2023) "What Should We Do Differently in STAT 101?" *Journal of Statistics and Data Science Education* [link](https://www.tandfonline.com/doi/full/10.1080/26939169.2023.2205905)
+1. Textbook: [**Statistical Inference via Data Science**](https://moderndive.com) by Chester Ismay and Albert Y. Kim
+2. Textbook: [**Lessons in Statistical Thinking**](https://dtkaplan.github.io/Lessons-in-statistical-thinking) by Danny Kaplan
+    - [Associated R package: `{LST}` ](https://dtkaplan.github.io/LST/)
+3. [USAFA Math 300Z](https://dtkaplan.github.io/Math-300Z/) course outline, instructor notes, etc.
+4. Jeff Witmer (2023) "What Should We Do Differently in STAT 101?" *Journal of Statistics and Data Science Education* [link](https://www.tandfonline.com/doi/full/10.1080/26939169.2023.2205905)
+
+
+
+## Basement
+
+- [ ] one
+- [ ] two
+
+
+Definition  
+: Definition is a statement that describes the meaning of the listed word in the heading.   
+
+Hypothesis
+: A hypothesis is a statement that might or might not be true.
 

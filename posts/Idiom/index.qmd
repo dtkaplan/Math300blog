@@ -1,0 +1,60 @@
+---
+title: "Idiom & idiosyncracy"
+author: "Daniel Kaplan"
+date: "2023-1-1"
+categories: [LST companion]
+format:
+  html:
+    toc: true
+---
+
+Writing *Lessons in Statistical Thinking* involved making choices. Among them: When to stick to conventional expositions or expressions and when to avoid them as misleading, adding unnecessarily to cognitive load, or failing to reinforce other aspects of the presentation. This blog post highlights some of those choices, particularly the ones where reasonable people may disagree. In it, I try to explain the thinking behind my choices.
+
+## LST Part I: Handling data {#sec-handling-data}
+
+### The "storage arrow" {#sec-storage-arrow}
+
+Typically, computer people use the word "assignment" to refer the operation of assigning a name to an object. Thus, in R, `x <- 7` assigns the value 7 to the name `x`.  And `x = 7` is effectively a synonym for assignment. 
+
+To a student, the word "assignment" may invoke thoughts of the work to be handed in next Tuesday. I think "storage" is a good alternative that avoids the cognitive load of distinguishing a classroom "assignment" from the computer jargon version. 
+
+As for the `x = 7` synonym ... I prefer `<-` in part because I like the image of pointing the calculation result to storage. And I like avoiding any algebraic connotations, as with the confusion newbies sometimes have with the algebraically impossible `x <- x + 1`. But there is another reason. R syntax requires that named arguments use `=`. The storage arrow (`<-`) is not allowed in the context of an argument. (There's a longer story here, but only a small fraction of R programmers find the story informative.)  `=` is the unique signifier of a named argument. Let's reserve it for that role.
+
+
+
+## LST Part V: Hypothetical thinking {#sec-hypothetical-thinking}
+
+Traditional statistics texts almost always refer to the subject of "statistical inference." I prefer a broader term: "hypothetical thinking." By way of explanation, I point to definitions of "statistical inference":
+
+> *the theory, methods, and practice of forming judgments about the parameters of a population and the reliability of statistical relationships, typically on the basis of random sampling.*---Oxford Languages
+
+> *Statistical inference is the process of using data analysis to infer properties of an underlying distribution of probability. Inferential statistical analysis infers properties of a population, for example by testing hypotheses and deriving estimates. It is assumed that the observed data set is sampled from a larger population.*---[Wikipedia](https://en.wikipedia.org/wiki/Statistical_inference) 
+
+These definitions exclude many forms of inference that are used today in statistical practice. For example, Bayesian statistics or machine learning do not involve the notion of a population. Similarly, use of causal networks (DAGs) to inform the appropriate choice of covariates in no way involves random sampling from a population.
+
+In my view, the unifying concept for all these forms of statistical reasoning is "hypothesis," a statement about the world that might or might not be true. Every DAG is a hypothesis. Bayesian reasoning puts hypotheses into competition with one another.  And, of course, "statistical inference" has its Null.
+
+### Null hypothesis testing {#sec-NHT}
+
+Many textbooks refer to "hypothesis testing" instead of using the Fisherian term "significance testing." Not long after Fisher's introduction of the "null hypothesis" and "significance testing" in the 1920s, Neyman and Pearson created a more general framework that added a second hypothesis: the alternative hypotheses. Regrettably, intro textbooks have eviscerated the alternative hypothesis, replacing it with a cartoon set of choices: $H_a \neq H_0$ or $H_a > H_0$ or $H_a < H_0$. The purpose of the alternative hypothesis in Neyman-Pearson is to support the idea of the "**power**" of a study: the probability of rejecting the Null *given* under the assumption that the alternative is true. The power can't be calculated from any of the cartoon alternatives in textbooks; they are simply a license to halve the p-value if so desired.
+
+p-values are only about the likelihood of the data *given* the Null hypothesis. If we disallow the cartoon stand-ins for the alternative, textbook "hypothesis testing" is simply testing of the Null hypothesis. Thus, along with many others, I call it "Null hypothesis testing."
+
+Only when we introduce a specific alternative hypothesis would it be justifiable to refer to "hypothesis testing" (without the Null qualifier) to reference Neyman-Pearson reasoning.
+
+More systematically ... Fisher's "Null hypothesis" testing and Neyman-Pearson's "Hypothesis testing" can be seen as special cases of Bayesian inference. All involve likelihoods: a probability conditioned on a hypothesis. Bayes has both an alternative hypothesis and a prior; Neyman-Pearson has an alternative but no prior; Fisher has neither an alternative nor prior.
+
+   | Fisher | Neyman-Pearson | Bayes
+------|-------|-------|--------
+likelihood | ✔︎ | ✔ | ✔
+alternative  | ×︎ | ✔ | ✔
+prior | × | × | ✔ 
+
+### Statistically "**discernible**" {#sec-discernible}
+
+Almost universally, statistics texts, journal articles, and newspaper reports use the word "significant" to describe the possible outcome of a Null Hypothesis Test. This is historically correct but badly abused and misleading. As pointed out by many statisticians over many decades, the technical, hypothesis-test-related meaning of "significant" has little or nothing to do with the dominant, everyday meaning of the word in contemporary usage as a synonym for "important." (In Fisher's day, one meaning of "significant" was neutral: to "signify" or "mean something." For instance, as with Macbeth saying, "Life's but a walking shadow; a poor player, that struts and frets his hour upon the stage, and then is heard no more: it is a tale told by an idiot, full of sound and fury, signifying nothing.")
+
+[Jeff Witmer has advocated](https://www.tandfonline.com/doi/full/10.1080/26939169.2023.2205905) switching from "significant" to the more accurate term "discernible." In *Lessons*, I follow Jeff's advice, and mention "significant" as an obsolescent synonym for "discernible." 
+
+Some people might counter that such a switch should be made only when "discernible" comes into wide use replacing "significant." Of course, if everybody followed this reasoning, nobody would switch. 
+

@@ -96,6 +96,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -181,6 +183,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#motivation" id="toc-motivation" class="nav-link active" data-scroll-target="#motivation">Motivation</a></li>
   <li><a href="#style" id="toc-style" class="nav-link" data-scroll-target="#style">Style</a></li>
   <li><a href="#course-overview" id="toc-course-overview" class="nav-link" data-scroll-target="#course-overview">Course overview</a></li>
+  <li><a href="#how-can-we-fit-more-in-an-already-crowded-course" id="toc-how-can-we-fit-more-in-an-already-crowded-course" class="nav-link" data-scroll-target="#how-can-we-fit-more-in-an-already-crowded-course">How can we fit more in an already crowded course?</a></li>
   <li><a href="#lesson-1.-data-frames" id="toc-lesson-1.-data-frames" class="nav-link" data-scroll-target="#lesson-1.-data-frames">Lesson 1. Data frames</a></li>
   <li><a href="#lesson-2.-graphics" id="toc-lesson-2.-graphics" class="nav-link" data-scroll-target="#lesson-2.-graphics">Lesson 2. Graphics</a></li>
   <li><a href="#lesson-3.-empirical-distributions" id="toc-lesson-3.-empirical-distributions" class="nav-link" data-scroll-target="#lesson-3.-empirical-distributions">Lesson 3. Empirical distributions</a></li>
@@ -211,11 +214,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>too much emphasis on p-values</li>
 <li>entirely ignores Bayes</li>
 <li>no substantial coverage of risk, risk factors, …</li>
-<li>uses a confusing over-variety of graphic modes (which are out-of-date)</li>
+<li>uses a confusing over-variety of graphic modes (many of which are out-of-date)</li>
 <li>doesn’t make contact with data science, machine learning, and AI/GPT</li>
 </ul>
 <p>My objective: Demonstrate the extent to which it’s possible to overcome these deficiencies with a complete, practicable, no-prerequisite course.</p>
 <p>I’m happy to discuss the above points anytime, but that’s not the point of this talk.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Jeff Witmer’s categories
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Proposes 15 changes, dividing into effort categories:</p>
+<ol type="a">
+<li>Changes You Could Make with Little Effort or Planning. (e.g.&nbsp;“significant” -&gt; discernible)</li>
+<li>Changes to a Course That You Could Implement after Investing a Day or so of Planning. (e.g.&nbsp;emphasize power, not <span class="math inline">\(\alpha\)</span>)</li>
+<li>Changes to a Course That Would Require Quite a Bit of Planning but That Are Worth Considering Nonetheless (e.g.&nbsp;emphasize effect size)</li>
+</ol>
+<p>Jeff Witmer (2023) “What Should We Do Differently in STAT 101?” <em>Journal of Statistics and Data Science Education</em> <a href="https://www.tandfonline.com/doi/full/10.1080/26939169.2023.2205905">link</a></p>
+<ul class="task-list">
+<li><input type="checkbox">one</li>
+<li><input type="checkbox">two</li>
+</ul>
+<dl>
+<dt>Definition</dt>
+<dd>
+Definition is a statement that describes the meaning of the listed word in the heading.
+</dd>
+<dt>Hypothesis</dt>
+<dd>
+A hypothesis is a statement that might or might not be true.
+</dd>
+</dl>
+</div>
+</div>
 </section>
 <section id="style" class="level2">
 <h2 class="anchored" data-anchor-id="style">Style</h2>
@@ -255,9 +291,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li>Part 3: Randomness and the unexplained
 <ul>
+<li>Signal and noise</li>
 <li>Simulation and DAGs</li>
 <li>Probability models (optional)</li>
-<li>Likelihood (prep. for Part 5)</li>
+<li>Likelihood (optional, prep. for Part 5)</li>
 <li>Measuring and accumulating risk</li>
 </ul></li>
 <li>Part 4: Understanding modeling
@@ -272,6 +309,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Null hypothesis testing (What you get when there is no prior and no second hypothesis.)</li>
 </ul></li>
 </ul>
+</section>
+<section id="how-can-we-fit-more-in-an-already-crowded-course" class="level2">
+<h2 class="anchored" data-anchor-id="how-can-we-fit-more-in-an-already-crowded-course">How can we fit more in an already crowded course?</h2>
+<p>Streamline!</p>
+<ol type="1">
+<li>Reduce <del>drag</del> cognitive load.
+<ol type="a">
+<li>Repeated use a small number of standard forms
+<ul>
+<li>one basic graphical pattern: annotated point plot</li>
+<li>one basic computational pattern: verb <code>|&gt;</code> verb <code>|&gt;</code> …</li>
+</ul></li>
+<li>Avoid nomenclature conflicts with everyday words, e.g.
+<ul>
+<li>“table” -&gt; data frame</li>
+<li>“case” -&gt; specimen</li>
+<li>“assignment” -&gt; storage</li>
+</ul></li>
+</ol></li>
+<li>Unify t, p into regression modeling, conf. interval/bands in both graphics and models</li>
+<li>Keep number of types of objects small: data frame, model, graphic, simulation</li>
+</ol>
 </section>
 <section id="lesson-1.-data-frames" class="level2">
 <h2 class="anchored" data-anchor-id="lesson-1.-data-frames">Lesson 1. Data frames</h2>
@@ -318,10 +377,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="lesson-3.-empirical-distributions">Lesson 3. Empirical distributions</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">pointplot</span>(height <span class="sc">~</span> sex, <span class="at">annot =</span> <span class="st">"violin"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in pointplot(Galton, height ~ sex, annot = "violin"): x-axis variable is numerical, so only one violin drawn for all rows.
-              Perhaps you want to use ntiles() or factor() on that variable?</code></pre>
-</div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -330,9 +385,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="lesson-4.-models-as-graphical-annotation" class="level2">
 <h2 class="anchored" data-anchor-id="lesson-4.-models-as-graphical-annotation">Lesson 4. Models as graphical annotation</h2>
 <div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">100</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pointplot</span>(height <span class="sc">~</span> sex, <span class="at">annot =</span> <span class="st">"model"</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">model_alpha=</span><span class="fl">0.75</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">pointplot</span>(height <span class="sc">~</span> mother <span class="sc">+</span> sex <span class="sc">+</span> sex, <span class="at">annot =</span> <span class="st">"model"</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">model_alpha=</span><span class="fl">0.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">100</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pointplot</span>(height <span class="sc">~</span> sex, <span class="at">annot =</span> <span class="st">"model"</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">model_alpha=</span><span class="fl">0.75</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">pointplot</span>(height <span class="sc">~</span> mother <span class="sc">+</span> sex <span class="sc">+</span> sex, <span class="at">annot =</span> <span class="st">"model"</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">model_alpha=</span><span class="fl">0.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
@@ -350,7 +405,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>[Perhaps use two class days]</p>
 <p>Five basic operations: <code>mutate()</code>, <code>filter()</code>, <code>summarize()</code>, <code>select()</code>, <code>arrange()</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Nats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Nats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 4
   country  year   GDP   pop
@@ -366,7 +421,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Nats <span class="sc">|&gt;</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2020</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Nats <span class="sc">|&gt;</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2020</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 4
   country  year   GDP   pop
@@ -376,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 3 France   2020  1203    55
 4 India    2020  1100  1300</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Nats <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="at">totalpop =</span> <span class="fu">sum</span>(pop), <span class="at">.by=</span>year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Nats <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="at">totalpop =</span> <span class="fu">sum</span>(pop), <span class="at">.by=</span>year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
    year totalpop

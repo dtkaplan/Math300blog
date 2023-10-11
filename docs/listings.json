@@ -3,6 +3,7 @@
     "listing": "/index.html",
     "items": [
       "/posts/StatChat-10-2023/index.html",
+      "/posts/Indispensible-tool/index.html",
       "/posts/Graphics-and-history/index.html",
       "/posts/Populations/index.html",
       "/posts/P-values/index.html",
@@ -29,7 +30,8 @@
       "/posts/Takeaways-20/index.html",
       "/posts/Takeaways-19/index.html",
       "/posts/Stat-and-non-stat-questions/index.html",
-      "/posts/ChatGPT-and-R/index.html"
+      "/posts/ChatGPT-and-R/index.html",
+      "/posts/Idiom/index.html"
     ]
   }
 ]
