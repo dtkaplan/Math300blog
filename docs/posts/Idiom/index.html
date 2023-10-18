@@ -148,6 +148,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#sec-handling-data" id="toc-sec-handling-data" class="nav-link active" data-scroll-target="#sec-handling-data">LST Part I: Handling data</a>
   <ul class="collapse">
   <li><a href="#sec-storage-arrow" id="toc-sec-storage-arrow" class="nav-link" data-scroll-target="#sec-storage-arrow">The “storage arrow”</a></li>
+  <li><a href="#sec-equal-assignment" id="toc-sec-equal-assignment" class="nav-link" data-scroll-target="#sec-equal-assignment">Why not <code>=</code> for assignment?</a></li>
   </ul></li>
   <li><a href="#sec-hypothetical-thinking" id="toc-sec-hypothetical-thinking" class="nav-link" data-scroll-target="#sec-hypothetical-thinking">LST Part V: Hypothetical thinking</a>
   <ul class="collapse">
@@ -168,9 +169,13 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="sec-handling-data">LST Part I: Handling data</h2>
 <section id="sec-storage-arrow" class="level3">
 <h3 class="anchored" data-anchor-id="sec-storage-arrow">The “storage arrow”</h3>
-<p>Typically, computer people use the word “assignment” to refer the operation of assigning a name to an object. Thus, in R, <code>x &lt;- 7</code> assigns the value 7 to the name <code>x</code>. And <code>x = 7</code> is effectively a synonym for assignment.</p>
+<p>Typically, computer people use the word “assignment” to refer the operation of assigning a name to an object. Thus, in R, <code>x &lt;- 7</code> assigns the value 7 to the name <code>x</code>.</p>
 <p>To a student, the word “assignment” may invoke thoughts of the work to be handed in next Tuesday. I think “storage” is a good alternative that avoids the cognitive load of distinguishing a classroom “assignment” from the computer jargon version.</p>
-<p>As for the <code>x = 7</code> synonym … I prefer <code>&lt;-</code> in part because I like the image of pointing the calculation result to storage. And I like avoiding any algebraic connotations, as with the confusion newbies sometimes have with the algebraically impossible <code>x &lt;- x + 1</code>. But there is another reason. R syntax requires that named arguments use <code>=</code>. The storage arrow (<code>&lt;-</code>) is not allowed in the context of an argument. (There’s a longer story here, but only a small fraction of R programmers find the story informative.) <code>=</code> is the unique signifier of a named argument. Let’s reserve it for that role.</p>
+</section>
+<section id="sec-equal-assignment" class="level3">
+<h3 class="anchored" data-anchor-id="sec-equal-assignment">Why not <code>=</code> for assignment?</h3>
+<p>A lot of R users do assignment with the <code>=</code> sign, as in <code>x = 7</code>. You could even say that is effectively a synonym for <code>&lt;-</code>. (But, there are places you can’t use <code>&lt;-</code> in place of <code>=</code>.)</p>
+<p>I prefer the <code>&lt;-</code> token in part because I like the image of pointing the calculation result to storage. And I like avoiding any algebraic connotations, as with the confusion newbies sometimes have with the algebraically impossible <code>x = x + 1</code>. But there is another reason as well. R syntax requires that named arguments use <code>=</code>. The storage arrow (<code>&lt;-</code>) is not allowed in the context of an argument. (There’s a longer story here, but only a small fraction of R programmers find the story informative.) <code>=</code> is the unique signifier of a named argument. Let’s reserve it for that role.</p>
 </section>
 </section>
 <section id="sec-hypothetical-thinking" class="level2">

@@ -21,12 +21,12 @@ library(LST)
 
 The "consensus" Stat 101 is 50 years out of date:
 
-- fails to engage issues of causation, covariation, and adjustment
-- too much emphasis on p-values 
-- entirely ignores Bayes
-- no substantial coverage of risk, risk factors, ... 
-- uses a confusing over-variety of graphic modes (many of which are out-of-date)
-- doesn't make contact with data science, machine learning, and AI/GPT
+a. fails to engage issues of causation, covariation, and adjustment
+b. too much emphasis on p-values 
+c. entirely ignores Bayes
+d. no substantial coverage of risk, risk factors, ... 
+e. uses a confusing over-variety of graphic modes (many of which are out-of-date)
+f. doesn't make contact with data science, machine learning, and AI/GPT
 
 My objective: Demonstrate the extent to which it's possible to overcome these deficiencies with a complete, practicable, no-prerequisite course.
 
@@ -102,8 +102,12 @@ Streamline!
 4. Remove square roots whenever that's easy
     - focus on variance rather than standard deviation, R^2 rather than r
 
+--------
 
-## Lesson 1. Data frames
+## Part I: Handling Data  (6-7 class hrs)
+
+
+### Lesson 1. Data frames
 
 Data is *always* in data frames.
 
@@ -123,7 +127,7 @@ Usually start with a named data frame, piping it to a function.
 Nats |> names()
 ```
 
-## Lesson 2. Graphics
+### Lesson 2. Graphics
 
 Both the horizontal and vertical axes are mapped to variables.
 
@@ -137,19 +141,18 @@ Galton |> pointplot(height ~ sex)
 Galton |> pointplot(height ~ mother + sex + sex)
 ```
 
-## Lesson 3. Empirical distributions
+### Lesson 3. Empirical distributions
 
 ```{r}
 Galton |> pointplot(height ~ sex, annot = "violin")
 ```
 
-## Lesson 4. Models as graphical annotation
+### Lesson 4. Models as graphical annotation
 
 ```{r}
-#| layout-ncol: 2
 Galton |> sample_n(size=100) |> 
   pointplot(height ~ sex, annot = "model", alpha = 0.1, model_alpha=0.75)
-Galton |> pointplot(height ~ mother + sex + sex, annot = "model", alpha = 0.1, model_alpha=0.75)
+Galton |> pointplot(height ~ mother + sex + father, annot = "model", alpha = 0.1, model_alpha=0.75)
 ```
 
 ## Lesson 5: Wrangling
@@ -180,6 +183,183 @@ Pipes, functions, parentheses, arguments, ...
 
 - Joins 
 - Why we put related data into tables with different units of observation.
+
+
+## Part II: Describing Relationships
+
+Consistently use explanatory/response modeling paradigm. Introduce models with two or three explanatory variables early in the course. 
+
+Use variance as measure of **varia**tion of a **varia**ble. (Ask me about the simple explanation of variance that doesn't involve calculating a mean.)
+
+Use data wrangling to introduce model values, residuals, ...
+
+```{r}
+mtcars |> 
+  mutate(mpg_mod = model_values(mpg ~ hp + wt)) |> 
+  select(hp, wt, mpg_mod) |> 
+  head()
+```
+
+Then transition to model coefficients. 
+
+`r options(digits=4)`
+
+```{r}
+mtcars |>
+  model_train(mpg ~ hp + wt) |>
+  conf_interval()
+```
+
+Coefficients are always shown in the context of a confidence interval, even if they don't yet know the mechanism for generating such intervals. 
+
+
+Demonstrate mechanism of "adjustment": Evaluate model holding covariates constant. 
+
+## Part III: Randomness and noise
+
+6-11 class hours, depending on how much spent with named probability distributions. (USAFA engineers want some practice with named distributions: normal, exponential, poisson, ...)
+
+### Signal and noise
+
+### Simulations
+
+Students construct simple simulations, using them to generate data.
+
+```{r}
+mysim <- datasim_make(
+  x <- rnorm(n),
+  y <- 2 + 3*x + rnorm(n, sd=0.5)
+)
+mysim |> sample(size=4)
+```
+
+### Probability models
+
+Mostly using simulations.
+
+### Estimation and likelihood
+
+Early introduction of the concept of **likelihood**: probability of data given hypothesis/model.
+
+- main point: distinguish between p(model | data) and p(data | model)
+- we'll use likelihood in last part of course.
+
+### DAGs
+
+Presentation of simulations as flow on a graph. Used to express a hypothesis.
+
+### Risk
+
+(2 or 3 day unit)
+
+Definition of risk, risk factors, baseline risk, risk ratios, absolute change in risk. 
+
+Use absolute change for decision making, but use risk ratios and odds ratios for calculations.
+
+Regression when response is a zero-one variable.
+
+```{r}
+Whickham |> pointplot(outcome ~ smoker, annot="model", model_alpha = 1)
+Whickham |> pointplot(outcome ~ age + smoker, annot="model")
+```
+
+
+## Part IV: Understanding modeling
+
+### Sampling variation and confidence intervals
+
+```{r}
+Runs <- mysim |> 
+  sample(size = 5) |>
+  model_train(y ~ x) |> 
+  trials(10) 
+Runs |> select(.trial, Intercept, x)
+Runs |> summarize(var(Intercept), var(x))
+```
+
+Demonstrate that variance scales as 1/n.  
+
+### Effect size
+
+Ratio of (change in output) to (change in input).
+
+Physical units important.
+
+### Prediction
+
+Always as a probability distribution
+
+### Causality
+
+covariates, DAGs, confounding, adjustment
+
+experiment interpreted as re-wiring of DAGs: requires *intervention*
+
+## Part V: Hypothetical thinking
+
+### Strong emphasis on the idea of *hypothesis*. 
+
+- Your turn: Please define hypothesis.
+
+What we want: p(hypothesis | data)
+
+What we have: hypothesis |> simulation |> data summarized as a Likelihood.
+
+Question: How do we calculate what we want.
+
+### Bayes framework
+
+- Setting: medical screening. Test result + or -. 
+
+- We put two hypotheses into competition based on the test result.
+
+- **Likelihoods** we can measure from data:
+
+    - p(+ | Sick) aka "sensitivity"
+    - p(+ | Healthy) aka "false-positive rate" translated to "specificity"
+    
+- Setting: prevalence(Sick)
+
+- Calculation
+
+    - Graphically
+    - Algebra from the graph
+    - Formula in Likelihood-ratio form 
+    
+$$odds(Sick|+) = \frac{p(+ | Sick)}{p(+ | Healthy)} \ odds(prevalence)$$
+    
+### Null hypothesis testing
+
+Null is "Healthy." 
+
+We have no claim about $prevalence$.
+
+If we have no claim about $p(+ | Sick)$, we are more inclined to conclude $Sick$ if $p(+ | Healthy)$ is small.  
+
+- $p(+ | Healthy)$ is p-value.
+
+### Neyman-Pearson
+
+Null is "Healthy." Alternative is "Sick".
+
+We have no claim about $prevalence$, but we have the ability to estimate $p(+ | Sick)$. 
+
+Inclined to conclude $Sick$ if $p(+ | Healthy)$ is small (like HNT) *and* $p(+ | Sick)$ is small. $p(+ | Sick)$ is the **power** of the test.
+
+### Gotcha's in NHT
+
+- Without power, can't say what constitutes a big p-value.
+- Estimation of p suffers greatly from sampling variation. No good reason to think that p < 0.01 is any different from p < 0.05. 
+- Sensible decisions require knowledge of prevalence.
+- Effect size, not p-value, is needed to interpret practical importance of results.
+
+
+
+
+
+
+
+
 
 
 

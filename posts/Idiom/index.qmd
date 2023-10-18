@@ -14,11 +14,15 @@ Writing *Lessons in Statistical Thinking* involved making choices. Among them: W
 
 ### The "storage arrow" {#sec-storage-arrow}
 
-Typically, computer people use the word "assignment" to refer the operation of assigning a name to an object. Thus, in R, `x <- 7` assigns the value 7 to the name `x`.  And `x = 7` is effectively a synonym for assignment. 
+Typically, computer people use the word "assignment" to refer the operation of assigning a name to an object. Thus, in R, `x <- 7` assigns the value 7 to the name `x`.  
 
 To a student, the word "assignment" may invoke thoughts of the work to be handed in next Tuesday. I think "storage" is a good alternative that avoids the cognitive load of distinguishing a classroom "assignment" from the computer jargon version. 
 
-As for the `x = 7` synonym ... I prefer `<-` in part because I like the image of pointing the calculation result to storage. And I like avoiding any algebraic connotations, as with the confusion newbies sometimes have with the algebraically impossible `x <- x + 1`. But there is another reason. R syntax requires that named arguments use `=`. The storage arrow (`<-`) is not allowed in the context of an argument. (There's a longer story here, but only a small fraction of R programmers find the story informative.)  `=` is the unique signifier of a named argument. Let's reserve it for that role.
+### Why not `=` for assignment? {#sec-equal-assignment}
+
+A lot of R users do assignment with the `=` sign, as in `x = 7`. You could even say that  is effectively a synonym for `<-`. (But, there are places you can't use `<-` in place of `=`.)
+
+I prefer the `<-` token in part because I like the image of pointing the calculation result to storage. And I like avoiding any algebraic connotations, as with the confusion newbies sometimes have with the algebraically impossible `x = x + 1`. But there is another reason as well. R syntax requires that named arguments use `=`. The storage arrow (`<-`) is not allowed in the context of an argument. (There's a longer story here, but only a small fraction of R programmers find the story informative.)  `=` is the unique signifier of a named argument. Let's reserve it for that role.
 
 
 
