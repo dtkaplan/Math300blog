@@ -1,0 +1,44 @@
+---
+title: "Outliers"
+author: "Daniel Kaplan"
+date: "2023-5-18"
+categories: [outliers, rlm()]
+format:
+  html:
+    toc: true
+---
+
+::: {.callout-warning}
+## Under construction
+
+:::
+
+
+```{r include=FALSE}
+library(LST)
+```
+
+Consider a data frame with two variables, `x` and `y`. Here are annotated point plots of the individual variables.
+
+```{r 21-4-nnbexdl, echo=FALSE, warning=FALSE}
+#| layout-ncol: 2
+set.seed(101)
+Samp <- sample(dag01, size=100) |>
+  mutate(y = y + 5*x)
+Samp <- bind_rows(Samp, data.frame(x=-2 + rnorm(5, sd=.2),y=13 + 5*rnorm(5)))
+Samp |> pointplot(x ~ 1, annot = "violin")
+Samp |> pointplot(y ~ 1, annot = "violin")
+```
+
+1. Is there any sign of outliers in `x` or `y`? Explain what you see in the graphs that account for your answer.
+
+Even when individual variables do not show outliers, there can be outliers *from the relationship* between the two variables, as in the following graph.
+
+2. Speculate on how you might create a variable that indicates how far away from the *relationship* each point is, and use that to detect outliers from the relationship. (Hint: `model_train(y ~ x)` and `model_eval()`.)
+
+```{r echo=FALSE}
+Samp |> pointplot(y ~ x, annot = "model") |>
+  gf_abline(intercept = 4.04, slope = 6.37, color="red")
+```
+
+The blue band in the following plot shows the model, but it does not exactly align with the diagonal cloud of points running from bottom-left to upper-right. The left end of the band is pulled upward by the outliers; the right end is forced downwards so that the middle of the band can be near the middle of the data. Excluding the outliers from the data used for fitting would address the matter. But we have more sophisticated methods that both identify outliers and make the model *robust* to them. The red line shows the model fitted by `MASS::rlm()`, where `rlm` stands for "robust linear modeling."

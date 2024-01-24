@@ -9,7 +9,7 @@ format:
 ---
 
 ```{r include=FALSE}
-library(math300)
+library(LST)
 source("../../../_startup.R")
 ```
 
@@ -43,5 +43,26 @@ The historically minded reader should note that the the growing English trade de
 > "*In order to stop this, the East India Company and other British merchants began to smuggle Indian opium into China illegally, for which they demanded payment in silver. This was then used to buy tea and other goods. By 1839, opium sales to China paid for the entire tea trade.*"---[National Army Museum](https://www.nam.ac.uk/explore/opium-war-1839-1842)
 
 By 1839, facing millions of Chinese citizens addicted to opium, the Chinese government began to successfully intervene to stop the smuggling, much as the US and other countries still do to curtail illegal drug trade. The English government found this unacceptable and went to war with China. With less advanced military technology, that war was a disaster for the Chinese and led to the impoverishment of the country and the forced transfer of territory---such as Hong Kong---to England. In the 1930s, a greatly weakened China fell victim to Japanese imperialism, then communist revolution. Only in the 1990s did China start to overcome extreme poverty. In the 2000s, the Chinese are still seeking to restore the economic pre-eminance they held before the eruption of the English opium trade.
+
+DRAFT
+
+Annother historical relationship is revealed by adding some annotations to a point plot of the data, as in @fig-exports-revolution. The Stamp Act was essentially a tax imposed on the American colonies, prompted by economic difficulties in England. The American Revolution led to a large economic burden on England to fund the war.
+
+```{r echo = FALSE}
+#| label: fig-exports-revolution
+#| fig-cap: "Annotating the import/export data with the dates of some significant events."
+Events <- tibble::tribble(
+  ~ Year, ~ placement, ~label,
+  1765, 450, "Stamp Act",
+  1775, 460, "American Revolution Starts"
+)
+GDAdata::EastIndiesTrade |> 
+  pivot_longer(!Year, names_to="direction", values_to = "amount") |>
+  pointplot(amount ~ Year + direction, point_ink = 1) |>
+  add_plot_labels(y = "Pounds sterling (millions)", x = "Year") |>
+  gf_vline(xintercept = ~Year, data = Events, color = "blue") |> 
+  gf_text(placement ~ Year - 2, label = ~label, data = Events, color = "blue", inherit = FALSE, angle = 90)
+```
+
 
 

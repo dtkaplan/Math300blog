@@ -1,0 +1,89 @@
+---
+title: "Instructor Orientation: Steamlining Graphics"
+author: "Daniel Kaplan"
+date: "2023-12-12"
+categories: [graphics, histograms, dot plots]
+format:
+  html:
+    toc: true
+---
+
+```{r include=FALSE}
+library(LST)
+source("../../../_startup.R")
+```
+
+It's typical for conventional introductory statistics courses to use the early part of the course to handle descriptive statistics (means, medians, sd, etc.) and graphical modes intended to show the distribution of a single variable: bar charts for categorical variables and histograms, dot plots, box-and-whisker plots, stem-and-leaf plots for quantitative variables. Graphics for pairs of variables---scatter plots---are covered later. There's not much emphasis at all on graphics for multiple variables.
+
+In contrast, *Lessons* introduces only a single, type of graphic---the annotated point plot---to handle both categorical and quantitative variables and for displaying single variables, pairs of variables, and multiple variables. Why leave out the other modes?
+
+*Lessons* tries to make clear an important distinction; there is (raw) data and there are summaries of data. We don't want students to confuse a summary with the (raw) data itself. Graphically, data are shown as dots that have a direct relationship to the data frame being graphed: one dot for each row of the data frame ("specimen," as we call it). Summaries of data are shown asvannotations on top of the data. The annotations always shade regions rather than marking points.
+
+```{r}
+#| label: fig-distinction
+#| fig-cap: "Raw data are shown with a different graphical modality than summaries of data."
+#| fig-subcap: 
+#|   - Raw data
+#|   - "Summary: model"
+#|   - "Summary: distribution"
+#| layout-ncol: 3
+#| code-fold: true
+Our_data <- Galton |> sample(n=300)
+Our_data |> sample(300) |> pointplot(height ~ mother + sex)
+Our_data |> pointplot(height ~ mother + sex, annot="model")
+Our_data |> pointplot(height ~ sex, annot = "violin")
+```
+
+
+## EXAMPLE: Cornwall temperatures
+
+```{r lamb-break-ring-0, echo = FALSE}
+Cornwall_daily_temps <- 
+  data.frame(
+  month = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"),
+  high = c(46L, 46L, 48L, 52L, 57L, 61L, 66L, 66L, 63L, 57L, 52L, 48L),
+  low = c(39L, 37L, 41L, 41L, 46L, 52L, 55L, 55L, 54L, 50L, 45L, 43L)) |>
+  mutate(month = factor(month, levels = month))
+```
+
+
+```{r echo = FALSE}
+#| label: fig-cornwall-temps
+#| fig-cap: "Average daily high and low temperatures in Cornwall, England. from <https://www.holiday-weather.com/cornwall/averages/>"
+knitr::include_graphics("ww/cornwall-temperatures.png")
+```
+
+**Part A**  
+
+1. What glyph is being used in @fig-cornwall-temps? `r short_answer(r"--(The glyph is a bar, whose top edge shows the temperature)--")`
+2. Is this an interval graphic? `r short_answer(r"--(Not really, since the length of the bar has no useful meaning.)--")`
+3. What's the significance (if any) of putting the baseline level at 0°F? `r short_answer(r"--(Often, it's a good idea to set the scale of non-negative quantitative variable to start at zero. But here, 0°F has no special meaning. Temperatures can be negative. Note also that the corresponding graph using degrees C (see below) gives a different impression about the magnitude of the high-to-low temperature range, even though the temperatures are the the same.)--")`
+
+`r long_answer()`
+
+```{r cornwall-temps-c, echo = FALSE}
+knitr::include_graphics("www/cornwall-temperatures-C.png")
+```
+
+`r end_long_answer()`
+
+**Part B**: Sketch out a better graphic using a more appropriate glyph
+
+
+`r long_answer()`
+
+To some extent, this is a matter of opinion, but a graphic should be designed to draw the eye to the appropriate comparisons. In the Cornwall temperatures, one might want to compare the high temperatures across the years, or one might want to compare the low temperatures across the years, or one might want to compare the *range* of temperatures from one month to another. 
+
+* Eliminating the grotesque coloring will help by removing an uninformative visual distraction.
+* The length of the bars doesn't really help in making any of the comparisons above. A better glyph would use an interval to mark the range of high and low temperatures. 
+* Adding a text glyph for each month makes it easier to identify the months while keeping one's eye on the interval glyphs.
+
+```{r lamb-break-ring-1, echo = FALSE, fig.show = "hold"}
+gf_errorbar(low + high ~ month, data = Cornwall_daily_temps) |>
+  gf_text(high ~ month, label = ~ month, vjust = "bottom", nudge_y = 1) |>
+  gf_labs(y = "Temperature (F)", x = "")
+```
+
+`r end_long_answer()`
+
+

@@ -1,0 +1,33 @@
+---
+title: "Hypothesis testing and likelihood"
+author: "Daniel Kaplan"
+date: "2024-01-24"
+categories: [Null hypothesis, likelihood]
+format:
+  html:
+    toc: true
+---
+
+Instructors who have taught introductory statistics in a conventional way know that "statistical inference" involves confidence intervals and hypothesis testing. Usually, the presentation of hypothesis testing involves two hypotheses: the Null and the Alternative.
+
+The p-value calculation involves finding the probability, under the Null hypothesis, of seeing data as extreme or more extreme than the data actualy observed. The Alternative is used only to determine what constitutes "extreme," that is, left-tailed, right-tailed, or both.
+
+The concept of "likelihood" doesn't enter in to the presentation. Indeed, "likelihood" is not even in the index of many introductory statistics books. In my experience, many statistics instructors are not familiar with the technical concept of likelihood. When the word "likelihood" is used, it is one of many synonyms for "probability" or "the chances of."
+
+In its technical sense, likelihood involves two entities: a hypothesis and data. The hypothesis describes an imaginary world (which might resemble the real world, or not). In this imaginary world---I call it a hypothetical world in *Lessons in Statistical Thinking**---one can calculate the relative probability of the observed data. This relative probability of the data given the hypothesis is the likelihood.
+
+Bayesian reasoning involves comparing multiple hypotheses on the basis of likelihood. The calculations also involve a "prior" expressed as the relative probability of the hypotheses being compared without regard to the data.
+
+Frequentists hold that the definition of "probability" excludes the possibility of assigning a meaningful, objective probability to a hypothesis. Nevertheless, frequentist theory often involves "likelihood." This is no contradiction, since frequentists accept that it's meaningful to talk about the probability of data drawn from a population. And likelihood is the probability of the data given a hypothesis, not the probability of a hypothesis given data.
+
+In *Lessons*, I use likelihood as a framework to introduce hypothesis testing. One motivation for this is to include Bayesian reasoning in the course, and likelihood is central to Bayesian reasoning. Another motivation comes from my early experience teaching hypothesis testing. A major misconception held by students and researchers is that the p-value is the probability of the Null hypothesis given the data. In other words, the misconception assigns a Bayesian construct to hypothesis testing. To overcome this misconception, it's useful to *contrast* hypothesis testing with the Bayesian framework. 
+
+In the Bayesian framework, we compare hypotheses based on likelihood. In the Frequentist framework, there is only one hypothesis in play: the Null. Despite lip service paid to the Alternative, hypothesis testing does not attempt to compare the Null and the Alternative.
+
+But hypothesis testing can be understood in terms of likelihood. Rather than multiple possible hypotheses, in hypothesis testing the likelihoods being compared involve a single hypothesis but two possibilities for data. We can call one possibility "more extreme than the data" and the other ... well there is no need to name it because there are only two possibilities being comparied. The likelihood of "more extreme than the data" is a probability under the Null hypothesis. The likelihood of the other, under the same Null hypothesis, must be the complement. 
+
+Comparing the probabilities for these two possibilities as a ratio gives the odds of "more extreme than," but the preferred format for this odds is a probability: the p-value. Whether the p-value is small is really a comparison of the "more extreme than" probability (that is, likelihood, since the Null hypothesis is given) to unity.
+
+
+
+

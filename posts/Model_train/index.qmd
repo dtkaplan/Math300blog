@@ -1,0 +1,15 @@
+---
+title: "Instructor's note: `model_train()`"
+author: "Daniel Kaplan"
+date: "2023-12-22"
+categories: [R, LST package, DRAFT]
+---
+
+```{r include=FALSE}
+library(LST)
+source("../../../_startup.R")
+```
+
+DRAFT, DRAFT, DRAFT
+
+**Instructors and others familiar with the R language** should note that `model_train()` makes use of the standard R modeling functions, `lm()` and `glm()`, for example. You could use those functions in place of `model_train()`, but you would have to deal with more complicated piping syntax.
