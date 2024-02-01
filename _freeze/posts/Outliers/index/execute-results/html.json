@@ -1,0 +1,16 @@
+{
+  "hash": "cd6a33a282cc147a628df56c16a021c5",
+  "result": {
+    "markdown": "---\ntitle: \"Outliers\"\nauthor: \"Daniel Kaplan\"\ndate: \"2023-5-18\"\ncategories: [outliers, rlm()]\nformat:\n  html:\n    toc: true\n---\n\n\n\n\nConsider a data frame with two variables, `x` and `y`. Here are annotated point plots of the individual variables.\n\n\n::: {.cell layout-ncol=\"2\"}\n::: {.cell-output-display}\n![](index_files/figure-html/21-4-nnbexdl-1.png){width=672}\n:::\n\n::: {.cell-output-display}\n![](index_files/figure-html/21-4-nnbexdl-2.png){width=672}\n:::\n:::\n\n\n1. Is there any sign of outliers in `x` or `y`? Explain what you see in the graphs that account for your answer.\n\nEven when individual variables do not show outliers, there can be outliers *from the relationship* between the two variables, as in the following graph.\n\n2. Speculate on how you might create a variable that indicates how far away from the *relationship* each point is, and use that to detect outliers from the relationship. (Hint: `model_train(y ~ x)` and `model_eval()`.)\n\n\n::: {.cell}\n::: {.cell-output .cell-output-stderr}\n```\nWarning: `geom_abline()`: Ignoring `mapping` because `slope` and/or `intercept` were\nprovided.\n```\n:::\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-2-1.png){width=672}\n:::\n:::\n\n\nThe blue band in the following plot shows the model, but it does not exactly align with the diagonal cloud of points running from bottom-left to upper-right. The left end of the band is pulled upward by the outliers; the right end is forced downwards so that the middle of the band can be near the middle of the data. Excluding the outliers from the data used for fitting would address the matter. But we have more sophisticated methods that both identify outliers and make the model *robust* to them. The red line shows the model fitted by `MASS::rlm()`, where `rlm` stands for \"robust linear modeling.\"\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

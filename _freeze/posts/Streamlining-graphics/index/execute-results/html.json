@@ -1,0 +1,16 @@
+{
+  "hash": "5f44a9a65b4d96576bea4e00060bdb9f",
+  "result": {
+    "markdown": "---\ntitle: \"Instructor Orientation: Steamlining Graphics\"\nauthor: \"Daniel Kaplan\"\ndate: \"2023-12-12\"\ncategories: [graphics, histograms, dot plots]\nformat:\n  html:\n    toc: true\n---\n\n\n\n\nIt's typical for conventional introductory statistics courses to use the early part of the course to handle descriptive statistics (means, medians, sd, etc.) and graphical modes intended to show the distribution of a single variable: bar charts for categorical variables and histograms, dot plots, box-and-whisker plots, stem-and-leaf plots for quantitative variables. Graphics for pairs of variables---scatter plots---are covered later. There's not much emphasis at all on graphics for multiple variables.\n\nIn contrast, *Lessons* introduces only a single, basic graphical modality---the point plot---to handle both categorical and quantitative variables and for displaying single variables, pairs of variables, and multiple variables. Why leave out the other modes?\n\n*Lessons* tries to make clear an important distinction; there is (raw) data and there are summaries of data. We don't want students to confuse a summary with the (raw) data itself. Graphically, data are shown as dots that have a direct relationship to the data frame being graphed: one dot for each row of the data frame (\"specimen,\" as we call it). Summaries of data are shown in a different graphical modalities, all of which are readily identified as shading regions rather than dots.\n\n\n::: {#fig-distinction .cell layout-ncol=\"3\"}\n\n```{.r .cell-code  code-fold=\"true\"}\nGalton |> pointplot(height ~ mother + sex)\nGalton |> pointplot(height ~ mother + sex, annot=\"model\")\nGalton |> pointplot(height ~ sex, annot = \"violin\")\n```\n\n::: {.cell-output-display}\n![Raw data](index_files/figure-html/fig-distinction-1.png){#fig-distinction-1 width=672}\n:::\n\n::: {.cell-output-display}\n![Summary: model](index_files/figure-html/fig-distinction-2.png){#fig-distinction-2 width=672}\n:::\n\n::: {.cell-output-display}\n![Summary: distribution](index_files/figure-html/fig-distinction-3.png){#fig-distinction-3 width=672}\n:::\n\nRaw data are shown with a different graphical modality than summaries of data.\n:::\n\n\n```\n\n\n\nIndeed, we avoid single-variable graphical modes mentioned in the previous paragraph. \n\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

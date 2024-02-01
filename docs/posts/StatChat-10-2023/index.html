@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Daniel Kaplan">
-<meta name="dcterms.date" content="2023-10-18">
+<meta name="dcterms.date" content="2023-01-31">
 
 <title>Math300 Blog - A Model Statistics Course</title>
 <style>
@@ -164,7 +164,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 18, 2023</p>
+        <p class="date">January 31, 2023</p>
       </div>
     </div>
     
@@ -180,7 +180,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#motivation" id="toc-motivation" class="nav-link active" data-scroll-target="#motivation">Motivation</a></li>
+  <li><a href="#introductions" id="toc-introductions" class="nav-link active" data-scroll-target="#introductions">Introductions</a></li>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation">Motivation</a></li>
   <li><a href="#style" id="toc-style" class="nav-link" data-scroll-target="#style">Style</a></li>
   <li><a href="#course-overview" id="toc-course-overview" class="nav-link" data-scroll-target="#course-overview">Course overview</a></li>
   <li><a href="#how-can-we-fit-more-in-an-already-crowded-course" id="toc-how-can-we-fit-more-in-an-already-crowded-course" class="nav-link" data-scroll-target="#how-can-we-fit-more-in-an-already-crowded-course">How can we fit more in an already crowded course?</a></li>
@@ -200,16 +201,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#signal-and-noise" id="toc-signal-and-noise" class="nav-link" data-scroll-target="#signal-and-noise">Signal and noise</a></li>
   <li><a href="#simulations" id="toc-simulations" class="nav-link" data-scroll-target="#simulations">Simulations</a></li>
   <li><a href="#probability-models" id="toc-probability-models" class="nav-link" data-scroll-target="#probability-models">Probability models</a></li>
-  <li><a href="#estimation-and-likelihood" id="toc-estimation-and-likelihood" class="nav-link" data-scroll-target="#estimation-and-likelihood">Estimation and likelihood</a></li>
-  <li><a href="#dags" id="toc-dags" class="nav-link" data-scroll-target="#dags">DAGs</a></li>
+  <li><a href="#likelihood" id="toc-likelihood" class="nav-link" data-scroll-target="#likelihood">Likelihood</a></li>
+  <li><a href="#r2" id="toc-r2" class="nav-link" data-scroll-target="#r2">R<sup>2</sup></a></li>
+  <li><a href="#prediction" id="toc-prediction" class="nav-link" data-scroll-target="#prediction">Prediction</a></li>
+  <li><a href="#sampling-variation-and-confidence-intervals" id="toc-sampling-variation-and-confidence-intervals" class="nav-link" data-scroll-target="#sampling-variation-and-confidence-intervals">Sampling variation and confidence intervals</a></li>
   <li><a href="#risk" id="toc-risk" class="nav-link" data-scroll-target="#risk">Risk</a></li>
   </ul></li>
-  <li><a href="#part-iv-understanding-modeling" id="toc-part-iv-understanding-modeling" class="nav-link" data-scroll-target="#part-iv-understanding-modeling">Part IV: Understanding modeling</a>
+  <li><a href="#part-iv-causal-modeling" id="toc-part-iv-causal-modeling" class="nav-link" data-scroll-target="#part-iv-causal-modeling">Part IV: Causal modeling</a>
   <ul class="collapse">
-  <li><a href="#sampling-variation-and-confidence-intervals" id="toc-sampling-variation-and-confidence-intervals" class="nav-link" data-scroll-target="#sampling-variation-and-confidence-intervals">Sampling variation and confidence intervals</a></li>
   <li><a href="#effect-size" id="toc-effect-size" class="nav-link" data-scroll-target="#effect-size">Effect size</a></li>
-  <li><a href="#prediction" id="toc-prediction" class="nav-link" data-scroll-target="#prediction">Prediction</a></li>
+  <li><a href="#dags" id="toc-dags" class="nav-link" data-scroll-target="#dags">DAGs</a></li>
   <li><a href="#causality" id="toc-causality" class="nav-link" data-scroll-target="#causality">Causality</a></li>
+  <li><a href="#experiment" id="toc-experiment" class="nav-link" data-scroll-target="#experiment">Experiment</a></li>
   </ul></li>
   <li><a href="#part-v-hypothetical-thinking" id="toc-part-v-hypothetical-thinking" class="nav-link" data-scroll-target="#part-v-hypothetical-thinking">Part V: Hypothetical thinking</a>
   <ul class="collapse">
@@ -217,11 +220,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#bayes-framework" id="toc-bayes-framework" class="nav-link" data-scroll-target="#bayes-framework">Bayes framework</a></li>
   <li><a href="#null-hypothesis-testing" id="toc-null-hypothesis-testing" class="nav-link" data-scroll-target="#null-hypothesis-testing">Null hypothesis testing</a></li>
   <li><a href="#neyman-pearson" id="toc-neyman-pearson" class="nav-link" data-scroll-target="#neyman-pearson">Neyman-Pearson</a></li>
-  <li><a href="#gotchas-in-nht" id="toc-gotchas-in-nht" class="nav-link" data-scroll-target="#gotchas-in-nht">Gotcha’s in NHT</a></li>
+  <li><a href="#gotchas-in-ht" id="toc-gotchas-in-ht" class="nav-link" data-scroll-target="#gotchas-in-ht">Gotcha’s in HT</a></li>
   </ul></li>
   <li><a href="#objects-and-operations" id="toc-objects-and-operations" class="nav-link" data-scroll-target="#objects-and-operations">Objects and operations</a></li>
   <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
-  <li><a href="#basement" id="toc-basement" class="nav-link" data-scroll-target="#basement">Basement</a></li>
   </ul>
 </nav>
     </div>
@@ -232,9 +234,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <blockquote class="blockquote">
-<p><em>These are presentation notes for the October 2023 StatChat meeting. For more than 15 years, statistical educators in the Twin Cities region of Minnesota have been gathering a half-dozen times a year at StatChat to share comradeship and teaching insights. Among the schools regularly represented are the University of Minnesota, Macalester College, St.&nbsp;Olaf College, Hamline University, Augsburg University, Carleton College, St.&nbsp;Cloud State University, and Minnesota State University Mankato.</em></p>
+<p><em>These are presentation notes for the October 2023 StatChat meeting. For more than 15 years, statistical educators in the Twin Cities region of Minnesota have been gathering a half-dozen times a year at StatChat to share comradeship and teaching insights. Among the schools regularly represented are the University of Minnesota, Macalester College, St.&nbsp;Olaf College, Hamline University, Augsburg University, Carleton College, St.&nbsp;Cloud State University, and Minnesota State University Mankato. The slides were slightly revised for a 2024-01-31 presentation “StatsChat” for high-school teachers in Wisconsin.</em></p>
 </blockquote>
-<p><strong>Abstract</strong>: “Mere Renovation is Too Little Too Late: We Need to Rethink Our Undergraduate Curriculum from the Ground Up” is the title <a href="https://nhorton.people.amherst.edu/mererenovation/">2015 paper</a> by George Cobb. Honoring George’s challenge, I have been rethinking and re-designing the introductory statistics course, replacing traditional foundations using modern materials and reconfiguring the living and working spaces to suit today’s applied statistical needs and projects. In the spirit of a “model house” used to demonstrate housing innovations, I’ll take you on a tour of my “model course,” whose materials are available free, open, and online. Among the features you’ll see: an accessible handling of causal reasoning, a unification of the course structure around modeling, a streamlined yet professional-quality computational platform, and an honest presentation of Null Hypothesis Testing that connects it to more current forms of statistical inference.</p>
+<p><strong>Abstract</strong>: “Mere Renovation is Too Little Too Late: We Need to Rethink Our Undergraduate Curriculum from the Ground Up” is the title <a href="https://nhorton.people.amherst.edu/mererenovation/">2015 paper</a> by George Cobb. Honoring George’s challenge, I have been rethinking and re-designing the introductory statistics course, replacing traditional foundations using modern materials and reconfiguring the living and working spaces to suit today’s applied statistical needs and projects. In the spirit of a “model house” used to demonstrate housing innovations, I’ll take you on a tour of my “model course,” whose materials are available free, open, and online. Among the features you’ll see: an accessible handling of causal reasoning, a unification of the course structure around modeling, a highly streamlined yet professional-quality computational platform, and an honest presentation of Hypothesis Testing that puts it in the framework of Bayesian reasoning.</p>
+<section id="introductions" class="level2">
+<h2 class="anchored" data-anchor-id="introductions">Introductions</h2>
+<ol type="1">
+<li><p>What is the most important take-away from your stats course?</p></li>
+<li><p>What subjects could be dropped without loss?</p></li>
+<li><p>Are there course topics that are misleading?</p></li>
+<li><p>Are there course topics that are out of date?</p></li>
+</ol>
+</section>
 <section id="motivation" class="level2">
 <h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
 <p>The “consensus” Stat 101 is 50 years out of date:</p>
@@ -246,7 +257,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>uses a confusing over-variety of graphic modes (many of which are out-of-date)</li>
 <li>doesn’t make contact with data science, machine learning, and AI/GPT</li>
 </ol>
-<p>My objective: Demonstrate the extent to which it’s possible to overcome these deficiencies with a complete, practicable, no-prerequisite course.</p>
+<p>My objectives:</p>
+<ol type="a">
+<li><p>Demonstrate the extent to which it’s possible to overcome these deficiencies with a complete, practicable, no-prerequisite course.</p></li>
+<li><p>Provide a complete course framework, avoiding topic bloat, to which other people can add their own exercises, topics, and examples.</p></li>
+</ol>
 <p>I’m happy to discuss the above points anytime, but that’s not the point of this talk.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -258,14 +273,14 @@ Jeff Witmer’s approach
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Jeff proposes 15 changes*, dividing into effort categories:</p>
+<p>Jeff proposes 15 changes*, dividing them into amount-of-effort categories:</p>
 <ol type="a">
 <li>Changes You Could Make with Little Effort or Planning. (e.g.&nbsp;“significant” -&gt; discernible)</li>
 <li>Changes to a Course That You Could Implement after Investing a Day or so of Planning. (e.g.&nbsp;emphasize power, not <span class="math inline">\(\alpha\)</span>)</li>
 <li>Changes to a Course That Would Require Quite a Bit of Planning but That Are Worth Considering Nonetheless (e.g.&nbsp;emphasize effect size)</li>
 </ol>
 <p>Jeff Witmer (2023) “What Should We Do Differently in STAT 101?” <em>Journal of Statistics and Data Science Education</em> <a href="https://www.tandfonline.com/doi/full/10.1080/26939169.2023.2205905">link</a></p>
-<p><em>Almost all of which are engaged in </em>Lessons in Statistical Thinking*</p>
+<p><em>Almost all of which are engaged in</em> <a href="https://dtkaplan.github.io/Lessons-in-statistical-thinking">Lessons in Statistical Thinking</a></p>
 </div>
 </div>
 </section>
@@ -304,19 +319,21 @@ Jeff Witmer’s approach
 <li>Signal and noise</li>
 <li>Simulation and DAGs</li>
 <li>Probability models (optional)</li>
+<li>Sampling variation and confidence intervals/bands</li>
 <li>Likelihood (optional, prep. for Part 5)</li>
 <li>Measuring and accumulating risk</li>
 </ul></li>
-<li>Part 4: Understanding modeling
+<li>Part 4: Causal reasoning
 <ul>
-<li>Sampling variation and confidence intervals/bands</li>
+<li>Effect size</li>
+<li>Directed Acyclic Graphs (DAGs), or “influence diagrams”</li>
 <li>Causality/Confounding/Adjustment</li>
 <li>Experiment</li>
 </ul></li>
 <li>Part 5: Hypothetical thinking
 <ul>
 <li>Basic Bayes: competing two hypotheses</li>
-<li>Null hypothesis testing (What you get when there is no prior and no second hypothesis.)</li>
+<li>Hypothesis testing</li>
 </ul></li>
 </ul>
 </section>
@@ -329,7 +346,7 @@ Jeff Witmer’s approach
 <li>Repeated use a small number of standard forms
 <ul>
 <li>one basic graphical pattern: annotated point plot</li>
-<li>one basic computational pattern: verb <code>|&gt;</code> verb <code>|&gt;</code> …</li>
+<li>one basic computational pattern: noun |&gt; verb <code>|&gt;</code> verb <code>|&gt;</code> …</li>
 </ul></li>
 <li>Avoid nomenclature conflicts with everyday words, e.g.
 <ul>
@@ -376,18 +393,18 @@ Jeff Witmer’s approach
 <section id="lesson-2.-graphics" class="level3">
 <h3 class="anchored" data-anchor-id="lesson-2.-graphics">Lesson 2. Graphics</h3>
 <p>Both the horizontal and vertical axes are mapped to variables.</p>
-<p>Just one command: <code>pointplot()</code> produces point plot with automatic jittering as needed.</p>
+<p>Just one command: <code>point_plot()</code> produces point plot with automatic jittering as needed.</p>
 <p>Tilde expression specifies which variable is mapped to y and x (and, optionally, color and faceting).</p>
 <div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">pointplot</span>(height <span class="sc">~</span> sex)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">pointplot</span>(height <span class="sc">~</span> mother <span class="sc">+</span> sex <span class="sc">+</span> sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">point_plot</span>(height <span class="sc">~</span> sex)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">point_plot</span>(height <span class="sc">~</span> mother <span class="sc">+</span> sex <span class="sc">+</span> sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<p><img src="index_files/figure-html/index-fyLGcH-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="index_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid" width="672"></p>
+<p><img src="index_files/figure-html/index-fyLGcH-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
@@ -396,9 +413,9 @@ Jeff Witmer’s approach
 <section id="lesson-3.-empirical-distributions" class="level3">
 <h3 class="anchored" data-anchor-id="lesson-3.-empirical-distributions">Lesson 3. Empirical distributions</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">pointplot</span>(height <span class="sc">~</span> sex, <span class="at">annot =</span> <span class="st">"violin"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">point_plot</span>(height <span class="sc">~</span> sex, <span class="at">annot =</span> <span class="st">"violin"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<p><img src="index_files/figure-html/index-TRHxeO-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -406,13 +423,13 @@ Jeff Witmer’s approach
 <h3 class="anchored" data-anchor-id="lesson-4.-models-as-graphical-annotation">Lesson 4. Models as graphical annotation</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">100</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pointplot</span>(height <span class="sc">~</span> sex, <span class="at">annot =</span> <span class="st">"model"</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">model_alpha=</span><span class="fl">0.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">point_plot</span>(height <span class="sc">~</span> sex, <span class="at">annot =</span> <span class="st">"model"</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">model_alpha=</span><span class="fl">0.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<p><img src="index_files/figure-html/index-a3uFv5-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">pointplot</span>(height <span class="sc">~</span> mother <span class="sc">+</span> sex <span class="sc">+</span> father, <span class="at">annot =</span> <span class="st">"model"</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">model_alpha=</span><span class="fl">0.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">point_plot</span>(height <span class="sc">~</span> mother <span class="sc">+</span> sex <span class="sc">+</span> father, <span class="at">annot =</span> <span class="st">"model"</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">model_alpha=</span><span class="fl">0.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid" width="672"></p>
+<p><img src="index_files/figure-html/index-a3uFv5-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -468,7 +485,7 @@ Jeff Witmer’s approach
 <p>[Entirely optional]</p>
 <ul>
 <li>Joins</li>
-<li>Why we put related data into tables with different units of observation.</li>
+<li>Why we put related data into separate tables with different units of observation.</li>
 </ul>
 </section>
 <section id="part-ii-describing-relationships" class="level2">
@@ -524,13 +541,14 @@ Valiant           105 3.460 20.47382</code></pre>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>mysim <span class="sc">|&gt;</span> <span class="fu">sample</span>(<span class="at">size=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 2
-       x     y
-   &lt;dbl&gt; &lt;dbl&gt;
-1  0.552 4.24 
-2 -0.675 0.285
-3  0.214 2.59 
-4  0.311 3.39 </code></pre>
+<pre><code># A tibble: 5 × 2
+       x       y
+   &lt;dbl&gt;   &lt;dbl&gt;
+1  0.552  3.97  
+2 -0.675 -0.0812
+3  0.214  3.10  
+4  0.311  2.82  
+5  1.17   5.79  </code></pre>
 </div>
 </div>
 </section>
@@ -538,17 +556,68 @@ Valiant           105 3.460 20.47382</code></pre>
 <h3 class="anchored" data-anchor-id="probability-models">Probability models</h3>
 <p>Mostly using simulations.</p>
 </section>
-<section id="estimation-and-likelihood" class="level3">
-<h3 class="anchored" data-anchor-id="estimation-and-likelihood">Estimation and likelihood</h3>
+<section id="likelihood" class="level3">
+<h3 class="anchored" data-anchor-id="likelihood">Likelihood</h3>
 <p>Early introduction of the concept of <strong>likelihood</strong>: probability of data given hypothesis/model.</p>
 <ul>
 <li>main point: distinguish between p(model | data) and p(data | model)</li>
 <li>we’ll use likelihood in last part of course.</li>
 </ul>
 </section>
-<section id="dags" class="level3">
-<h3 class="anchored" data-anchor-id="dags">DAGs</h3>
-<p>Presentation of simulations as flow on a graph. Used to express a hypothesis.</p>
+<section id="r2" class="level3">
+<h3 class="anchored" data-anchor-id="r2">R<sup>2</sup></h3>
+</section>
+<section id="prediction" class="level3">
+<h3 class="anchored" data-anchor-id="prediction">Prediction</h3>
+<ol type="a">
+<li><p>The proper form for a prediction: a relative probability assigned to each possible outcome.</p></li>
+<li><p>The prediction-interval shorthand for (a).</p></li>
+</ol>
+</section>
+<section id="sampling-variation-and-confidence-intervals" class="level3">
+<h3 class="anchored" data-anchor-id="sampling-variation-and-confidence-intervals">Sampling variation and confidence intervals</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Runs <span class="ot">&lt;-</span> mysim <span class="sc">|&gt;</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model_train</span>(y <span class="sc">~</span> x) <span class="sc">|&gt;</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">trials</span>(<span class="dv">10</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The `tidy()` method for objects of class `model_object` is not maintained by the broom team, and is only supported through the `lm` tidier method. Please be cautious in interpreting and reporting broom output.
+
+This warning is displayed once per session.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Runs <span class="sc">|&gt;</span> <span class="fu">select</span>(.trial, term, estimate )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   .trial        term estimate
+1       1 (Intercept)    1.659
+2       1           x    3.164
+3       2 (Intercept)    2.204
+4       2           x    2.950
+5       3 (Intercept)    2.055
+6       3           x    3.318
+7       4 (Intercept)    1.771
+8       4           x    3.141
+9       5 (Intercept)    2.156
+10      5           x    2.920
+11      6 (Intercept)    2.157
+12      6           x    3.324
+13      7 (Intercept)    2.091
+14      7           x    2.833
+15      8 (Intercept)    2.446
+16      8           x    2.794
+17      9 (Intercept)    1.892
+18      9           x    2.399
+19     10 (Intercept)    2.053
+20     10           x    2.694</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>Runs <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="fu">var</span>(estimate), <span class="at">.by =</span> term)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         term var(estimate)
+1 (Intercept)       0.05117
+2           x       0.08504</code></pre>
+</div>
+</div>
+<p>Demonstrate that variance scales as 1/n.&nbsp;</p>
 </section>
 <section id="risk" class="level3">
 <h3 class="anchored" data-anchor-id="risk">Risk</h3>
@@ -557,60 +626,44 @@ Valiant           105 3.460 20.47382</code></pre>
 <p>Use absolute change for decision making, but use risk ratios and odds ratios for calculations.</p>
 <p>Regression when response is a zero-one variable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Whickham <span class="sc">|&gt;</span> <span class="fu">pointplot</span>(outcome <span class="sc">~</span> smoker, <span class="at">annot=</span><span class="st">"model"</span>, <span class="at">model_alpha =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>Whickham <span class="sc">|&gt;</span> <span class="fu">point_plot</span>(outcome <span class="sc">~</span> smoker, <span class="at">annot=</span><span class="st">"model"</span>, <span class="at">model_alpha =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in ggplot2::geom_jitter(aes(y = .data[[vars[1]]], x =
+.data[[vars[[2]]]]), : Ignoring unknown parameters: `model_alpha`</code></pre>
+</div>
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<p><img src="index_files/figure-html/index-oS96Bi-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>Whickham <span class="sc">|&gt;</span> <span class="fu">pointplot</span>(outcome <span class="sc">~</span> age <span class="sc">+</span> smoker, <span class="at">annot=</span><span class="st">"model"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>Whickham <span class="sc">|&gt;</span> <span class="fu">point_plot</span>(outcome <span class="sc">~</span> age <span class="sc">+</span> smoker, <span class="at">annot=</span><span class="st">"model"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid" width="672"></p>
+<p><img src="index_files/figure-html/index-oS96Bi-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
 </section>
-<section id="part-iv-understanding-modeling" class="level2">
-<h2 class="anchored" data-anchor-id="part-iv-understanding-modeling">Part IV: Understanding modeling</h2>
-<section id="sampling-variation-and-confidence-intervals" class="level3">
-<h3 class="anchored" data-anchor-id="sampling-variation-and-confidence-intervals">Sampling variation and confidence intervals</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Runs <span class="ot">&lt;-</span> mysim <span class="sc">|&gt;</span> </span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(<span class="at">size =</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model_train</span>(y <span class="sc">~</span> x) <span class="sc">|&gt;</span> </span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">trials</span>(<span class="dv">10</span>) </span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>Runs <span class="sc">|&gt;</span> <span class="fu">select</span>(.trial, Intercept, x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   .trial Intercept     x
-1       1     2.118 3.173
-2       2     1.659 3.164
-3       3     2.204 2.950
-4       4     2.055 3.318
-5       5     1.771 3.141
-6       6     2.156 2.920
-7       7     2.157 3.324
-8       8     2.091 2.833
-9       9     2.446 2.794
-10     10     1.892 2.399</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>Runs <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="fu">var</span>(Intercept), <span class="fu">var</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  var(Intercept)  var(x)
-1        0.05166 0.08038</code></pre>
-</div>
-</div>
-<p>Demonstrate that variance scales as 1/n.&nbsp;</p>
-</section>
+<section id="part-iv-causal-modeling" class="level2">
+<h2 class="anchored" data-anchor-id="part-iv-causal-modeling">Part IV: Causal modeling</h2>
 <section id="effect-size" class="level3">
 <h3 class="anchored" data-anchor-id="effect-size">Effect size</h3>
 <p>Ratio of (change in output) to (change in input).</p>
 <p>Physical units important.</p>
 </section>
-<section id="prediction" class="level3">
-<h3 class="anchored" data-anchor-id="prediction">Prediction</h3>
-<p>Always as a probability distribution</p>
+<section id="dags" class="level3">
+<h3 class="anchored" data-anchor-id="dags">DAGs</h3>
+<p>Reading “influence diagrams”</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section>
 <section id="causality" class="level3">
 <h3 class="anchored" data-anchor-id="causality">Causality</h3>
-<p>covariates, DAGs, confounding, adjustment</p>
+<p>confounding, covariates, and adjustment</p>
+<p>Choosing covariates based on a DAG</p>
+</section>
+<section id="experiment" class="level3">
+<h3 class="anchored" data-anchor-id="experiment">Experiment</h3>
 <p>experiment interpreted as re-wiring of DAGs: requires <em>intervention</em></p>
 </section>
 </section>
@@ -660,8 +713,8 @@ Valiant           105 3.460 20.47382</code></pre>
 <p>We have no claim about <span class="math inline">\(prevalence\)</span>, but we have the ability to estimate <span class="math inline">\(p(+ | Sick)\)</span>.</p>
 <p>Inclined to conclude <span class="math inline">\(Sick\)</span> if <span class="math inline">\(p(+ | Healthy)\)</span> is small (like HNT) <em>and</em> <span class="math inline">\(p(+ | Sick)\)</span> is small. <span class="math inline">\(p(+ | Sick)\)</span> is the <strong>power</strong> of the test.</p>
 </section>
-<section id="gotchas-in-nht" class="level3">
-<h3 class="anchored" data-anchor-id="gotchas-in-nht">Gotcha’s in NHT</h3>
+<section id="gotchas-in-ht" class="level3">
+<h3 class="anchored" data-anchor-id="gotchas-in-ht">Gotcha’s in HT</h3>
 <ul>
 <li>Without power, can’t say what constitutes a big p-value.</li>
 <li>Estimation of p suffers greatly from sampling variation. No good reason to think that p &lt; 0.01 is any different from p &lt; 0.05.</li>
@@ -704,23 +757,6 @@ Valiant           105 3.460 20.47382</code></pre>
 <li><a href="https://dtkaplan.github.io/Math-300Z/">USAFA Math 300Z</a> course outline, instructor notes, etc.</li>
 <li>Jeff Witmer (2023) “What Should We Do Differently in STAT 101?” <em>Journal of Statistics and Data Science Education</em> <a href="https://www.tandfonline.com/doi/full/10.1080/26939169.2023.2205905">link</a></li>
 </ol>
-</section>
-<section id="basement" class="level2">
-<h2 class="anchored" data-anchor-id="basement">Basement</h2>
-<ul class="task-list">
-<li><input type="checkbox">one</li>
-<li><input type="checkbox">two</li>
-</ul>
-<dl>
-<dt>Definition</dt>
-<dd>
-Definition is a statement that describes the meaning of the listed word in the heading.
-</dd>
-<dt>Hypothesis</dt>
-<dd>
-A hypothesis is a statement that might or might not be true.
-</dd>
-</dl>
 
 
 </section>

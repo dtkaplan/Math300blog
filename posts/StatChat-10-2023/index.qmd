@@ -1,20 +1,30 @@
 ---
 title: "A Model Statistics Course"
 author: "Daniel Kaplan"
-date: "2023-10-18"
+date: "2023-01-31"
 categories: [presentation, overview]
 format:
   html:
     toc: true
 ---
 
-> *These are presentation notes for the October 2023 StatChat meeting. For more than 15 years, statistical educators in the Twin Cities region of Minnesota have been gathering a half-dozen times a year at StatChat to share comradeship and teaching insights. Among the schools regularly represented are the University of Minnesota, Macalester College, St. Olaf College, Hamline University, Augsburg University, Carleton College, St. Cloud State University, and Minnesota State University Mankato.*
+> *These are presentation notes for the October 2023 StatChat meeting. For more than 15 years, statistical educators in the Twin Cities region of Minnesota have been gathering a half-dozen times a year at StatChat to share comradeship and teaching insights. Among the schools regularly represented are the University of Minnesota, Macalester College, St. Olaf College, Hamline University, Augsburg University, Carleton College, St. Cloud State University, and Minnesota State University Mankato. The slides were slightly revised for a 2024-01-31 presentation "StatsChat" for high-school teachers in Wisconsin.*
 
-**Abstract**: "Mere Renovation is Too Little Too Late: We Need to Rethink Our Undergraduate Curriculum from the Ground Up" is the title [2015 paper](https://nhorton.people.amherst.edu/mererenovation/) by George Cobb. Honoring George's challenge, I have been rethinking and re-designing the introductory statistics course, replacing traditional foundations using modern materials and reconfiguring the living and working spaces to suit today's applied statistical needs and projects. In the spirit of a "model house" used to demonstrate housing innovations, I'll take you on a tour of my "model course," whose materials are available free, open, and online. Among the features you'll see: an accessible handling of causal reasoning, a unification of the course structure around modeling, a streamlined yet professional-quality computational platform, and an honest presentation of Null Hypothesis Testing that connects it to more current forms of statistical inference.
+**Abstract**: "Mere Renovation is Too Little Too Late: We Need to Rethink Our Undergraduate Curriculum from the Ground Up" is the title [2015 paper](https://nhorton.people.amherst.edu/mererenovation/) by George Cobb. Honoring George's challenge, I have been rethinking and re-designing the introductory statistics course, replacing traditional foundations using modern materials and reconfiguring the living and working spaces to suit today's applied statistical needs and projects. In the spirit of a "model house" used to demonstrate housing innovations, I'll take you on a tour of my "model course," whose materials are available free, open, and online. Among the features you'll see: an accessible handling of causal reasoning, a unification of the course structure around modeling, a highly streamlined yet professional-quality computational platform, and an honest presentation of Hypothesis Testing that puts it in the framework of Bayesian reasoning.
 
 ```{r include=FALSE}
 library(LST)
 ```
+
+## Introductions
+
+1. What is the most important take-away from your stats course?
+
+2. What subjects could be dropped without loss?
+
+3. Are there course topics that are misleading?
+
+4. Are there course topics that are out of date?
 
 
 ## Motivation
@@ -28,14 +38,18 @@ d. no substantial coverage of risk, risk factors, ...
 e. uses a confusing over-variety of graphic modes (many of which are out-of-date)
 f. doesn't make contact with data science, machine learning, and AI/GPT
 
-My objective: Demonstrate the extent to which it's possible to overcome these deficiencies with a complete, practicable, no-prerequisite course.
+My objectives: 
+
+a. Demonstrate the extent to which it's possible to overcome these deficiencies with a complete, practicable, no-prerequisite course.
+
+b. Provide a complete course framework, avoiding topic bloat, to which other people can add their own exercises, topics, and examples. 
 
 I'm happy to discuss the above points anytime, but that's not the point of this talk.
 
 ::: {.callout-note}
 ## Jeff Witmer's approach
 
-Jeff proposes 15 changes*, dividing into effort categories:
+Jeff proposes 15 changes*, dividing them into amount-of-effort categories:
 
 a. Changes You Could Make with Little Effort or Planning. (e.g. "significant" -> discernible)
 b. Changes to a Course That You Could Implement after Investing a Day or so of Planning. (e.g. emphasize power, not $\alpha$)
@@ -43,7 +57,7 @@ c. Changes to a Course That Would Require Quite a Bit of Planning but That Are W
 
 Jeff Witmer (2023) "What Should We Do Differently in STAT 101?" *Journal of Statistics and Data Science Education* [link](https://www.tandfonline.com/doi/full/10.1080/26939169.2023.2205905)
 
-*Almost all of which are engaged in *Lessons in Statistical Thinking*
+*Almost all of which are engaged in* [Lessons in Statistical Thinking](https://dtkaplan.github.io/Lessons-in-statistical-thinking)
 :::
 
 ## Style
@@ -72,17 +86,19 @@ a. Demonstrate and describe statistical phenomena by causal simulation
     - Signal and noise
     - Simulation and DAGs
     - Probability models (optional)
+    - Sampling variation and confidence intervals/bands 
     - Likelihood (optional, prep. for Part 5)
     - Measuring and accumulating risk
 
-- Part 4: Understanding modeling
-    - Sampling variation and confidence intervals/bands 
+- Part 4: Causal reasoning
+    - Effect size
+    - Directed Acyclic Graphs (DAGs), or "influence diagrams"
     - Causality/Confounding/Adjustment
     - Experiment
 
 - Part 5: Hypothetical thinking
     - Basic Bayes: competing two hypotheses
-    - Null hypothesis testing (What you get when there is no prior and no second hypothesis.)
+    - Hypothesis testing 
 
 ## How can we fit more in an already crowded course?
 
@@ -91,7 +107,7 @@ Streamline!
 1. Reduce ~~drag~~ cognitive load. 
     a. Repeated use a small number of standard forms
         - one basic graphical pattern: annotated point plot
-        - one basic computational pattern: verb `|>` verb `|>` ...
+        - one basic computational pattern: noun |> verb `|>` verb `|>` ...
     b. Avoid nomenclature conflicts with everyday words, e.g.
         - "table" -> data frame
         - "case" -> specimen
@@ -123,7 +139,7 @@ Computing concepts:
 
 Usually start with a named data frame, piping it to a function.
 
-```{r}
+```{r label='index-VbWSLR'}
 Nats |> names()
 ```
 
@@ -131,28 +147,28 @@ Nats |> names()
 
 Both the horizontal and vertical axes are mapped to variables.
 
-Just one command: `pointplot()` produces point plot with automatic jittering as needed.
+Just one command: `point_plot()` produces point plot with automatic jittering as needed.
 
 Tilde expression specifies which variable is mapped to y and x (and, optionally, color and faceting).
 
-```{r}
+```{r label='index-fyLGcH'}
 #| layout-ncol: 2
-Galton |> pointplot(height ~ sex)
-Galton |> pointplot(height ~ mother + sex + sex)
+Galton |> point_plot(height ~ sex)
+Galton |> point_plot(height ~ mother + sex + sex)
 ```
 
 ### Lesson 3. Empirical distributions
 
-```{r}
-Galton |> pointplot(height ~ sex, annot = "violin")
+```{r label='index-TRHxeO'}
+Galton |> point_plot(height ~ sex, annot = "violin")
 ```
 
 ### Lesson 4. Models as graphical annotation
 
-```{r}
+```{r label='index-a3uFv5', warning=FALSE}
 Galton |> sample_n(size=100) |> 
-  pointplot(height ~ sex, annot = "model", alpha = 0.1, model_alpha=0.75)
-Galton |> pointplot(height ~ mother + sex + father, annot = "model", alpha = 0.1, model_alpha=0.75)
+  point_plot(height ~ sex, annot = "model", alpha = 0.1, model_alpha=0.75)
+Galton |> point_plot(height ~ mother + sex + father, annot = "model", alpha = 0.1, model_alpha=0.75)
 ```
 
 ## Lesson 5: Wrangling
@@ -166,7 +182,7 @@ Five basic operations: `mutate()`, `filter()`, `summarize()`, `select()`, `arran
 Nats
 ```
 
-```{r}
+```{r label='index-vh82Zh'}
 Nats |> filter(year == 2020)
 Nats |> summarize(totalpop = sum(pop), .by=year)
 ```
@@ -182,7 +198,7 @@ Pipes, functions, parentheses, arguments, ...
 [Entirely optional]
 
 - Joins 
-- Why we put related data into tables with different units of observation.
+- Why we put related data into separate tables with different units of observation.
 
 
 ## Part II: Describing Relationships
@@ -193,7 +209,7 @@ Use variance as measure of **varia**tion of a **varia**ble. (Ask me about the si
 
 Use data wrangling to introduce model values, residuals, ...
 
-```{r}
+```{r label='index-c9IJkP'}
 mtcars |> 
   mutate(mpg_mod = model_values(mpg ~ hp + wt)) |> 
   select(hp, wt, mpg_mod) |> 
@@ -204,7 +220,7 @@ Then transition to model coefficients.
 
 `r options(digits=4)`
 
-```{r}
+```{r label='index-AFpL5u'}
 mtcars |>
   model_train(mpg ~ hp + wt) |>
   conf_interval()
@@ -225,7 +241,7 @@ Demonstrate mechanism of "adjustment": Evaluate model holding covariates constan
 
 Students construct simple simulations, using them to generate data.
 
-```{r}
+```{r label='index-k42ybr'}
 mysim <- datasim_make(
   x <- rnorm(n),
   y <- 2 + 3*x + rnorm(n, sd=0.5)
@@ -237,16 +253,33 @@ mysim |> sample(size=4)
 
 Mostly using simulations.
 
-### Estimation and likelihood
+### Likelihood
 
 Early introduction of the concept of **likelihood**: probability of data given hypothesis/model.
 
 - main point: distinguish between p(model | data) and p(data | model)
 - we'll use likelihood in last part of course.
 
-### DAGs
+### R^2^
 
-Presentation of simulations as flow on a graph. Used to express a hypothesis.
+### Prediction
+
+a. The proper form for a prediction: a relative probability assigned to each possible outcome.
+
+b. The prediction-interval shorthand for (a).
+
+### Sampling variation and confidence intervals
+
+```{r label='index-g88fzK'}
+Runs <- mysim |> 
+  sample(n = 5) |>
+  model_train(y ~ x) |> 
+  trials(10) 
+Runs |> select(.trial, term, estimate )
+Runs |> summarize(var(estimate), .by = term)
+```
+
+Demonstrate that variance scales as 1/n.  
 
 ### Risk
 
@@ -258,26 +291,13 @@ Use absolute change for decision making, but use risk ratios and odds ratios for
 
 Regression when response is a zero-one variable.
 
-```{r}
-Whickham |> pointplot(outcome ~ smoker, annot="model", model_alpha = 1)
-Whickham |> pointplot(outcome ~ age + smoker, annot="model")
+```{r label='index-oS96Bi'}
+Whickham |> point_plot(outcome ~ smoker, annot="model", model_alpha = 1)
+Whickham |> point_plot(outcome ~ age + smoker, annot="model")
 ```
 
 
-## Part IV: Understanding modeling
-
-### Sampling variation and confidence intervals
-
-```{r}
-Runs <- mysim |> 
-  sample(size = 5) |>
-  model_train(y ~ x) |> 
-  trials(10) 
-Runs |> select(.trial, Intercept, x)
-Runs |> summarize(var(Intercept), var(x))
-```
-
-Demonstrate that variance scales as 1/n.  
+## Part IV: Causal modeling
 
 ### Effect size
 
@@ -285,13 +305,21 @@ Ratio of (change in output) to (change in input).
 
 Physical units important.
 
-### Prediction
+### DAGs
 
-Always as a probability distribution
+Reading "influence diagrams"
+
+```{r echo=FALSE}
+dag_draw(sim_06)
+```
 
 ### Causality
 
-covariates, DAGs, confounding, adjustment
+confounding, covariates, and adjustment
+
+Choosing covariates based on a DAG
+
+### Experiment
 
 experiment interpreted as re-wiring of DAGs: requires *intervention*
 
@@ -346,7 +374,7 @@ We have no claim about $prevalence$, but we have the ability to estimate $p(+ | 
 
 Inclined to conclude $Sick$ if $p(+ | Healthy)$ is small (like HNT) *and* $p(+ | Sick)$ is small. $p(+ | Sick)$ is the **power** of the test.
 
-### Gotcha's in NHT
+### Gotcha's in HT
 
 - Without power, can't say what constitutes a big p-value.
 - Estimation of p suffers greatly from sampling variation. No good reason to think that p < 0.01 is any different from p < 0.05. 
@@ -395,16 +423,4 @@ Tilde expressions for models and graphics.
 4. Jeff Witmer (2023) "What Should We Do Differently in STAT 101?" *Journal of Statistics and Data Science Education* [link](https://www.tandfonline.com/doi/full/10.1080/26939169.2023.2205905)
 
 
-
-## Basement
-
-- [ ] one
-- [ ] two
-
-
-Definition  
-: Definition is a statement that describes the meaning of the listed word in the heading.   
-
-Hypothesis
-: A hypothesis is a statement that might or might not be true.
 

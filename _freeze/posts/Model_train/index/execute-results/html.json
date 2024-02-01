@@ -1,0 +1,14 @@
+{
+  "hash": "53123ac09321babdffcbc3bd120f5a78",
+  "result": {
+    "markdown": "---\ntitle: \"Instructor's note: `model_train()`\"\nauthor: \"Daniel Kaplan\"\ndate: \"2023-12-22\"\ncategories: [R, LST package, DRAFT]\n---\n\n\n\n\nDRAFT, DRAFT, DRAFT\n\n**Instructors and others familiar with the R language** should note that `model_train()` makes use of the standard R modeling functions, `lm()` and `glm()`, for example. You could use those functions in place of `model_train()`, but you would have to deal with more complicated piping syntax.\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

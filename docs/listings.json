@@ -2,11 +2,15 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/StatChat-10-2023/index.html",
+      "/posts/NHT-and-likelihood/index.html",
+      "/posts/Model_train/index.html",
+      "/posts/Streamlining-graphics/index.html",
+      "/posts/Personality-and-academic-performance/index.html",
       "/posts/Indispensible-tool/index.html",
       "/posts/Graphics-and-history/index.html",
       "/posts/Populations/index.html",
       "/posts/P-values/index.html",
+      "/posts/Outliers/index.html",
       "/posts/Stat-vocabulary/index.html",
       "/posts/Hyp-test-and-poker/index.html",
       "/posts/Hyp-test-Bayesian/index.html",
@@ -31,6 +35,7 @@
       "/posts/Takeaways-19/index.html",
       "/posts/Stat-and-non-stat-questions/index.html",
       "/posts/ChatGPT-and-R/index.html",
+      "/posts/StatChat-10-2023/index.html",
       "/posts/Idiom/index.html"
     ]
   }
