@@ -1,7 +1,7 @@
 ---
 title: "A Model Statistics Course"
 author: "Daniel Kaplan"
-date: "2023-01-31"
+date: "2024-01-31"
 categories: [presentation, overview]
 format:
   html:
@@ -38,13 +38,17 @@ d. no substantial coverage of risk, risk factors, ...
 e. uses a confusing over-variety of graphic modes (many of which are out-of-date)
 f. doesn't make contact with data science, machine learning, and AI/GPT
 
+I'm happy to discuss the above points anytime, but that's where I aimed this talk.
+
+
 My objectives: 
 
 a. Demonstrate the extent to which it's possible to overcome these deficiencies with a complete, practicable, no-prerequisite course.
 
 b. Provide a complete course framework, avoiding topic bloat, to which other people can add their own exercises, topics, and examples. 
 
-I'm happy to discuss the above points anytime, but that's not the point of this talk.
+To this end, there is now a completed draft textbook: [*Lessons in Statistical Thinking*](https://dtkaplan.github.io/Lessons-in-statistical-thinking) that is free, online. 
+
 
 ::: {.callout-note}
 ## Jeff Witmer's approach
@@ -68,9 +72,22 @@ a. Demonstrate and describe statistical phenomena by causal simulation
         - confounders, covariates, colliders, adjustment
     - Stat theory from simulation/wrangling rather than probability/algebra
 #. Informal inference from the very beginning, *gradually* formalizing it over the semester
-#. Single, standard format for graphics
+#. Single, standard format for graphics: the *annotated point plot*.
+    - Annotations for (i) distribution, and (ii) models, including multivariable models.
+#. Keep the software powerful, but simple. 
+    i. Example: a point plot of Francis Galton's data on children's heights versus their parents.
 
-
+```{r label='index-i9Xy1G'}
+Galton |> point_plot(height ~ mother + sex)
+```
+ii. Example: The most frequently encountered command has this structure:
+    
+```{r}
+    Galton |> 
+      model_train(height ~ mother + sex) |>
+      conf_interval()
+```
+    
 ## Course overview
 
 - Part 1: Handling data
@@ -133,7 +150,7 @@ Data is *always* in data frames.
 
 Computing concepts:
 
-- name of data frame
+- name of data frame, e.g. `Galton` or `Nats`
 - pipe
 - function()
 
@@ -154,7 +171,7 @@ Tilde expression specifies which variable is mapped to y and x (and, optionally,
 ```{r label='index-fyLGcH'}
 #| layout-ncol: 2
 Galton |> point_plot(height ~ sex)
-Galton |> point_plot(height ~ mother + sex + sex)
+Galton |> point_plot(height ~ mother + father + sex)
 ```
 
 ### Lesson 3. Empirical distributions
@@ -167,8 +184,11 @@ Galton |> point_plot(height ~ sex, annot = "violin")
 
 ```{r label='index-a3uFv5', warning=FALSE}
 Galton |> sample_n(size=100) |> 
-  point_plot(height ~ sex, annot = "model", alpha = 0.1, model_alpha=0.75)
-Galton |> point_plot(height ~ mother + sex + father, annot = "model", alpha = 0.1, model_alpha=0.75)
+  point_plot(height ~ sex, annot = "model", 
+             point_ink = 0.1, model_ink=0.75)
+Galton |> point_plot(height ~ mother + father + sex, 
+                     annot = "model", 
+                     point_ink = 0.1, model_ink=0.75)
 ```
 
 ## Lesson 5: Wrangling
@@ -292,7 +312,8 @@ Use absolute change for decision making, but use risk ratios and odds ratios for
 Regression when response is a zero-one variable.
 
 ```{r label='index-oS96Bi'}
-Whickham |> point_plot(outcome ~ smoker, annot="model", model_alpha = 1)
+Whickham |> point_plot(outcome ~ smoker, annot="model", 
+                       model_ink = 1)
 Whickham |> point_plot(outcome ~ age + smoker, annot="model")
 ```
 

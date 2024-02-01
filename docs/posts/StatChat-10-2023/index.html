@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Daniel Kaplan">
-<meta name="dcterms.date" content="2023-01-31">
+<meta name="dcterms.date" content="2024-01-31">
 
 <title>Math300 Blog - A Model Statistics Course</title>
 <style>
@@ -164,7 +164,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 31, 2023</p>
+        <p class="date">January 31, 2024</p>
       </div>
     </div>
     
@@ -257,12 +257,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>uses a confusing over-variety of graphic modes (many of which are out-of-date)</li>
 <li>doesn’t make contact with data science, machine learning, and AI/GPT</li>
 </ol>
+<p>I’m happy to discuss the above points anytime, but that’s where I aimed this talk.</p>
 <p>My objectives:</p>
 <ol type="a">
 <li><p>Demonstrate the extent to which it’s possible to overcome these deficiencies with a complete, practicable, no-prerequisite course.</p></li>
 <li><p>Provide a complete course framework, avoiding topic bloat, to which other people can add their own exercises, topics, and examples.</p></li>
 </ol>
-<p>I’m happy to discuss the above points anytime, but that’s not the point of this talk.</p>
+<p>To this end, there is now a completed draft textbook: <a href="https://dtkaplan.github.io/Lessons-in-statistical-thinking"><em>Lessons in Statistical Thinking</em></a> that is free, online.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -297,8 +298,37 @@ Jeff Witmer’s approach
 <li>Stat theory from simulation/wrangling rather than probability/algebra</li>
 </ul></li>
 <li>Informal inference from the very beginning, <em>gradually</em> formalizing it over the semester</li>
-<li>Single, standard format for graphics</li>
+<li>Single, standard format for graphics: the <em>annotated point plot</em>.
+<ul>
+<li>Annotations for (i) distribution, and (ii) models, including multivariable models.</li>
+</ul></li>
+<li>Keep the software powerful, but simple.
+<ol type="i">
+<li>Example: a point plot of Francis Galton’s data on children’s heights versus their parents.</li>
+</ol></li>
 </ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">point_plot</span>(height <span class="sc">~</span> mother <span class="sc">+</span> sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/index-i9Xy1G-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ol start="2" type="i">
+<li>Example: The most frequently encountered command has this structure:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>    Galton <span class="sc">|&gt;</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">model_train</span>(height <span class="sc">~</span> mother <span class="sc">+</span> sex) <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">conf_interval</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  term          .lwr  .coef   .upr
+  &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 (Intercept) 37.1   41.4   45.8  
+2 mother       0.286  0.353  0.421
+3 sexM         4.87   5.18   5.49 </code></pre>
+</div>
+</div>
 </section>
 <section id="course-overview" class="level2">
 <h2 class="anchored" data-anchor-id="course-overview">Course overview</h2>
@@ -378,13 +408,13 @@ Jeff Witmer’s approach
 </ul>
 <p>Computing concepts:</p>
 <ul>
-<li>name of data frame</li>
+<li>name of data frame, e.g.&nbsp;<code>Galton</code> or <code>Nats</code></li>
 <li>pipe</li>
 <li>function()</li>
 </ul>
 <p>Usually start with a named data frame, piping it to a function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Nats <span class="sc">|&gt;</span> <span class="fu">names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Nats <span class="sc">|&gt;</span> <span class="fu">names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "country" "year"    "GDP"     "pop"    </code></pre>
 </div>
@@ -396,8 +426,8 @@ Jeff Witmer’s approach
 <p>Just one command: <code>point_plot()</code> produces point plot with automatic jittering as needed.</p>
 <p>Tilde expression specifies which variable is mapped to y and x (and, optionally, color and faceting).</p>
 <div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">point_plot</span>(height <span class="sc">~</span> sex)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">point_plot</span>(height <span class="sc">~</span> mother <span class="sc">+</span> sex <span class="sc">+</span> sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">point_plot</span>(height <span class="sc">~</span> sex)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">point_plot</span>(height <span class="sc">~</span> mother <span class="sc">+</span> father <span class="sc">+</span> sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
@@ -413,7 +443,7 @@ Jeff Witmer’s approach
 <section id="lesson-3.-empirical-distributions" class="level3">
 <h3 class="anchored" data-anchor-id="lesson-3.-empirical-distributions">Lesson 3. Empirical distributions</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">point_plot</span>(height <span class="sc">~</span> sex, <span class="at">annot =</span> <span class="st">"violin"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">point_plot</span>(height <span class="sc">~</span> sex, <span class="at">annot =</span> <span class="st">"violin"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/index-TRHxeO-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -422,12 +452,15 @@ Jeff Witmer’s approach
 <section id="lesson-4.-models-as-graphical-annotation" class="level3">
 <h3 class="anchored" data-anchor-id="lesson-4.-models-as-graphical-annotation">Lesson 4. Models as graphical annotation</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">100</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">point_plot</span>(height <span class="sc">~</span> sex, <span class="at">annot =</span> <span class="st">"model"</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">model_alpha=</span><span class="fl">0.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">100</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">point_plot</span>(height <span class="sc">~</span> sex, <span class="at">annot =</span> <span class="st">"model"</span>, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">point_ink =</span> <span class="fl">0.1</span>, <span class="at">model_ink=</span><span class="fl">0.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/index-a3uFv5-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">point_plot</span>(height <span class="sc">~</span> mother <span class="sc">+</span> sex <span class="sc">+</span> father, <span class="at">annot =</span> <span class="st">"model"</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">model_alpha=</span><span class="fl">0.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Galton <span class="sc">|&gt;</span> <span class="fu">point_plot</span>(height <span class="sc">~</span> mother <span class="sc">+</span> father <span class="sc">+</span> sex, </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">annot =</span> <span class="st">"model"</span>, </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">point_ink =</span> <span class="fl">0.1</span>, <span class="at">model_ink=</span><span class="fl">0.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/index-a3uFv5-2.png" class="img-fluid" width="672"></p>
 </div>
@@ -439,7 +472,7 @@ Jeff Witmer’s approach
 <p>[Perhaps use two class days]</p>
 <p>Five basic operations: <code>mutate()</code>, <code>filter()</code>, <code>summarize()</code>, <code>select()</code>, <code>arrange()</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Nats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Nats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 4
   country  year   GDP   pop
@@ -455,7 +488,7 @@ Jeff Witmer’s approach
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Nats <span class="sc">|&gt;</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2020</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Nats <span class="sc">|&gt;</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2020</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 4
   country  year   GDP   pop
@@ -465,7 +498,7 @@ Jeff Witmer’s approach
 3 France   2020  1203    55
 4 India    2020  1100  1300</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Nats <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="at">totalpop =</span> <span class="fu">sum</span>(pop), <span class="at">.by=</span>year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>Nats <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="at">totalpop =</span> <span class="fu">sum</span>(pop), <span class="at">.by=</span>year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
    year totalpop
@@ -494,10 +527,10 @@ Jeff Witmer’s approach
 <p>Use variance as measure of <strong>varia</strong>tion of a <strong>varia</strong>ble. (Ask me about the simple explanation of variance that doesn’t involve calculating a mean.)</p>
 <p>Use data wrangling to introduce model values, residuals, …</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span> </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mpg_mod =</span> <span class="fu">model_values</span>(mpg <span class="sc">~</span> hp <span class="sc">+</span> wt)) <span class="sc">|&gt;</span> </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hp, wt, mpg_mod) <span class="sc">|&gt;</span> </span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mpg_mod =</span> <span class="fu">model_values</span>(mpg <span class="sc">~</span> hp <span class="sc">+</span> wt)) <span class="sc">|&gt;</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hp, wt, mpg_mod) <span class="sc">|&gt;</span> </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   hp    wt  mpg_mod
 Mazda RX4         110 2.620 23.57233
@@ -510,9 +543,9 @@ Valiant           105 3.460 20.47382</code></pre>
 </div>
 <p>Then transition to model coefficients.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model_train</span>(mpg <span class="sc">~</span> hp <span class="sc">+</span> wt) <span class="sc">|&gt;</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conf_interval</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model_train</span>(mpg <span class="sc">~</span> hp <span class="sc">+</span> wt) <span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conf_interval</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
   term           .lwr   .coef    .upr
@@ -535,11 +568,11 @@ Valiant           105 3.460 20.47382</code></pre>
 <h3 class="anchored" data-anchor-id="simulations">Simulations</h3>
 <p>Students construct simple simulations, using them to generate data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mysim <span class="ot">&lt;-</span> <span class="fu">datasim_make</span>(</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n),</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd=</span><span class="fl">0.5</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>mysim <span class="sc">|&gt;</span> <span class="fu">sample</span>(<span class="at">size=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>mysim <span class="ot">&lt;-</span> <span class="fu">datasim_make</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n),</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd=</span><span class="fl">0.5</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>mysim <span class="sc">|&gt;</span> <span class="fu">sample</span>(<span class="at">size=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 2
        x       y
@@ -577,16 +610,16 @@ Valiant           105 3.460 20.47382</code></pre>
 <section id="sampling-variation-and-confidence-intervals" class="level3">
 <h3 class="anchored" data-anchor-id="sampling-variation-and-confidence-intervals">Sampling variation and confidence intervals</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Runs <span class="ot">&lt;-</span> mysim <span class="sc">|&gt;</span> </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model_train</span>(y <span class="sc">~</span> x) <span class="sc">|&gt;</span> </span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">trials</span>(<span class="dv">10</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>Runs <span class="ot">&lt;-</span> mysim <span class="sc">|&gt;</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model_train</span>(y <span class="sc">~</span> x) <span class="sc">|&gt;</span> </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">trials</span>(<span class="dv">10</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: The `tidy()` method for objects of class `model_object` is not maintained by the broom team, and is only supported through the `lm` tidier method. Please be cautious in interpreting and reporting broom output.
 
 This warning is displayed once per session.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Runs <span class="sc">|&gt;</span> <span class="fu">select</span>(.trial, term, estimate )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>Runs <span class="sc">|&gt;</span> <span class="fu">select</span>(.trial, term, estimate )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   .trial        term estimate
 1       1 (Intercept)    1.659
@@ -610,7 +643,7 @@ This warning is displayed once per session.</code></pre>
 19     10 (Intercept)    2.053
 20     10           x    2.694</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>Runs <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="fu">var</span>(estimate), <span class="at">.by =</span> term)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>Runs <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="fu">var</span>(estimate), <span class="at">.by =</span> term)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         term var(estimate)
 1 (Intercept)       0.05117
@@ -626,15 +659,12 @@ This warning is displayed once per session.</code></pre>
 <p>Use absolute change for decision making, but use risk ratios and odds ratios for calculations.</p>
 <p>Regression when response is a zero-one variable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>Whickham <span class="sc">|&gt;</span> <span class="fu">point_plot</span>(outcome <span class="sc">~</span> smoker, <span class="at">annot=</span><span class="st">"model"</span>, <span class="at">model_alpha =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::geom_jitter(aes(y = .data[[vars[1]]], x =
-.data[[vars[[2]]]]), : Ignoring unknown parameters: `model_alpha`</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>Whickham <span class="sc">|&gt;</span> <span class="fu">point_plot</span>(outcome <span class="sc">~</span> smoker, <span class="at">annot=</span><span class="st">"model"</span>, </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">model_ink =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/index-oS96Bi-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>Whickham <span class="sc">|&gt;</span> <span class="fu">point_plot</span>(outcome <span class="sc">~</span> age <span class="sc">+</span> smoker, <span class="at">annot=</span><span class="st">"model"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>Whickham <span class="sc">|&gt;</span> <span class="fu">point_plot</span>(outcome <span class="sc">~</span> age <span class="sc">+</span> smoker, <span class="at">annot=</span><span class="st">"model"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/index-oS96Bi-2.png" class="img-fluid" width="672"></p>
 </div>
@@ -653,7 +683,7 @@ This warning is displayed once per session.</code></pre>
 <p>Reading “influence diagrams”</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>

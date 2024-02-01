@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/StatChat-10-2023/index.html",
       "/posts/NHT-and-likelihood/index.html",
       "/posts/Model_train/index.html",
       "/posts/Streamlining-graphics/index.html",
@@ -35,7 +36,6 @@
       "/posts/Takeaways-19/index.html",
       "/posts/Stat-and-non-stat-questions/index.html",
       "/posts/ChatGPT-and-R/index.html",
-      "/posts/StatChat-10-2023/index.html",
       "/posts/Idiom/index.html"
     ]
   }
